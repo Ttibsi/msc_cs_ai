@@ -1,0 +1,11 @@
+[1] - https://www.arm.com/glossary/isa
+[2] - https://en.wikipedia.org/wiki/Instruction_set_architecture
+[3] - https://eng.libretexts.org/Bookshelves/Computer_Science/Programming_Languages/Introduction_To_MIPS_Assembly_Language_Programming_(Kann)/04%3A_Translating_Assembly_Language_into_Machine_Code/4.02%3A_Machine_Code_for_the_Add_Instruction
+[4] - https://documentation-service.arm.com/static/6813592879c4c17ad8038691
+[5] - https://en.wikipedia.org/wiki/Fortran
+[6] - https://en.wikipedia.org/wiki/ALGOL_58
+[7] - https://www.c-language.org/about
+[8] - https://en.wikipedia.org/wiki/Object-oriented_programming#History
+[9] - https://www.tiobe.com/tiobe-index/
+[10] - https://en.wikipedia.org/wiki/Declarative_programming
+[11] - https://www.freecodecamp.org/news/four-pillars-of-object-oriented-programming/
