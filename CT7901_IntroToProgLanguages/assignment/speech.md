@@ -1,6 +1,6 @@
-Hello, thank you for all agreeing to meet with me to discuss the potential 
-development of geltmSoft's new programming language. This presentation should
-only take 25 minutes, and I've broken this down into five sections
+Hello, thank you for agreeing to meet with me to discuss the development of 
+geltmSoft's new programming language. This presentation should last 25 
+minutes, and is broken down into five sections
 
 ---
 
@@ -8,83 +8,71 @@ only take 25 minutes, and I've broken this down into five sections
 
 ---
 
-So, let's start with the history of programming languages to get a thorough 
-understanding of what came before. 
+Any conversation about how language development needs to begin with 
+understanding how languages work. 
 
 ---
 
-As you may know, computers "think" in ones and zeroes, otherwise known as 
-binary, or machine code. A CPU is made up of a series of registers that store 
-these bits. 
+At it's most basic form, a computer only understands 1s and 0s. A CPU's 
+instructions are stored in registers[1] in sets of bytes known as opcodes, or
+operation codes. Any following parameters to that opcode are called it's 
+operands. This example on screen shows the Add instruction, taking two addresses 
+and adding the values at those locations into the first address. [3][4].
 
 ---
 
-The CPU knows what actions to perform using opcodes, or Operation Codes. The 
-valid instructions that each sequence of 1s and 0s will perform is called the
-Instruction Set [1] and they tend to make up what we may be more familiar with
-nowadays as simple statements.
+One big flaw in directly programming in raw bytes is that it's difficult to 
+debug and tricky to understand. All other programming languages are abstractions 
+over this idea. Here, you can see X86 assembly, the first level of abstraction, 
+replacing raw bytes with three-letter instructions. Despite these languages 
+allowing for precice control of the machine, even assembly doesn't completely 
+solve the issues of machine code, and developers of the 1950s were discovering
+another issue - portability.[5]
 
 ---
 
-Most opcodes also come with a series of values that are passed to it. These
-are called operands.[2] For example, take the "add" instruction. Commonly, the
-next two sequences of bytes will represent the addresses in memory of the two
-numbers to add together.[3]
+At the time, developers wanted to run their code on machines with different 
+architectures that utilised varying instruction sets[6]. Starting with fortran 
+in 1957 [7] and Algol in 1958 [8], compiled languages were developed. These use 
+a program called a compiler to turn their source code into the correct machine 
+code for the instruction set you're currently using. Some languages instead 
+compile down to a virtual machine designed to run on any architecture.
+
+Onscreen now is C, first released in the 70s [9]. However, these languages
+aren't suited to the rapid development cycle that would benefit geltmSoft as 
+further abstractions provide more powerful tools for modern developers.
 
 ---
 
-Remembering every sequence of 1s and 0s made any development very complex very
-quickly, leading to the development of our second layer of programming languages.
-Assembly. Assembly uses mnemonics to represent these instructions, as well as
-memory addresses. [4] 
-
-This is what our add instruction looks like in Arm assembly, adding 1 to the
-number stored in the x0 register and writing it into the x1 register for later
-use [4]
+Second generation high level languages start to add more powerful features 
+around modelling the real world in your code. These languages make use of 
+paradigms to categorise their features, and most modern languages implement
+multiple paradigms. 
 
 ---
 
-While somewhat easier to read, Assembly is still programming the instructions
-a given CPU archtecture is expecting, such as Arm or X86 instruction sets. By 
-the late 50s and early 60s, the conversation was turning to portability - how
-can the code I write on one machine run on a different machine with a different
-architecture. 
+Procedural languages are a type of imperative langauge made up of 
+statements run in a sequence. Procedural code tends to be simpler to implement,
+perfect for prototyping, but doesn't often hold up to real world complexity.[10]
+Modularity comes from procedures - also called functions - that the paradigm 
+gets it's name from.[11]. This python code models this behaviour. 
 
 ---
 
-This leads us on to our third layer of abstraction, high level languages. Starting
-with the likes of fortran in 1957 [5] and Algol in 1958 [6], compiled languages
-started to appear. These use a program called a compiler to turn their source
-code into the correct machine code for the instruction set you're currently 
-using. Eventually cross-compilers were developed to allow you to compile for
-other instruction sets as well.
-
-The code on screen currently is C, one of the most well renowned languages of
-this era, developed by Dennis Richie and Brian Kernighan and first released to 
-the public in the early 70s [7]
+Out of this grew object oriented programming, with its four pillars of 
+Abstraction, Encapsulation, Inheritance, and Polymorphism[12] that allow for 
+more powerful reuse of code and flexibility [13]. While first proposed in the 
+'60s, this paradigm started to gain popularity in the '80s with languages like 
+C++, modelled on this slide.[14]. Due to the nature of the products geltmSoft
+wants to produce, I believe you would benefit from utilising powerful reusable 
+components developed in this manner.
 
 ---
 
-This brings us to the fourth level of abstraction, and the one most likely to
-be of interest to yourselves. Object oriented code wrap our previous tier in 
-further abstraction, allowing for more powerful data-driven concepts in 
-programming languages to appear. While these concepts first started floating
-around back in the 70s with smalltalk[8], they were popularised by the likes of
-C++ and Java, two of the biggest languages still used today[9]
-
----
-
-I want to take a moment to note that programming languages can be classified
-in a number of ways. We have Imperative vs Declarative, where one side declares
-the "what" a program should do and the other defines how the program should get
-there.[10] But, more interestingly, we have different programming paradigms
-
----
-
-<TODO: SOMETHING HERE ON DIFFERENT PARADIGMS -- I NEED TO SHORTEN WHATS ABOVE>
-
----
-
-Object Oriented programming is the main paradigm we're going to look at. It's
-four principles of Encapsulation, Inheritance, Abstraction, and Polymorphism[11]
-give you powerful tools
+The environment around a language is also important. Some languages use a 
+compiler and linker to compile down to machine code to be executed, whereas 
+others use another program called an interpreter to execute each line. The 
+former is usually faster than the latter, but has an extra build step that can 
+be slow.[15] Debuggers also speed up the testing and debugging step[16], although
+a number of compiled languages tend to insert DWARF debug symbols optionally
+at compile time to make use of existing tooling.[17]
