@@ -18,4 +18,6 @@
 [18] - https://www.freecodecamp.org/news/compiled-versus-interpreted-languages/
 [19] - https://en.wikipedia.org/wiki/Debugger
 [20] - https://dwarfstd.org/doc/Debugging%20using%20DWARF-2012.pdf
-
+[21] - https://en.wikipedia.org/wiki/Associative_array
+[22] - https://learnxinyminutes.com/lua/
+[23] - https://en.wikipedia.org/wiki/Union_type
