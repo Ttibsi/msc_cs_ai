@@ -86,8 +86,8 @@ the data types we'll build into the language.
 
 ---
 
-Along with the basics - chars, integers, floats, booleans and null values, we 
-want to design a lean language that reuses these two data types: the 
+Along with the basics - strings, chars, integers, floats, booleans and null 
+values, we want to design a lean language that reuses these two data types: the 
 associative array and the union
 
 ---
@@ -155,6 +155,15 @@ are stored as integers, and others are strings.
 
 ---
 
-While a union is  more niche data type with a somewhat narrow use case, we do 
+The power of the union really shines when in combination with our associative
+array and the demonstrated first class functions. This is a more realistic
+example of a class object in geltmsoftlang. As you can see, we combine
+parameters and functions in a way that might not be familiar to someone more 
+used to traditional Object Oriented code, but still allowing a number of the 
+same features.
+
+---
+
+While a union is a more niche data type with a somewhat narrow use case, we do 
 believe that the combination of a union and our associative array should cover
 any use case that you can think of.
