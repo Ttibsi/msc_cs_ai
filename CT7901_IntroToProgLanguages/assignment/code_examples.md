@@ -125,8 +125,23 @@ var JasonAttendance: dict[str, union[bool, Null]] = {
 
 * Bigger class
 ```
+var tommyOliver: dict[str, union[str, dict[int, int], ()func()] = {
+    "faveColour": "green",
+    "grades": {19, 32, 64, 68},
+    "gradeAverage": function() {
+        return sum(grades) / len(grades)
+    }
+};
 ```
 
 * Quizzes
 ```
+var quizQuestionL str = "When was the Battle of Hastings?";
+var quizAnswers: dict[int, union[int, str]] = {
+    1066,
+    "13th century",
+    "10th century",
+    1940
+};
+
 ```
