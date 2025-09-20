@@ -7,7 +7,7 @@
 [7] - https://en.wikipedia.org/wiki/ALGOL_58
 [8] - https://computing.llnl.gov/about/newsroom/look-back-robert-hughes-and-development-fortran 
 [9] - https://www.c-language.org/about
-[10] - https://en.wikipedia.org/wiki/Fast_inverse_square_root#cite_note-quakesrc-15
+[10] - https://en.wikipedia.org/wiki/Fast_inverse_square_root
 [11] - https://github.com/id-Software/Quake-III-Arena/blob/master/code/game/q_math.c#L552
 [12] - https://en.wikipedia.org/wiki/Procedural_programming
 [13] - https://www.bbc.co.uk/bitesize/guides/zc8pjty/revision/2
@@ -19,5 +19,18 @@
 [19] - https://en.wikipedia.org/wiki/Debugger
 [20] - https://dwarfstd.org/doc/Debugging%20using%20DWARF-2012.pdf
 [21] - https://en.wikipedia.org/wiki/Associative_array
-[22] - https://learnxinyminutes.com/lua/
+[22] - https://lua.org/manual/5.4/
 [23] - https://en.wikipedia.org/wiki/Union_type
+[24] - https://dl.acm.org/doi/10.1145/942572.807045
+
+
+----
+Replace some above references with this paper:
+https://web.archive.org/web/20161012215755/https://pdfs.semanticscholar.org/10bd/dc49b85196aaa6715dd46843d9dcffa38358.pdf
+
+ex about paradigms 
+look at 12-16/17?
+
+---
+
+Replace [9] with a ref to the ansi C book

@@ -2,7 +2,7 @@
 
 ### Associative array
 ```
-var studentAge: dict[str, int] = {
+var studentAge: map[str, int] = {
     "Jason": 17,
     "Zack": 17,
     "Billy": 16,
@@ -15,11 +15,11 @@ var studentAge: dict[str, int] = {
 * As a list
 ```
 // Implicit indexing
-var students: dict[int, str] = {"Jason", "Zack", "Billy", "Trini", "Kimberly", "Tommy"};
+var students: map[int, str] = {"Jason", "Zack", "Billy", "Trini", "Kimberly", "Tommy"};
 print(studentx[0]); // Jason
 
 // Explicit indexing
-var students: dict[int, str] = {
+var students: map[int, str] = {
     0: "Jason",
     1: "Zack",
     2: "Billy",
@@ -31,7 +31,7 @@ var students: dict[int, str] = {
 
 * structs
 ```
-var tommyOliver: dict[str: str] = {
+var tommyOliver: map[str: str] = {
     "FirstName": "Tommy",
     "LastName": "Oliver",
     "FavouriteColour": "Green",
@@ -40,9 +40,9 @@ var tommyOliver: dict[str: str] = {
 
 * classes
 ```
-// see also: functions with annotated return types and functions as a valid 
+// also spot functions with annotated return types and functions as a valid 
 // type in our type system
-var tommyOliver: dict[str: (str)func() ] = {
+var tommyOliver: map[str: (str)func() ] = {
     "getSurname": function() str {
         return self.LastName; // Implicit self passed to method
     };
@@ -53,7 +53,7 @@ print(tommyOliver.getSurname());
 
 * Nested tables
 ```
-var tommyOliver: dict[str: dict[str: str] ] = {
+var tommyOliver: map[str: map[str: str] ] = {
     "friendsWithFavouriteColours": {
         "Jason": "Red",
         "Zack": "Black",
@@ -66,7 +66,7 @@ var tommyOliver: dict[str: dict[str: str] ] = {
 
 * student data
 ```
-var students: dict[str: dict[str, int]] = {
+var students: map[str: map[str, int]] = {
     "Tommy": {
         "Attendance": 74,
         "TotalGrades": 44
@@ -81,7 +81,7 @@ var students: dict[str: dict[str, int]] = {
 * test results
 ```
 
-var mathTests: dict[str: dict[str, int]] = {
+var mathTests: map[str: map[str, int]] = {
     "Arithmetic 1": {
         "Total marks": 10,
         "Jason": 9,
@@ -114,7 +114,7 @@ if (name != Null) { print(litExamResult); }
 
 * Attendance
 ```
-var JasonAttendance: dict[str, union[bool, Null]] = {
+var JasonAttendance: map[str, union[bool, Null]] = {
     "Mon": true,
     "Tue": False,
     "Wed": Null,
@@ -123,25 +123,25 @@ var JasonAttendance: dict[str, union[bool, Null]] = {
 }
 ```
 
-* Bigger class
-```
-var tommyOliver: dict[str, union[str, dict[int, int], ()func()] = {
-    "faveColour": "green",
-    "grades": {19, 32, 64, 68},
-    "gradeAverage": function() {
-        return sum(grades) / len(grades)
-    }
-};
-```
-
 * Quizzes
 ```
 var quizQuestionL str = "When was the Battle of Hastings?";
-var quizAnswers: dict[int, union[int, str]] = {
+var quizAnswers: map[int, union[int, str]] = {
     1066,
     "13th century",
     "10th century",
     1940
 };
 
+```
+
+* Bigger class
+```
+var tommyOliver: map[str, union[str, map[int, int], ()func()] = {
+    "faveColour": "green",
+    "grades": {19, 32, 64, 68},
+    "gradeAverage": function() {
+        return sum(grades) / len(grades)
+    }
+};
 ```

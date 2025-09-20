@@ -77,25 +77,25 @@ a number of compiled languages tend to insert DWARF debug symbols optionally
 at compile time to make use of existing tooling.[20]
 
 -------------------------------------------------------------------------------
-<TODO: WORK ON TRANSITION>
 
----
-
-I want to start taking a look at the features of geltmsoftlang, starting with 
-the data types we'll build into the language. 
+I want to start by taking a look at the features of geltmsoftlang, starting with 
+some of the language's data types. These are going to shape your software 
+architecture and the mental model you build while working on your products, 
+and ensuring we have the right features for modelling real world complexity is 
+vital.
 
 ---
 
 Along with the basics - strings, chars, integers, floats, booleans and null 
-values, we want to design a lean language that reuses these two data types: the 
-associative array and the union
+values, we want to design a lean language that reuses these two data types in 
+multiple ways: the associative array and the union.
 
 ---
 
-Starting with an associative array[21], we've chosen this as a versatile data
-structure that can fill many use cases. Taking some inspiration from Lua[22], we 
-can ensure our standard library provides functions to help the user recreate
-types from other languages
+Starting with an associative array[21] called a map, we've chosen this as a 
+versatile data structure that can fill many use cases. Taking some inspiration 
+from Lua[22]'s tables, the map can be used to implement a number of types your
+devs will be used to from other languages
 
 ---
 
@@ -103,17 +103,18 @@ such as lists or arrays with implicit indexing, structs with default values
 
 ---
 
-or even classes, if we combine them with first class functions, adding a touch
-of functional programming to emulate object oriented programming.
+or even classes, if we combine them with first class functions, leaning 
+geltmsoftlang towards a functional approach of emulating object oriented 
+programming.
 
 ---
 
-Of course, tables can be nested as well. 
+Of course, maps can be nested as well. 
 
 ---
 
-There are many uses of this data structure within the educational domain. For
-example, you may store student data as a list of structs like so
+There are many uses of maps within the educational domain. For example, you may 
+store student data as a list of structs like so
 
 ---
 
@@ -123,19 +124,20 @@ applications or services may use.
 
 ---
 
-It's worth noting that we're trading flexibility for conciseness. While some
-languages will provide discrete data types of each of these examples, which make
-reading code clearer as to what's going on, the flexibility of only one type 
-will allow for more complex data types to be built with less experience. We've 
-chosen to take this approach so that your team can be up and running quickly.
+It's worth noting that we're trading conciseness for flexibility. While some
+languages will provide discrete data types of each of these examples, which 
+provide bespoke implementations for different data structure at the cost of 
+added complexity, geltmsoftlang's focus should be on flattening the learning
+curve so your devs can be producing your products quicker, while not sacrificing
+language features.
 
 ---
 
 The second data type is a union[23], a data type that practically allows an 
 option of multiple types in one field. Unlike the previously mentioned lua,
-geltmsoftlang is intended to be a strictly typed language for correctness, so
-we're introducing this type to allow developers to have some more control over
-the types used. 
+geltmsoftlang is intended to be a strictly typed language for correctness[24], 
+so we're introducing this type to allow developers to have some more control 
+over the types used. 
 
 ---
 
@@ -155,15 +157,22 @@ are stored as integers, and others are strings.
 
 ---
 
-The power of the union really shines when in combination with our associative
-array and the demonstrated first class functions. This is a more realistic
-example of a class object in geltmsoftlang. As you can see, we combine
-parameters and functions in a way that might not be familiar to someone more 
-used to traditional Object Oriented code, but still allowing a number of the 
-same features.
+The power of the union really shines when in combination with the other 
+demonstrated features of the language. This is a more realistic example of a 
+class object in geltmsoftlang. As you can see, we combine parameters and 
+functions in a way that emulates some features of traditional Object Oriented 
+code you tend to find in this domain.
 
 ---
 
-While a union is a more niche data type with a somewhat narrow use case, we do 
-believe that the combination of a union and our associative array should cover
-any use case that you can think of.
+These data types push geltmsoftlang towards a functional paradigm, although
+basic procedural development is possible too. Our focus with the design of 
+this language is primarily flexibility with a small number of powerful
+features. We don't fully embrace object oriented programming here as a number
+of other languages do as the language features will start to grow exponentially,
+slowing the internal rate of adoption and increasing the length of time newer
+employees take to ramp onboard. 
+
+However, we're balanced this with being able to accurately implement any
+customer requests as ultimately they're the final focus.
+
