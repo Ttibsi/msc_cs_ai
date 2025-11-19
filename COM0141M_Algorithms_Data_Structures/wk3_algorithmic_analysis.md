@@ -75,3 +75,54 @@ OptimisedBubbleSort(A, n):
 In this improved algorithm, worst case is still O(n^2), but best case is
 Omega(n) because the outer loop would only iterate the once and break out
 in the if statement.
+
+----
+Pseudocode development and analysis
+
+Develop Pseudocode: Write pseudocode for an algorithm that determines whether a 
+given sequence contains only unique elements. The algorithm should return True 
+if all elements are unique and False otherwise.
+Identify Best and Worst Case Scenarios:
+    Best Case Scenario: Describe the input sequence that would result in the 
+    best-case performance for your algorithm. What is the time complexity of 
+    the algorithm in the best case?
+
+    Worst Case Scenario: Describe the input sequence that would result in the 
+    worst-case performance for your algorithm. What is the time complexity of 
+    the algorithm in the worst case?
+
+```
+ALGORITHM check_unique(A)
+    if length(A) is less than 2
+        return true
+
+    let visited be an empty list
+    for elem in A
+        for item in visited
+            if item is equal to elem
+                return true
+            
+        visited.insert(elem)
+END
+```
+
+---
+Turning someone else's pseudocode into python code:
+```
+def all_unique(A: list[int]) -> bool:
+    checked_list = set()
+    for elem in A:
+        if elem in checked_list:
+            return False
+        else:
+            checked_list.add(elem)
+    return True
+
+assert all_unique([1,2,3,4,5]) == True
+assert all_unique([1,1,1]) == False
+assert all_unique([1]) == True
+```
+
+It was cleverly identified that you could just turn a list into a set
+and compare their lengths: `return len(set(A)) == len(A)` as sets have O(1)
+lookup whereas lists have O(n) lookup
