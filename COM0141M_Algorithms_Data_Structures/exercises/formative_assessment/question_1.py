@@ -24,21 +24,29 @@ In addition, the function must meet the following requirements:
     • if the parameter text is an empty string, the function returns an empty string.
 """
 
+# Should be best case O(1) and worst case O(n)
 def extract_keys(text: str, keys: str) -> str:
     ret: str = ""
-    words: list[str] = text.split()
+    if not len(text) or not len(keys):
+        return ret
 
-    for word in words:
-        not_found = False
-        for c in word:
-            if c.lower() not in keys.lower():
-                not_found = True
-                break
+    word: str = ""
+    invalid = False
+    for idx, c in enumerate(text):
+        if c.isspace() or idx == len(text) - 1:
+            if not invalid:
+                ret += word + c
+            word = ""
+            invalid = False
 
-        if not not_found:
-            ret += word + " "
+            continue
 
-    return ret[:-1]
+        if c.lower() in keys.lower():
+            word += c
+        else:
+            invalid = True 
+
+    return ret
 
 @pytest.mark.parametrize(
     ("text", "keys", "expected"),
