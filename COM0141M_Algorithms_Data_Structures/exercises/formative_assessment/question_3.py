@@ -35,6 +35,7 @@ sum of hits recorded in the column labelled 𝑘𝑘.
 same. For example, in Figure 3, Gabriel and Charlotte were both ranked third.
 """
 
+
 class PouleSheet:
     _poule_number: int
     _poule_size: int
@@ -122,8 +123,8 @@ class PouleSheet:
 
     def _cleanup_dict(self, dct: dict[int, int]) -> dict[int, int]:
         return {
-            k:v 
-            for k, v in dct.items() 
+            k: v
+            for k, v in dct.items()
             if v == max(dct.values())
         }
 
@@ -156,7 +157,7 @@ class PouleSheet:
                 num_of_wins[k] = self._get_hs(k)
 
             num_of_wins = self._cleanup_dict(num_of_wins)
-            
+
         ret = set()
         for k in num_of_wins.keys():
             match k:
@@ -175,6 +176,7 @@ class PouleSheet:
         return ret
 
 ###
+
 
 def test_constructor():
     sheet = PouleSheet(1, 3)
@@ -200,7 +202,7 @@ def test_add_competitor_out_of_space():
     sheet = PouleSheet(1, 3)
     assert sheet.add_competitor("foo") == True
     assert sheet.add_competitor("bar") == True
-    assert sheet.add_competitor("baz") == True 
+    assert sheet.add_competitor("baz") == True
     assert sheet.add_competitor("Quax") == False
     assert sheet._competitors == ["foo", "bar", "baz"]
 

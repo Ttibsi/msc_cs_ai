@@ -31,15 +31,16 @@ Where 𝑆𝑆 is [0,0,2,1,1,0,1,2,2]. In addition, the function should return N
 contain exactly 9 elements and exactly 3 of each element from the set {0, 1, 2}.
 """
 
+
 def compute_code(board: list[int]) -> int | None:
-    # the function should return None if the list does not contain exactly 9 elements 
+    # the function should return None if the list does not contain exactly 9 elements
     if len(board) != 9:
         return None
 
-    # the function should return None if the list does not contain exactly 3 of 
+    # the function should return None if the list does not contain exactly 3 of
     # each element from the set {0, 1, 2}.
     counter = Counter(board)
-    if any(x not in (0,1,2) for x in counter.keys()):
+    if any(x not in (0, 1, 2) for x in counter.keys()):
         return None
 
     ret: int = 0
@@ -53,11 +54,11 @@ def compute_code(board: list[int]) -> int | None:
 @pytest.mark.parametrize(
     ("board", "expected"),
     (
-        ([0,0,2,1,1,0,1,2,2], 18351),
-        ([0,0,0,0,0,0,0,0,0], 0),
+        ([0, 0, 2, 1, 1, 0, 1, 2, 2], 18351),
+        ([0, 0, 0, 0, 0, 0, 0, 0, 0], 0),
         ([123], None),
-        ([1,2,3,4,5,6,7,8,9], None),
+        ([1, 2, 3, 4, 5, 6, 7, 8, 9], None),
     )
 )
 def test_compute_code(board, expected):
-    assert compute_code(board) == expected 
+    assert compute_code(board) == expected

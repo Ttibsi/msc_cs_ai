@@ -24,7 +24,7 @@ In addition, the function must meet the following requirements:
     • if the parameter text is an empty string, the function returns an empty string.
 """
 
-# Should be best case O(1) and worst case O(n)
+
 def extract_keys(text: str, keys: str) -> str:
     ret: list[str] = []
     if not len(text) or not len(keys):
@@ -54,14 +54,19 @@ def extract_keys(text: str, keys: str) -> str:
 
     return " ".join(ret)
 
+
 @pytest.mark.parametrize(
     ("text", "keys", "expected"),
     (
-        ("The term conda is not recognised as the name of a", "theAsORin", "The is not as the a"),
+        (
+            "The term conda is not recognised as the name of a",
+            "theAsORin",
+            "The is not as the a"
+        ),
         ("", "theAsORin", ""),
         ("Reader", "ArEdz", "Reader"),
         ("ab", "a", "")
     )
 )
 def test_extract_keys(text, keys, expected):
-    assert extract_keys(text, keys) == expected 
+    assert extract_keys(text, keys) == expected
