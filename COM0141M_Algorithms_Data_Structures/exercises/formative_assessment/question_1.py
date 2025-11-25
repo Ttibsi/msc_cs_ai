@@ -26,27 +26,33 @@ In addition, the function must meet the following requirements:
 
 # Should be best case O(1) and worst case O(n)
 def extract_keys(text: str, keys: str) -> str:
-    ret: str = ""
+    ret: list[str] = []
     if not len(text) or not len(keys):
-        return ret
+        return ""
 
     word: str = ""
     invalid = False
-    for idx, c in enumerate(text):
-        if c.isspace() or idx == len(text) - 1:
+    for c in text:
+        if not c.isspace() and c.lower() not in keys.lower():
+            invalid = True
+            continue
+
+        if not c.isspace() and invalid:
+            continue
+
+        if not c.isspace():
+            word += c
+        else:
             if not invalid:
-                ret += word + c
+                ret.append(word)
+
             word = ""
             invalid = False
 
-            continue
+    if word != "" and not invalid:
+        ret.append(word)
 
-        if c.lower() in keys.lower():
-            word += c
-        else:
-            invalid = True 
-
-    return ret
+    return " ".join(ret)
 
 @pytest.mark.parametrize(
     ("text", "keys", "expected"),
@@ -54,6 +60,7 @@ def extract_keys(text: str, keys: str) -> str:
         ("The term conda is not recognised as the name of a", "theAsORin", "The is not as the a"),
         ("", "theAsORin", ""),
         ("Reader", "ArEdz", "Reader"),
+        ("ab", "a", "")
     )
 )
 def test_extract_keys(text, keys, expected):
