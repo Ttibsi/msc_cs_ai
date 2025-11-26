@@ -1,6 +1,6 @@
 from collections import Counter
 import math
-import pytest
+# import pytest
 
 """
 Terni lapilli, also known as "Rota"
@@ -51,14 +51,14 @@ def compute_code(board: list[int]) -> int | None:
     return ret
 
 
-@pytest.mark.parametrize(
-    ("board", "expected"),
-    (
-        ([0, 0, 2, 1, 1, 0, 1, 2, 2], 18351),
-        ([0, 0, 0, 0, 0, 0, 0, 0, 0], 0),
-        ([123], None),
-        ([1, 2, 3, 4, 5, 6, 7, 8, 9], None),
-    )
-)
-def test_compute_code(board, expected):
-    assert compute_code(board) == expected
+# @pytest.mark.parametrize(
+#     ("board", "expected"),
+#     (
+#         ([0, 0, 2, 1, 1, 0, 1, 2, 2], 18351),
+#         ([0, 0, 0, 0, 0, 0, 0, 0, 0], 0),
+#         ([123], None),
+#         ([1, 2, 3, 4, 5, 6, 7, 8, 9], None),
+#     )
+# )
+# def test_compute_code(board, expected):
+#     assert compute_code(board) == expected

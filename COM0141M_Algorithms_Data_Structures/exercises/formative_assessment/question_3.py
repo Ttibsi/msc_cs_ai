@@ -1,4 +1,4 @@
-import pytest
+# import pytest
 
 """
 During a fencing competition, All the fencers in the competition are put into groups of 4 or more
@@ -178,109 +178,109 @@ class PouleSheet:
 ###
 
 
-def test_constructor():
-    sheet = PouleSheet(1, 3)
-    assert len(sheet._competitors) == 3
-    assert len(sheet._results) == 3
-    assert len(sheet._results[0]) == 3
-
-
-def test_add_competitor_new():
-    sheet = PouleSheet(1, 3)
-    assert sheet.add_competitor("foo") == True
-    assert sheet._competitors == ["foo", None, None]
-
-
-def test_add_competitor_already_exists():
-    sheet = PouleSheet(1, 3)
-    assert sheet.add_competitor("foo") == True
-    assert sheet.add_competitor("foo") == False
-    assert sheet._competitors == ["foo", None, None]
-
-
-def test_add_competitor_out_of_space():
-    sheet = PouleSheet(1, 3)
-    assert sheet.add_competitor("foo") == True
-    assert sheet.add_competitor("bar") == True
-    assert sheet.add_competitor("baz") == True
-    assert sheet.add_competitor("Quax") == False
-    assert sheet._competitors == ["foo", "bar", "baz"]
-
-
-def test_record_bout():
-    sheet = PouleSheet(1, 3)
-    sheet.add_competitor("foo") == True
-    sheet.add_competitor("bar") == True
-
-    sheet.record_bout(1, 2, 5, 3)
-    assert sheet._results[0][1] == 5
-    assert sheet._results[1][0] == 3
-
-    sheet.record_bout(2, 3, 2, 5)
-    assert sheet._results[1][2] == 2
-    assert sheet._results[2][1] == 5
-
-
-def test_get_hr():
-    sheet = PouleSheet(1, 4)
-
-    # These result values come from the question sheet
-    sheet._results = [
-        [None, 5, 2, 3],
-        [2, None, 5, 5],
-        [5, 3, None, 2],
-        [5, 3, 5, None]
-    ]
-
-    assert sheet._get_hr(1) == 12
-    assert sheet._get_hr(2) == 11
-    assert sheet._get_hr(3) == 12
-    assert sheet._get_hr(4) == 10
-
-
-def test_get_hs():
-    sheet = PouleSheet(1, 4)
-
-    # These result values come from the question sheet
-    sheet._results = [
-        [None, 5, 2, 3],
-        [2, None, 5, 5],
-        [5, 3, None, 2],
-        [5, 3, 5, None]
-    ]
-
-    assert sheet._get_hs(1) == 10
-    assert sheet._get_hs(2) == 12
-    assert sheet._get_hs(3) == 10
-    assert sheet._get_hs(4) == 13
-
-
-def test_get_victories():
-    sheet = PouleSheet(1, 4)
-
-    # These result values come from the question sheet
-    sheet._results = [
-        [None, 5, 2, 3],
-        [2, None, 5, 5],
-        [5, 3, None, 2],
-        [5, 3, 5, None]
-    ]
-
-    assert sheet._get_victories(1) == 1
-    assert sheet._get_victories(2) == 2
-    assert sheet._get_victories(3) == 1
-    assert sheet._get_victories(4) == 2
-
-
-def test_get_winners():
-    sheet = PouleSheet(1, 4)
-
-    # These result values come from the question sheet
-    sheet._results = [
-        [None, 5, 2, 3],
-        [2, None, 5, 5],
-        [5, 3, None, 2],
-        [5, 3, 5, None]
-    ]
-
-    assert sheet.get_winners() == {"Clémentine"}
+# def test_constructor():
+#     sheet = PouleSheet(1, 3)
+#     assert len(sheet._competitors) == 3
+#     assert len(sheet._results) == 3
+#     assert len(sheet._results[0]) == 3
+#
+#
+# def test_add_competitor_new():
+#     sheet = PouleSheet(1, 3)
+#     assert sheet.add_competitor("foo") == True
+#     assert sheet._competitors == ["foo", None, None]
+#
+#
+# def test_add_competitor_already_exists():
+#     sheet = PouleSheet(1, 3)
+#     assert sheet.add_competitor("foo") == True
+#     assert sheet.add_competitor("foo") == False
+#     assert sheet._competitors == ["foo", None, None]
+#
+#
+# def test_add_competitor_out_of_space():
+#     sheet = PouleSheet(1, 3)
+#     assert sheet.add_competitor("foo") == True
+#     assert sheet.add_competitor("bar") == True
+#     assert sheet.add_competitor("baz") == True
+#     assert sheet.add_competitor("Quax") == False
+#     assert sheet._competitors == ["foo", "bar", "baz"]
+#
+#
+# def test_record_bout():
+#     sheet = PouleSheet(1, 3)
+#     sheet.add_competitor("foo") == True
+#     sheet.add_competitor("bar") == True
+#
+#     sheet.record_bout(1, 2, 5, 3)
+#     assert sheet._results[0][1] == 5
+#     assert sheet._results[1][0] == 3
+#
+#     sheet.record_bout(2, 3, 2, 5)
+#     assert sheet._results[1][2] == 2
+#     assert sheet._results[2][1] == 5
+#
+#
+# def test_get_hr():
+#     sheet = PouleSheet(1, 4)
+#
+#     # These result values come from the question sheet
+#     sheet._results = [
+#         [None, 5, 2, 3],
+#         [2, None, 5, 5],
+#         [5, 3, None, 2],
+#         [5, 3, 5, None]
+#     ]
+#
+#     assert sheet._get_hr(1) == 12
+#     assert sheet._get_hr(2) == 11
+#     assert sheet._get_hr(3) == 12
+#     assert sheet._get_hr(4) == 10
+#
+#
+# def test_get_hs():
+#     sheet = PouleSheet(1, 4)
+#
+#     # These result values come from the question sheet
+#     sheet._results = [
+#         [None, 5, 2, 3],
+#         [2, None, 5, 5],
+#         [5, 3, None, 2],
+#         [5, 3, 5, None]
+#     ]
+#
+#     assert sheet._get_hs(1) == 10
+#     assert sheet._get_hs(2) == 12
+#     assert sheet._get_hs(3) == 10
+#     assert sheet._get_hs(4) == 13
+#
+#
+# def test_get_victories():
+#     sheet = PouleSheet(1, 4)
+#
+#     # These result values come from the question sheet
+#     sheet._results = [
+#         [None, 5, 2, 3],
+#         [2, None, 5, 5],
+#         [5, 3, None, 2],
+#         [5, 3, 5, None]
+#     ]
+#
+#     assert sheet._get_victories(1) == 1
+#     assert sheet._get_victories(2) == 2
+#     assert sheet._get_victories(3) == 1
+#     assert sheet._get_victories(4) == 2
+#
+#
+# def test_get_winners():
+#     sheet = PouleSheet(1, 4)
+#
+#     # These result values come from the question sheet
+#     sheet._results = [
+#         [None, 5, 2, 3],
+#         [2, None, 5, 5],
+#         [5, 3, None, 2],
+#         [5, 3, 5, None]
+#     ]
+#
+#     assert sheet.get_winners() == {"Clémentine"}

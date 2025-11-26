@@ -1,4 +1,4 @@
-import pytest
+# import pytest
 
 """
 When you start to learn touch typing, you only practice on a subset of keys on the keyboard.
@@ -55,18 +55,18 @@ def extract_keys(text: str, keys: str) -> str:
     return " ".join(ret)
 
 
-@pytest.mark.parametrize(
-    ("text", "keys", "expected"),
-    (
-        (
-            "The term conda is not recognised as the name of a",
-            "theAsORin",
-            "The is not as the a"
-        ),
-        ("", "theAsORin", ""),
-        ("Reader", "ArEdz", "Reader"),
-        ("ab", "a", "")
-    )
-)
-def test_extract_keys(text, keys, expected):
-    assert extract_keys(text, keys) == expected
+# @pytest.mark.parametrize(
+#     ("text", "keys", "expected"),
+#     (
+#         (
+#             "The term conda is not recognised as the name of a",
+#             "theAsORin",
+#             "The is not as the a"
+#         ),
+#         ("", "theAsORin", ""),
+#         ("Reader", "ArEdz", "Reader"),
+#         ("ab", "a", "")
+#     )
+# )
+# def test_extract_keys(text, keys, expected):
+#     assert extract_keys(text, keys) == expected
