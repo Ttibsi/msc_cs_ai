@@ -25,7 +25,7 @@ In addition, the function must meet the following requirements:
 """
 
 
-def extract_keys(text: str, keys: str) -> str:
+def extract_text(text: str, keys: str) -> str:
     ret: list[str] = []
     if not len(text) or not len(keys):
         return ""
@@ -69,4 +69,4 @@ def extract_keys(text: str, keys: str) -> str:
 #     )
 # )
 # def test_extract_keys(text, keys, expected):
-#     assert extract_keys(text, keys) == expected
+#     assert extract_text(text, keys) == expected
