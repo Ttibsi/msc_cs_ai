@@ -7,15 +7,18 @@ def ispalindrome(word: str) -> bool:
     punctuation, and then refactor your code to consider punctuation.
     """
 
-    if not word[0].isalpha():
+    word = word.lower()
+    while not word[0].isalpha():
         word = word[1:]
 
-    if not word[-1].isalpha():
+    while not word[-1].isalpha():
         word = word[:-1]
 
     if len(word) > 2:
         if ispalindrome(word[1:-1]):
             return word[0] == word[-1]
+        else:
+            return False
 
     return word[0] == word[-1]
 
@@ -49,7 +52,13 @@ def sum_digits(num: int) -> int:
     addition, you are not allowed to convert the int into a list or a string.
     """
 
-    return (num % 10) + sum_digits(num // 10) if num else 0
+    if not num:
+        return 0
+    else:
+        num = abs(num)
+        next = num // 10
+        now = num % 10
+        return now + sum_digits(next)
 
 
 def flatten(mlist: list[list[int]]) -> list[int]:
@@ -116,18 +125,20 @@ def iselfish(word: str) -> bool:
     """
 
     check = ['e', 'l', 'f']
-    def inner(word, idx, mem):
+    found = set()
+
+    def inner(word, idx):
         if idx == len(word):
-            return mem
+            return
 
         if word[idx] in check:
-            mem.append(1)
-        else:
-            mem.append(0)
+            found.add(word[idx])
+            return inner(word, idx + 1)
 
-        return inner(word, idx + 1, mem)
+        return inner(word, idx + 1)
 
-    return sum(inner(word, 0, [])) >= 3
+    inner(word, 0) 
+    return len(found) == 3
 
         
 def something_ish(pattern: str, word: str) -> bool:
