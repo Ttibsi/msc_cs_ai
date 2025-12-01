@@ -30,7 +30,7 @@ Algorithmic "big o" functions
     - Quick sort
 - Quadratic time - O(n^2)
     - Insertion/selection sort
-- Cubic time - O(n^3)n^
+- Cubic time - O(n^3)
     - matrix chain multiplication
 - Exponential time - O(c^n)
     - A solution that examples all possible sublists of a list
