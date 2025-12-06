@@ -81,7 +81,7 @@ Quick sort
 - combine sorted subarrays
 
 Best time - when the pivot divides the array in roughly equal halves each time
-- the depth of hte tree is logarithmic in this case
+- the depth of the decision tree is logarithmic in this case
 - O(n log n)
 
 worst case - pivot has very uneven splits, such as when the largest number or 
@@ -92,3 +92,41 @@ sorted already
 space complexity - depends on recursion depth, worst case each recursive call
 processes only one element at a time
 - should be O(log n), but can decay to O(n^2) in the worst case
+
+### Discussion topic
+```
+ALGORITHM is_unique(S):
+    if length(S) is less than 2
+        return True
+
+    Let T be a binary search tree
+    for elem in S:
+        if elem in T:
+            return False
+        else:
+            insert elem into T
+
+    return True
+```
+
+Algorithmic analysis
+Here we use a Binary Search Tree to utilise it's sorted behaviour for quick 
+insertion and lookup, both on average O(log n). This means we don't have to 
+rely on sequence S being alredy sorted when searching. Notably, a pre-sorted 
+sequence would have a negative affect on searching, as every node would be 
+inserted to the right of the preceeding parent, leading to a worst case of O(n)
+lookup -- effectively making our tree just a linked list.
+
+We then need to consider the fact that we're iterating through -- at worst -- 
+every element in S, which is a linear operation. Therefore our worst case 
+performance here overall is O(n^2). However, our asymptotic performance is 
+O(n log n) assuming our tree takes a traditional tree shape.
+
+We could alternatively utilise a self-balancing tree, such as a Red-Black tree.
+While this wouldn't have any signficant impact on performance, the 
+self-balancing property would prevent the previously mentioned scenario when 
+using a pre-sorted sequence, turning the worst case scenario from O(n^2) into 
+O(n log n) as the height of the tree will always be log n. However, this is 
+likely an over-optimisation based on the given scenario and should only be 
+revisited if the BST implementation runs into relevant edge case issues.
+
