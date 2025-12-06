@@ -130,3 +130,49 @@ O(n log n) as the height of the tree will always be log n. However, this is
 likely an over-optimisation based on the given scenario and should only be 
 revisited if the BST implementation runs into relevant edge case issues.
 
+## Lesson 3 - Handling errors and working with text files in python
+* Python executes at most 1 except block
+* `else` and `finally` keywords can follow
+* `else` will trigger if no except block is entered
+* `finally` is always called whether there's an exception or not
+
+```py
+try:
+    input = int(input("enter a num "))
+    out = 10 / input
+except ValueError:
+    print("ValueError")
+except ZeroDivisionError:
+    print("ZeroDivisionError")
+else:
+    print(f"{out=}")
+finally:
+    print("And now we clean up...")
+```
+
+You can create custom error types by `raise`ing a custom type:
+```
+class FooError(Exception):
+    pass
+
+raise FooError
+```
+
+* We should also use docstrings for documentation
+* You can have an except block hold two error types with: `except (FooError, BarError):`
+
+### Text files
+```py
+# Write a script to save the contents of a string variable, a_word, into a file named exo1.txt.
+with open("exo1.txt", "w") as f:
+    f.write(a_word)
+
+# Write a function called save_to_log(entry, log_file) that takes two 
+# parameters: a string entry to be added to the end of a text file named 
+# log_file (also a string). The function should ensure that the existing 
+# content of the log_file is NOT overwritten.
+def save_to_log(entry: str, log_file: str):
+    with open(log_file, "a") as f:
+        f.write(entry + "\n")
+```
+
