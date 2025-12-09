@@ -1,3 +1,7 @@
+import math
+import os 
+import string
+
 """
 Exercise 1:
 We want to create a function sum_from_file(filename) that calculate the sum of
@@ -22,6 +26,9 @@ described
 """
 
 def sum_numbers(a_string: str) -> int:
+    if not a_string:
+        return 0
+
     if " " not in a_string:
         raise ValueError
 
@@ -42,15 +49,17 @@ def sum_from_file(filename: str) -> int | None:
     if not filename:
         return None
 
+    if not os.path.exists(filename):
+        return None
+
     total = 0
     with open(filename) as  f:
         lines = f.readlines()
 
         for line in lines:
-            try:
-                total += sum_numbers(line)
-            except ValueError:
-                ...
+            if any([c in string.ascii_letters for c in line]):
+                raise ValueError("Text must contain only numbers and spaces")
+            total += sum_numbers(line)
             
     return total
 
@@ -59,7 +68,7 @@ def sum_from_file(filename: str) -> int | None:
 Exercise 2:
 The aim of this exercise is to compute the score of an athlete in a given track event. We
 need to convert a time in seconds into points. The formula is:
-    points = a(b ― time)c
+    points = a(b ― time)^c
 
 Where time is the time in seconds of the athlete for that event. a, b and c are parameters
 that vary depending on the event (see Table 1). The value of points must be rounded down
@@ -78,7 +87,8 @@ def track_points(time: float, eventParameters: tuple[float, float, float]) -> in
         raise ValueError("Provide exactly 3 event parameters")
 
     a, b, c = eventParameters
-    return int(a * (b - time) * c)
+    ret = a * math.pow(max(b - time, 0), c)
+    return int(ret) if ret > 0 else 0
 
 
 """
@@ -91,10 +101,10 @@ with an appropriate error message.
 """
 
 def rasterise(list_1D: list[int], width: int) -> list[list[int]]:
-    if len(list_1D) % width:
-        raise BufferError(f"List length {len(list_1D)} is not a multiple of {width}")
     if width < 1:
         raise ValueError("Please provide a valid width")
+    if len(list_1D) % width:
+        raise BufferError(f"List length {len(list_1D)} is not a multiple of {width}")
 
     ret = []
     temp = []
