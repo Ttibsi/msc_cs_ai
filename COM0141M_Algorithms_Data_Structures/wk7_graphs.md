@@ -143,3 +143,36 @@ Algorithm BFS(G, source):
 ```
 
 time complexity: O(V + E)
+
+## Lesson 2 - Dijkstra's shortest path
+
+* Find the shortest path from any one node to another
+* We use a process called edge relaxation that uses a table to store the distance
+of each node from the starting node. To start, each node is set to "infinity" 
+distance away.
+
+```
+Algorithm ShortestPath(G, source):
+    distance = infinity for each element
+    distance[source] = 0
+
+    pq = PriorityQueue()
+    insert every vertex in G into PQ 
+
+    while pq is not empty:
+        u = pq.remove_min()
+        for each adjacent node [V] to u:
+
+            # This is the relaxation section
+            if (distance[u] + weight(u, V)) < distance[V]:
+                distance[V] = distance[u] + weight(u, V)
+    return distance[V] for for each vertex V
+
+```
+
+* DSP may not work if there are any negative distances
+* This is a greedy strategy
+
+* The idea here is that we aren't popping off the PQ, we're just reading from it.
+This lets us lean on the automatic reordering to know the shortest distance to 
+any node, I think.
