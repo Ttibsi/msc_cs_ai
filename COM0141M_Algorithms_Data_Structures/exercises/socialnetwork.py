@@ -65,6 +65,22 @@ class SocialNetwork:
             return set()
 
         ret = set()
+        ret.add(user_id)
+
+        starting_user = self.get_user(user_id)
+
+        # first connections
+        for uid in starting_user.get_connections():
+            ret.add(uid.get_id())
+
+        # second connections
+        for uid in ret:
+            ret.add([u for u in self.get_user(uid).get_connections()])
+
+        # third connections
+        for uid in ret:
+            ret.add([u for u in self.get_user(uid).get_connections()])
+
 
         return ret
 
