@@ -1,5 +1,6 @@
-from typing import NamedTuple
+import math
 import queue
+from typing import NamedTuple
 from user import User
 
 class Connection(NamedTuple):
@@ -84,4 +85,16 @@ class SocialNetwork:
 
         return ret
 
+    def closeness(self, user_id: str) -> int:
+        user = self.get_user(user_id)
+
+        numerator = len(self._users) - 1
+        denominator = 0
+
+        for i in self._users:
+            conn = self.connexion_degree(user_id, i)
+            if conn != -1:
+                denominator += conn
+
+        return numerator / denominator
 
