@@ -2,14 +2,14 @@
 
 * Implement graphs using adjacency lists and adjacency matrice. [MLO 1]
 * Analyse the properties of graphs and graph representations. [MLOs 1,2]
-* Write pseudocodes for several graph  algorithms and demonstrate how they work  [MLOs 1,2].  
+* Write pseudocodes for several graph  algorithms and demonstrate how they work  [MLOs 1,2].
 * Construct computer programs to implement graph  algorithms and analyse their performance  [MLOs 3,4].
 * Implement and test a computer program against its specification. [MLO 4]
 
 ## Lesson 1 - Graphs and graph traversal
 * Graphs can represent any form of relationships
 * Not every vertex has to have edges
-* Dense graphs - the number of edges is close to the maximum possible number of 
+* Dense graphs - the number of edges is close to the maximum possible number of
     edges
 * Sparce - opposite, has only a few edges in comparison to the number of vertices
 
@@ -19,7 +19,7 @@
     - also called a digraph
 * Weighted graph - edges contain a weight, such as distance or cost
     - Edges could be represented like (U, V, W) where W is the weight
-    - EX (U, V, 5) is a weighted, undirected node. 
+    - EX (U, V, 5) is a weighted, undirected node.
     - weighted graphs can be directed or undirected
     - Weights can be negative
     - Directed graphs can have different weights depending on the direction
@@ -31,16 +31,16 @@ Representing Graphs
 * Option 1 - Edge list
     - A list of triplets holding the source, dest, and weight
     - ex [(A, D, 1), (A, C, 3), (A, B 4)]
-    - Main issue - lack of structure, 
+    - Main issue - lack of structure,
         - to get a list of all vertices, you must traverse the whole list
         - doesn't contain vertices with no edges
         - Could be solved with two lists, one of edges and one of vertices, but
         this takes up a lot of space in memory
 * Option 2 - Adjacency matrix
     - A 2d array, where `matrix[u][v]` contains the weight of going from u to v
-    - undirected graphs will repeat every value - `matrix[u][v]` will be the 
+    - undirected graphs will repeat every value - `matrix[u][v]` will be the
     same as `matrix[v][u]`
-    - if no edge exists, conventions to fill those space include filling those 
+    - if no edge exists, conventions to fill those space include filling those
     cells with infinity or zero, depending on the problem trying to be solved
     - Unweighted graphs can just use booleans, or 1 and 0
 * Option 3 - Adjacency list
@@ -108,11 +108,11 @@ Algorithm DFS(G, source):
 
     visited = [False for elem in G]
     visited[source] = True
-    
+
     while beingVisited is not empty:
         current = beingVisited.pop()
         process(current)
-        
+
         for each adjacent node [V] to current:
             if not visited[V]:
                 beingVisited.push(V)
@@ -128,7 +128,7 @@ Otherwise, the algorithm is similar to above
 Algorithm BFS(G, source):
     beingVisited = Queue()
     beingVisited.enqueue(source)
-    
+
     visited = [False for elem in G]
     visited[source] = True
 
@@ -148,7 +148,7 @@ time complexity: O(V + E)
 
 * Find the shortest path from any one node to another
 * We use a process called edge relaxation that uses a table to store the distance
-of each node from the starting node. To start, each node is set to "infinity" 
+of each node from the starting node. To start, each node is set to "infinity"
 distance away.
 
 ```
@@ -157,7 +157,7 @@ Algorithm ShortestPath(G, source):
     distance[source] = 0
 
     pq = PriorityQueue()
-    insert every vertex in G into PQ 
+    insert every vertex in G into PQ
 
     while pq is not empty:
         u = pq.remove_min()
@@ -174,5 +174,76 @@ Algorithm ShortestPath(G, source):
 * This is a greedy strategy
 
 * The idea here is that we aren't popping off the PQ, we're just reading from it.
-This lets us lean on the automatic reordering to know the shortest distance to 
+This lets us lean on the automatic reordering to know the shortest distance to
 any node, I think.
+
+## Lesson 3 - Prim-Jarnik's Minimum Spanning Tree
+Spanning tree - a subgraph of an undirected graph that includes all the vertices
+while forming a tree
+    * is Connected
+    * contains no cycles
+    * V-1 edges for V vertices
+    * uses the minimum number of edges to maintain connectivity
+
+Useful for simplifying complex graphs for analysis and optimisation
+    * easier to explore relationship, identify key pathways, solve practical
+        problems
+    * in network design - used to ensure all nodes are connected without
+    redundancy
+
+finding a subset of edges in a weighted, undirected graph that connects all
+vertices with the least total edge weight
+
+exclusion of the heaviest edge in any cycle
+    - by removing the heaviest edge, you maintain connectivity while reducing
+    weight
+inclusion of the lightest edge
+
+Primm-Jarnik uses a priority queue to select which edges to include
+1 - initialise a tree with a single vertex, chosen arbitrarily
+2 - grow by one edge, finding the smallest weight attached node
+3 - repeat step 2 until all vertices completed
+
+Unlike above, this pseudoecode comes from wiki, with added comments by myself
+```
+function Prim(vertices, edges):
+    // step 1, setup
+    for each vertex in vertices:
+        cheapestCost[vertex] = inf
+        cheapestEdge[vertex] = Null
+
+    explored = set()
+    unexplored = set(all vertices)
+    start = any vertex
+    cheapestCost[start] = 0
+
+    // step 2 - iterate through all elements and find the min weight
+    while unexplored is not empty:
+        // select vertex in unexplored with min cost
+        currVertex = vertex in unexplored with min cheapestCost
+        unexplored.remove(currVertex)
+        explored.add(currVertex)
+
+        for each edge(currVertex, neighbor) in edges:
+            if (
+                neighbor in unexplored and
+                weight(currVertex, neighbor) < cheapestCost[neighbor]
+            ):
+                cheapestCost[neighbor] = weight(currVertex, neighbor)
+                cheapestEdge[neighbor] = (currVertex, neighbor)
+
+    // step 3 - build the MST from the cheapest edges
+    resultEdges = []
+    for each vertex in vertices:
+        if cheapestEdge[vertex] is not null:
+            resultEdges.append(cheapestEdge[vertex])
+
+    return resultEdges
+```
+
+Not that the set above could be implemented as an array or priority queue.
+Using a PQ, each operation runs in O(log n) time, with a total of O(m log n)
+for a connected graph
+Using an unsorted list instead results in O(n^2)
+
+Note, an MST doesn't have to be a BINARY tree
