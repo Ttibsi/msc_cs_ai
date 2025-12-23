@@ -13,10 +13,21 @@ type stats_t = dict[str, dict[str, int]]
 class Enrolment:
     grade: int
     course_code: str
-    name: str
     student_id: str
 
-    def __init__(self, data: enrolment_t, name: str, s_id: str):
+    def __init__(self, data: enrolment_t, s_id: str):
+        """
+        Construct an object of the type Enrolment
+
+        Parameters:
+            - data: enrolment_t - a dictionary with two keys:
+                                  `grade`, `course_code`
+            - s_id: str - A string representation of the student's ID
+
+        Raises:
+            ValueError - incorrect data passed in the `data` dict
+        """
+
         grade_val = data.get("grade", None)
         if grade_val is None:
             raise ValueError("Grade not found")
@@ -33,7 +44,6 @@ class Enrolment:
             raise ValueError("Course Code not found")
         self.course_code = raw_course_code
 
-        self.name = name
         self.student_id = s_id
 
 
@@ -43,11 +53,26 @@ class Course:
     student_ids: set[str]
 
     def __init__(self):
+        """ Construct the Course object with default values """
         self.grades = []
         self.student_ids = set()
 
 
 def compute_descriptive_stats(grades: list[int]) -> dict[str, float | int]:
+    """
+    Helper function to generate a dict of statistics based on a set of grades
+
+    Args:
+        - grades: list[int] - a list of student grades
+
+    Returns:
+        dict[str, float | int] - A dictionary of statistics calculated from
+                                 the given grade set
+
+    Raises:
+        ValueError - Grades list doesn't provide valid data
+    """
+
     if not grades:
         raise ValueError("Grades list is empty")
     if not all(str(g).strip('-').isdigit() for g in grades):
@@ -67,6 +92,21 @@ def compute_descriptive_stats(grades: list[int]) -> dict[str, float | int]:
 
 
 def compute_course_statistics(students: students_t) -> stats_t:
+    """
+    Calculate statistics on multiple uni courses based on given student data
+
+    Args:
+        students: students_t - A dictionary containing each student and the
+                               courses they're enrolled in
+
+    Returns:
+        stats_t - A dict containing statistics on courses attended by the
+                  given students
+
+    Raises:
+        ValueError - provided dict is empty or otherwise contains invalid data
+    """
+
     if not students:
         raise ValueError("Students dict is empty")
 
@@ -83,7 +123,7 @@ def compute_course_statistics(students: students_t) -> stats_t:
 
         for course_data in enrolments:
             structured_enrolments.append(
-                Enrolment(course_data, name, student_id)
+                Enrolment(course_data, student_id)
             )
 
     # Extract enrolment data into course-specific data
@@ -103,6 +143,17 @@ def compute_course_statistics(students: students_t) -> stats_t:
 
 
 def format_course_report(course_stats: dict[str, dict[str, int]]) -> str:
+    """
+    Format the statistic data into a readable table
+
+    Args:
+    - course_stats: dict[str, dict[str | int]] - A dict of calculated stats
+                                                 on course grades
+
+    Returns:
+        str - The formatted table as a single string
+    """
+
     report_contents = [["Course", "Mean", "Median", "StdDev", "Students"]]
 
     # Add header line
@@ -131,29 +182,28 @@ def format_course_report(course_stats: dict[str, dict[str, int]]) -> str:
 
 
 if __name__ == "__main__":
+    # if this file is the main module, run the unit tests
     import unittest
 
     class TestSuite(unittest.TestCase):
         def test_construct_enrolment(self):
             input: enrolment_t = {}
-            name = "ABC123"
             s_id = "2468"
 
             with self.assertRaises(ValueError, msg="Grade not found"):
-                e = Enrolment(input, name, s_id)
+                e = Enrolment(input, s_id)
 
             input = {"grade": 12.3}
             err_msg = "Floating point grade fouund"
             with self.assertRaises(ValueError, msg=err_msg):
-                e = Enrolment(input, name, s_id)
+                e = Enrolment(input, s_id)
 
             input["course_code"] = "C0012"
             input["grade"] = 32
-            e = Enrolment(input, name, s_id)
+            e = Enrolment(input, s_id)
 
             self.assertEqual(e.grade, 32)
             self.assertEqual(e.course_code, "C0012")
-            self.assertEqual(e.name, "ABC123")
             self.assertEqual(e.student_id, "2468")
 
         def test_compute_descriptive_stats(self):
