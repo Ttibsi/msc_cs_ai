@@ -187,6 +187,7 @@ if __name__ == "__main__":
 
     class TestSuite(unittest.TestCase):
         def test_construct_enrolment(self):
+            """ unit test for the Enrollment constructor """
             input: enrolment_t = {}
             s_id = "2468"
 
@@ -207,6 +208,7 @@ if __name__ == "__main__":
             self.assertEqual(e.student_id, "2468")
 
         def test_compute_descriptive_stats(self):
+            """ unit tests for the compute_descriptive_stats function """
             # Test with only a single item input
             input: list[int] = [1]
             expected: dict[str, float] = {
@@ -228,6 +230,7 @@ if __name__ == "__main__":
             self.assertEqual(compute_descriptive_stats(input), expected)
 
         def test_compute_course_statistics(self):
+            """ unit test for the compute_course_statistics function """
             with self.assertRaises(ValueError, msg="Students dict is empty"):
                 compute_course_statistics({})
 
@@ -249,6 +252,7 @@ if __name__ == "__main__":
             self.assertEqual(actual, expected)
 
         def test_format_course_report(self):
+            """ unit test for the format_course_report function """
             input = {
                 "CS5001": {"mean": 72.00, "median": 72.00, "std_dev": 0.00, "student_count": 1},
                 "CS5002": {"mean": 65.00, "median": 65.00, "std_dev": 0.00, "student_count": 1}
