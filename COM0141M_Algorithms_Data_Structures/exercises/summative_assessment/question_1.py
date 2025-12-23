@@ -4,7 +4,10 @@ from dataclasses import dataclass
 import statistics
 from typing import Any
 
+# Define useful type aliases for clarity in data structure
 type enrolment_t = dict[str, str | int | float]
+type students_t = dict[str, dict[str, str | list[enrolment_t]]]
+type stats_t = dict[str, dict[str, int]]
 
 class Enrolment:
     grade: int
@@ -12,7 +15,7 @@ class Enrolment:
     name: str
     student_id: str
 
-    def __init__(self, data: dict[str, Any], name: str, s_id: str):
+    def __init__(self, data: enrolment_t, name: str, s_id: str):
         grade_val = data.get("grade", None)
         if grade_val is None:
             raise ValueError("Grade not found")
@@ -24,21 +27,23 @@ class Enrolment:
         else:
             self.grade = grade_val
 
-        self.course_code = data.get("course_code", None)
-        if self.course_code is None:
+        raw_course_code = data.get("course_code", None)
+        if raw_course_code is None:
             raise ValueError("Course Code not found")
+        self.course_code = raw_course_code
 
         self.name = name
-        self.studen_id = s_id
+        self.student_id = s_id
 
 
+# define Course type to better structure data during transformation
 @dataclass
 class Course:
     grades: list[int]
     student_ids: set[str]
 
 
-def compute_descriptive_stats(grades: list[int]) -> dict[str, float]:
+def compute_descriptive_stats(grades: list[int]) -> dict[str, float | int]:
     if not grades:
         raise ValueError("Grades list is empty")
     if not all(str(g).strip('-').isdigit() for g in grades):
@@ -52,11 +57,11 @@ def compute_descriptive_stats(grades: list[int]) -> dict[str, float]:
     return {
         "mean": float(f"{statistics.mean(grades):.2f}"),
         "median": float(f"{statistics.median(grades):.2f}"),
-        "std_dev": float(stdev)
-        "student_count": float(f"{len(grades):.2f}")
+        "std_dev": float(stdev),
+        "student_count": len(grades)
     }
 
-def compute_course_statistics(students) -> dict[str, dict[str, int]]:
+def compute_course_statistics(students: students_t) -> stats_t:
     if not students:
         raise ValueError("Students dict is empty")
 
@@ -69,15 +74,16 @@ def compute_course_statistics(students) -> dict[str, dict[str, int]]:
 
         enrolments: list[enrolment_t] | None = data.get("enrolments", None)
         if enrolments is None:
-            raise ValueError("enrollment data not provided")
+            raise ValueError("enrolment data not provided")
 
-        for course_data in enrollments:
+        for course_data in enrolments:
             structured_enrolments.append(
                 Enrolment(course_data, name, student_id)
             )
 
     # Extract enrolment data into course-specific data
-    course_stats: dict[str, Course] = collections.defaultdict(Course)
+    construct_course = lambda: Course([], set())
+    course_stats: dict[str, Course] = collections.defaultdict(construct_course)
     for enrolment in structured_enrolments:
         course_stats[enrolment.course_code].grades.append(enrolment.grade)
         course_stats[enrolment.course_code].student_ids.add(
@@ -90,3 +96,116 @@ def compute_course_statistics(students) -> dict[str, dict[str, int]]:
         course_values[code] = compute_descriptive_stats(course.grades)
 
     return course_values
+
+def format_course_report(course_stats: dict[str, dict[str, int]]) -> str:
+    report_contents = [["Course", "Mean", "Median", "StdDev", "Students"]]
+
+    # Add header line
+    # Sum the length of all the text in the header, then add one for every
+    # entry to ensure spaces
+    header_line_len = sum([len(i) + 1 for i in report_contents[0]])
+    report_contents.append(["-" * header_line_len])
+
+    # Build up rows of data
+    for course_code, stats in course_stats.items():
+        # Ensure we collect all the data with default placeholder values
+        report_contents.append([
+            course_code,
+            f"{stats.get("mean", 0.00):.2f}",
+            f"{stats.get("median", 0.00):.2f}",
+            f"{stats.get("std_dev", 0.00):.2f}",
+            str(stats.get("student_count", 0))
+        ])
+
+    # Join our 2d array together into a single string
+    intermediary = []
+    for row in report_contents:
+        intermediary.append(" ".join(str(elem) for elem in row))
+
+    return "\n".join(intermediary)
+
+
+if __name__ == "__main__":
+    import unittest
+
+    class TestSuite(unittest.TestCase):
+        def test_construct_enrolment(self):
+            input: enrolment_t = {}
+            name = "ABC123"
+            s_id = "2468"
+
+            with self.assertRaises(ValueError, msg="Grade not found"):
+                e = Enrolment(input, name, s_id)
+
+            input = {"grade": 12.3}
+            err_msg = "Floating point grade fouund"
+            with self.assertRaises(ValueError, msg=err_msg):
+                e = Enrolment(input, name, s_id)
+
+            input["course_code"] = "C0012"
+            input["grade"] = 32
+            e = Enrolment(input, name, s_id)
+
+            self.assertEqual(e.grade, 32)
+            self.assertEqual(e.course_code, "C0012")
+            self.assertEqual(e.name, "ABC123")
+            self.assertEqual(e.student_id, "2468")
+
+        def test_compute_descriptive_stats(self):
+            # Test with only a single item input
+            input: list[int] = [1]
+            expected: dict[str, float] = {
+                "mean": 1.00,
+                "median": 1.00,
+                "std_dev": 0.00,
+                "student_count": 1
+            }
+
+            self.assertEqual(compute_descriptive_stats(input), expected)
+
+            input = [56, 45, 76, 85]
+            expected = {
+                "mean": 65.50,
+                "median": 66.00,
+                "std_dev": 18.27,
+                "student_count": 4
+            }
+            self.assertEqual(compute_descriptive_stats(input), expected)
+
+        def test_compute_course_statistics(self):
+            with self.assertRaises(ValueError, msg="Students dict is empty"):
+                compute_course_statistics({})
+
+            students = {
+                "S001": {
+                    "name": "Alice",
+                    "enrolments": [
+                        {"course_code": "CS5001", "grade": 72},
+                        {"course_code": "CS5002", "grade": 65}
+                    ]
+                }
+            }
+
+            expected = {
+                "CS5001": {"mean": 72.00, "median": 72.00, "std_dev": 0.00, "student_count": 1},
+                "CS5002": {"mean": 65.00, "median": 65.00, "std_dev": 0.00, "student_count": 1}
+            }
+            actual = compute_course_statistics(students)
+            self.assertEqual(actual, expected)
+
+        def test_format_course_report(self):
+            input = {
+                "CS5001": {"mean": 72.00, "median": 72.00, "std_dev": 0.00, "student_count": 1},
+                "CS5002": {"mean": 65.00, "median": 65.00, "std_dev": 0.00, "student_count": 1}
+            }
+
+            expected = """\
+Course Mean Median StdDev Students
+-----------------------------------
+CS5001 72.00 72.00 0.00 1
+CS5002 65.00 65.00 0.00 1\
+"""
+
+            self.assertEqual(format_course_report(input), expected)
+
+    unittest.main(verbosity=2)
