@@ -1,6 +1,6 @@
 # University Analytics System
+
 import collections
-from dataclasses import dataclass
 import statistics
 from typing import Any
 
@@ -8,6 +8,7 @@ from typing import Any
 type enrolment_t = dict[str, str | int | float]
 type students_t = dict[str, dict[str, str | list[enrolment_t]]]
 type stats_t = dict[str, dict[str, int]]
+
 
 class Enrolment:
     grade: int
@@ -37,10 +38,13 @@ class Enrolment:
 
 
 # define Course type to better structure data during transformation
-@dataclass
 class Course:
     grades: list[int]
     student_ids: set[str]
+
+    def __init__(self):
+        self.grades = []
+        self.student_ids = set()
 
 
 def compute_descriptive_stats(grades: list[int]) -> dict[str, float | int]:
@@ -60,6 +64,7 @@ def compute_descriptive_stats(grades: list[int]) -> dict[str, float | int]:
         "std_dev": float(stdev),
         "student_count": len(grades)
     }
+
 
 def compute_course_statistics(students: students_t) -> stats_t:
     if not students:
@@ -82,8 +87,7 @@ def compute_course_statistics(students: students_t) -> stats_t:
             )
 
     # Extract enrolment data into course-specific data
-    construct_course = lambda: Course([], set())
-    course_stats: dict[str, Course] = collections.defaultdict(construct_course)
+    course_stats: dict[str, Course] = collections.defaultdict(Course)
     for enrolment in structured_enrolments:
         course_stats[enrolment.course_code].grades.append(enrolment.grade)
         course_stats[enrolment.course_code].student_ids.add(
@@ -96,6 +100,7 @@ def compute_course_statistics(students: students_t) -> stats_t:
         course_values[code] = compute_descriptive_stats(course.grades)
 
     return course_values
+
 
 def format_course_report(course_stats: dict[str, dict[str, int]]) -> str:
     report_contents = [["Course", "Mean", "Median", "StdDev", "Students"]]
