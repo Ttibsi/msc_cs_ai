@@ -5,6 +5,8 @@ from typing import NamedTuple
 from typing import Self
 
 # Create a named tuple for any Find to ensure the data is more structured
+
+
 class Find(NamedTuple):
     x: int
     y: int
@@ -157,9 +159,9 @@ def closest_artefacts(site: Site) -> Distance | None:
             # We need to check if each value is None. If not, we
             # instead populate the value with an arbitrarily large
             # number
-            xy_dist = disco_x.distance(disco_y) if disco_x is not None else 10000
-            xz_dist = disco_x.distance(disco_z) if disco_x is not None else 10000
-            yz_dist = disco_y.distance(disco_z) if disco_y is not None else 10000
+            xy_dist = disco_x.distance(disco_y) if disco_x is not None else 100
+            xz_dist = disco_x.distance(disco_z) if disco_x is not None else 100
+            yz_dist = disco_y.distance(disco_z) if disco_y is not None else 100
             min_dist = min(xy_dist, xz_dist, yz_dist)
 
             if min_dist == xy_dist:
@@ -182,12 +184,12 @@ def closest_artefacts(site: Site) -> Distance | None:
         # pick the smaller pair:
         return min(lhs, rhs, straddle_dist)
 
-    ### End of inner helper function
+    # End of inner helper function
 
     if len(site.discoveries) < 2:
         return None
 
-    return _closest_recursive(site.discoveries);
+    return _closest_recursive(site.discoveries)
 
 
 def in_circle(site: Site, cx: int, cy: int, r: float) -> list[Find]:
@@ -207,7 +209,8 @@ def in_circle(site: Site, cx: int, cy: int, r: float) -> list[Find]:
     def _check_coordinates(x: int, y: int, cx: int, cy: int, r: float) -> bool:
         """
         Check the coordinates of a given Find lie within the provided circle
-        dimensions using the formula: (x-center_x)^2 + (y - center_y)^2 < radius^2
+        dimensions using the formula:
+        (x-center_x)^2 + (y - center_y)^2 < radius^2
 
         Args:
             x: int - x coordinate of the find
@@ -240,7 +243,6 @@ if __name__ == "__main__":
             g = Find(9, 9)
             self.assertEqual(f.distance(g), 8.06)
 
-
         def test_Site_add(self):
             s = Site(5, 5, [])
             s.add(Find(1, 2))
@@ -258,10 +260,12 @@ if __name__ == "__main__":
             # We need to check if this doesn't throw an error
             self.assertEqual(s.validate(2, 2), None)
 
-
         def test_Distance_lt(self):
-            d = Distance(Find(1, 1), Find(4, 4), Find(1, 1).distance(Find(4, 4)))
-            e = Distance(Find(1, 1), Find(2, 2), Find(1, 1).distance(Find(2, 2)))
+            f1 = Find(1, 1)
+            f2 = Find(4, 4)
+            f3 = Find(2, 2)
+            d = Distance(f1, f2, f1.distance(f2))
+            e = Distance(f1, f3, f1.distance(f3))
 
             self.assertEqual(e < d, True)
             self.assertEqual(d < e, False)
@@ -290,7 +294,7 @@ if __name__ == "__main__":
 
         def test_closest_artefacts(self):
             s = Site(10, 10, [Find(1, 4), Find(3, 1), Find(6, 7), Find(9, 5)])
-            expected = Distance(Find(1,4), Find(3,1), 3.61)
+            expected = Distance(Find(1, 4), Find(3, 1), 3.61)
             self.assertEqual(closest_artefacts(s), expected)
 
         def test_in_circle(self):
@@ -302,6 +306,5 @@ if __name__ == "__main__":
                 in_circle(s2, 0, 0, 5.1),
                 [Find(3, 4), Find(3, 4)]
             )
-
 
     unittest.main(verbosity=2)
