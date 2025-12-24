@@ -16,8 +16,8 @@ class Find(NamedTuple):
 
         if other is None:
             return 10000000.0  # arbitrarily large number
-        x_half = (other.x - self.x) * 2
-        y_half = (other.y - self.y) * 2
+        x_half = math.pow(other.x - self.x, 2)
+        y_half = math.pow(other.y - self.y, 2)
         return round(math.sqrt(x_half + y_half), 2)
 
 
@@ -128,9 +128,10 @@ def _get(lst: list[Any], idx: int) -> Any | None:
         Any - the element from the list
         None - if the index is out of bounds
     """
-    if len(lst) < idx:
+    try:
+        return lst[idx]
+    except IndexError:
         return None
-    return lst[idx]
 
 
 def closest_artefacts(site: Site) -> Distance | None:
@@ -153,9 +154,12 @@ def closest_artefacts(site: Site) -> Distance | None:
             disco_y = _get(discoveries, 1)
             disco_z = _get(discoveries, 2)
 
-            xy_dist = disco_x.distance(disco_y)
-            xz_dist = disco_x.distance(disco_z)
-            yz_dist = disco_y.distance(disco_z)
+            # We need to check if each value is None. If not, we
+            # instead populate the value with an arbitrarily large
+            # number
+            xy_dist = disco_x.distance(disco_y) if disco_x is not None else 10000
+            xz_dist = disco_x.distance(disco_z) if disco_x is not None else 10000
+            yz_dist = disco_y.distance(disco_z) if disco_y is not None else 10000
             min_dist = min(xy_dist, xz_dist, yz_dist)
 
             if min_dist == xy_dist:
@@ -180,13 +184,13 @@ def closest_artefacts(site: Site) -> Distance | None:
 
     ### End of inner helper function
 
-    if len(discoveries) < 2:
+    if len(site.discoveries) < 2:
         return None
 
     return _closest_recursive(site.discoveries);
 
 
-def in_circle(site: Site, cx: int, cy: int, r: int) -> list[Find]:
+def in_circle(site: Site, cx: int, cy: int, r: float) -> list[Find]:
     """
     Find all discoveries within a given radius in a site
 
@@ -194,13 +198,34 @@ def in_circle(site: Site, cx: int, cy: int, r: int) -> list[Find]:
         site: Site - the site to search
         cx: int, cy: int - the x and y coordinates of the centerpoint of
                            the circle
-        r: int - the radius of the circle
+        r: float - the radius of the circle
 
     Returns:
         list[Find] - a list of all valid artifacts found in the circle
     """
 
+    def _check_coordinates(x: int, y: int, cx: int, cy: int, r: float) -> bool:
+        """
+        Check the coordinates of a given Find lie within the provided circle
+        dimensions using the formula: (x-center_x)^2 + (y - center_y)^2 < radius^2
+
+        Args:
+            x: int - x coordinate of the find
+            y: int - y coordinate of the find
+            cx: int - x coordinate of the center of the circle
+            cy: int - y coordinate of the center of the circle
+            r: float - radius of the circle
+
+        Returns:
+            bool - does the coordinates lie within the circle
+        """
+        return math.pow(x - cx, 2) + math.pow(y - cy, 2) <= math.pow(r, 2)
+
     valid_finds: list[Find] = []
+    for find in site.discoveries:
+        if _check_coordinates(find.x, find.y, cx, cy, r):
+            valid_finds.append(find)
+
     return valid_finds
 
 
@@ -210,6 +235,73 @@ if __name__ == "__main__":
     import unittest
 
     class TestSuite(unittest.TestCase):
-        ...
+        def test_Find_distance(self):
+            f = Find(5, 2)
+            g = Find(9, 9)
+            self.assertEqual(f.distance(g), 8.06)
+
+
+        def test_Site_add(self):
+            s = Site(5, 5, [])
+            s.add(Find(1, 2))
+            self.assertEqual(len(s.discoveries), 1)
+
+        def test_Site_validate(self):
+            s = Site(5, 5, [])
+
+            with self.assertRaises(ValueError):
+                s.validate(0, 2)
+
+            with self.assertRaises(ValueError):
+                s.validate(4, 12)
+
+            # We need to check if this doesn't throw an error
+            self.assertEqual(s.validate(2, 2), None)
+
+
+        def test_Distance_lt(self):
+            d = Distance(Find(1, 1), Find(4, 4), Find(1, 1).distance(Find(4, 4)))
+            e = Distance(Find(1, 1), Find(2, 2), Find(1, 1).distance(Find(2, 2)))
+
+            self.assertEqual(e < d, True)
+            self.assertEqual(d < e, False)
+
+        def test_new_site(self):
+            expected = Site(5, 5, [])
+            self.assertEqual(new_site(5, 5), expected)
+
+        def test_add_find(self):
+            s = Site(5, 5, [])
+            expected = Site(5, 5, [Find(1, 1)])
+            self.assertEqual(add_find(s, 1, 1), expected)
+
+            with self.assertRaises(ValueError):
+                add_find(s, 6, 6)
+
+        def test_distance(self):
+            f = Find(5, 2)
+            g = Find(9, 9)
+            self.assertEqual(distance(f, g), 8.06)
+
+        def test_get_helper(self):
+            lst = [1, 2, 3]
+            self.assertEqual(_get(lst, 7), None)
+            self.assertEqual(_get(lst, 1), 2)
+
+        def test_closest_artefacts(self):
+            s = Site(10, 10, [Find(1, 4), Find(3, 1), Find(6, 7), Find(9, 5)])
+            expected = Distance(Find(1,4), Find(3,1), 3.61)
+            self.assertEqual(closest_artefacts(s), expected)
+
+        def test_in_circle(self):
+            s = Site(10, 10, [Find(1, 1), Find(5, 5), Find(8, 8)])
+            self.assertEqual(in_circle(s, 5, 5, 3), [Find(5, 5)])
+
+            s2 = Site(10, 10, [Find(3, 4), Find(7, 7), Find(3, 4), Find(9, 9)])
+            self.assertEqual(
+                in_circle(s2, 0, 0, 5.1),
+                [Find(3, 4), Find(3, 4)]
+            )
+
 
     unittest.main(verbosity=2)
