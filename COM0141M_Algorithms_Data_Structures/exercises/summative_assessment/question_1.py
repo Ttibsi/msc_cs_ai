@@ -3,6 +3,7 @@
 import collections
 import statistics
 from typing import Any
+from typing import Self
 
 # Define useful type aliases for clarity in data structure
 type enrolment_t = dict[str, str | int | float]
@@ -15,7 +16,7 @@ class Enrolment:
     course_code: str
     student_id: str
 
-    def __init__(self, data: enrolment_t, s_id: str):
+    def __init__(self, data: enrolment_t, s_id: str) -> Self:
         """
         Construct an object of the type Enrolment
 
@@ -52,7 +53,7 @@ class Course:
     grades: list[int]
     student_ids: set[str]
 
-    def __init__(self):
+    def __init__(self) -> Self:
         """ Construct the Course object with default values """
         self.grades = []
         self.student_ids = set()
