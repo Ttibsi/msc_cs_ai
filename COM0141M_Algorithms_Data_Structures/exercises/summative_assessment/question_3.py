@@ -339,14 +339,30 @@ if __name__ == "__main__":
             self.assertEqual(next(gen), ("A",))
 
         def test_CommunicationProtocol_handle_single(self):
-            pass
+            c = CommunicationProtocol("MARS2025")
+            self.assertEqual(c._handle_single("A"), "M")
+            self.assertEqual(c._handle_single("M"), "0")
+            self.assertEqual(c._handle_single("N"), "L")
+
         def test_CommunicationProtocol_rectangle_rule(self):
-            pass
+            c = CommunicationProtocol("MARS2025")
+            input = Coordinate(0, 2), Coordinate(3, 1)
+            self.assertEqual(c._rectangle_rule(input), "PA")
+
         def test_CommunicationProtocol_row_rule(self):
-            pass
+            c = CommunicationProtocol("MARS2025")
+            input = Coordinate(0, 2), Coordinate(0, 1)
+            self.assertEqual(s._row_rule(input), "SR")
+
         def test_CommunicationProtocol_col_rule(self):
-            pass
+            c = CommunicationProtocol("MARS2025")
+            input = Coordinate(5, 0), Coordinate(1, 0)
+            self.assertEqual(c._col_rule(input), "MG")
+
         def test_CommunicationProtocol_encode_message(self):
-            pass
+            c = CommunicationProtocol("MARS2025")
+            input = "Rover at 5N"
+            expected = "PA5ZSRENL"
+            self.assertEqual(c.encode_message(input), expected)
 
     unittest.main(verbosity = 2)
