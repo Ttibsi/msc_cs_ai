@@ -1,15 +1,15 @@
 # Mars Rover Communication System
 import copy
-from enum import Enum
-import string
 import itertools
+import operator
+import string
+from enum import Enum
+from typing import Callable
 from typing import Iterator
 from typing import NamedTuple
 from typing import Self
 
 # Set up helpers
-
-
 class Equality(Enum):
     NOMATCH = 1
     X_ONLY = 2
@@ -35,6 +35,7 @@ class Coordinate(NamedTuple):
 # Set up type aliases for clarity
 type Position_t = tuple[Coordinate | None, Coordinate | None]
 type Grid_t = list[list[str | None]]
+type func_t = Callable[[int, int], int]
 
 
 class CommunicationProtocol:
@@ -166,7 +167,7 @@ class CommunicationProtocol:
         """
         yield from itertools.batched(message, 2)
 
-    def _handle_single(self, char: str) -> str:
+    def _handle_single(self, char: str, func: func_t) -> str:
         """
         Find the char at wrapped relative position -1, -1 to the provided
         char in the grid
@@ -179,7 +180,7 @@ class CommunicationProtocol:
         """
         pos: Coordinate = self._find_position(left=char, right=None)[0]
         # Mod the coordinate to wrap around
-        return self._grid[(pos.x - 1) % 6][(pos.y - 1) % 6]
+        return self._grid[func(pos.x, 1) % 6][func(pos.y, 1) % 6]
 
     def _rectangle_rule(self, pair: Position_t) -> str:
         """
@@ -205,7 +206,7 @@ class CommunicationProtocol:
             self._grid[pair[0].x][pair[1].y]
         )
 
-    def _row_rule(self, pair: Position_t) -> str:
+    def _row_rule(self, pair: Position_t, func: func_t) -> str:
         """
         Shift both characters to the right, wrapping around, in the grid
 
@@ -221,11 +222,11 @@ class CommunicationProtocol:
             if loc is None:
                 continue
 
-            ret += self._grid[loc.x][(loc.y + 1) % 6]
+            ret += self._grid[loc.x][(func(loc.y, 1)) % 6]
 
         return ret
 
-    def _col_rule(self, pair: Position_t) -> str:
+    def _col_rule(self, pair: Position_t, func: func_t) -> str:
         """
         Shift both characters down, wrapping around, in the grid
 
@@ -240,7 +241,7 @@ class CommunicationProtocol:
         for loc in pair:
             if loc is None:
                 continue
-            ret += self._grid[(loc.x + 1) % 6][loc.y]
+            ret += self._grid[func(loc.x, 1) % 6][loc.y]
         return ret
 
     def encode_message(self, message: str) -> str:
@@ -257,7 +258,7 @@ class CommunicationProtocol:
 
         for pair in self._create_pairs(message.upper().replace(" ", "")):
             if len(pair) == 1:
-                result += self._handle_single(pair[0])
+                result += self._handle_single(pair[0], operator.sub)
                 continue
 
             pos: Position_t = self._find_position(left=pair[0], right=pair[1])
@@ -265,9 +266,37 @@ class CommunicationProtocol:
                 case Equality.NOMATCH:
                     result += self._rectangle_rule(pos)
                 case Equality.X_ONLY:
-                    result += self._row_rule(pos)
+                    result += self._row_rule(pos, operator.add)
                 case Equality.Y_ONLY:
-                    result += self._col_rule(pos)
+                    result += self._col_rule(pos, operator.add)
+
+        return result
+
+    def decode_message(self, message: str) -> str:
+        """
+        Deocde the provided message
+
+        Args:
+        message: str - the message to decode
+
+        Returns:
+        str - the decoded message
+        """
+        result = ""
+
+        for pair in self._create_pairs(message.upper().replace(" ", "")):
+            if len(pair) == 1:
+                result += self._handle_single(pair[0], operator.add)
+                continue
+
+            pos: Position_t = self._find_position(left=pair[0], right=pair[1])
+            match pos[0].equal(pos[1]):
+                case Equality.NOMATCH:
+                    result += self._rectangle_rule(pos)
+                case Equality.X_ONLY:
+                    result += self._row_rule(pos, operator.sub)
+                case Equality.Y_ONLY:
+                    result += self._col_rule(pos, operator.sub)
 
         return result
 
@@ -337,8 +366,8 @@ if __name__ == "__main__":
 
         def test_CommunicationProtocol_handle_single(self):
             c = CommunicationProtocol("MARS2025")
-            self.assertEqual(c._handle_single("A"), "3")
-            self.assertEqual(c._handle_single("N"), "L")
+            self.assertEqual(c._handle_single("A", operator.sub), "3")
+            self.assertEqual(c._handle_single("N", operator.sub), "L")
 
         def test_CommunicationProtocol_rectangle_rule(self):
             c = CommunicationProtocol("MARS2025")
@@ -350,17 +379,21 @@ if __name__ == "__main__":
         def test_CommunicationProtocol_row_rule(self):
             c = CommunicationProtocol("MARS2025")
             input = Coordinate(0, 2), Coordinate(0, 1)
-            self.assertEqual(c._row_rule(input), "SR")
+            self.assertEqual(c._row_rule(input, operator.add), "SR")
 
         def test_CommunicationProtocol_col_rule(self):
             c = CommunicationProtocol("MARS2025")
             input = Coordinate(5, 0), Coordinate(1, 0)
-            self.assertEqual(c._col_rule(input), "MG")
+            self.assertEqual(c._col_rule(input, operator.add), "MG")
 
         def test_CommunicationProtocol_encode_message(self):
             c = CommunicationProtocol("MARS2025")
             input = "Rover at 5N"
             expected = "PA5ZSRENL"
             self.assertEqual(c.encode_message(input), expected)
+
+        def test_CommunicationProtocol_decode_message(self):
+            c = CommunicationProtocol("MARS2025")
+            self.assertEqual(c.decode_message("PA5ZSRENL"), "ROVERAT5N")
 
     unittest.main(verbosity=2)
