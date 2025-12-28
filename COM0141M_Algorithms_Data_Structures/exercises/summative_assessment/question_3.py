@@ -9,14 +9,15 @@ from typing import Iterator
 from typing import NamedTuple
 from typing import Self
 
-# Set up helpers
 class Equality(Enum):
+    """ Enumeration of match values for two Coordinates """
     NOMATCH = 1
     X_ONLY = 2
     Y_ONLY = 3
 
 
 class Coordinate(NamedTuple):
+    """ Coordinate NamedTuple for more structured data. """
     x: int
     y: int
 
@@ -174,6 +175,7 @@ class CommunicationProtocol:
 
         Args:
         char: str - a character in the grid
+        func: func_t - a function to apply when moving around the grid
 
         Returns:
         str - the char to append to an encoded message
@@ -213,6 +215,7 @@ class CommunicationProtocol:
         Args:
         pair: Position_t - the positions of two characters to find in the
         grid
+        func: func_t - a function to apply when moving around the grid
 
         Returns:
         str - a two-character encoded string
@@ -232,6 +235,7 @@ class CommunicationProtocol:
 
         Args:
         pair: Position_t - the positions of two characters to find in the grid
+        func: func_t - a function to apply when moving around the grid
 
         Returns:
         str - a two-character encoded string
