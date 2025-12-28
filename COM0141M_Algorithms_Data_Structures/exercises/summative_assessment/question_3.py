@@ -177,7 +177,7 @@ class CommunicationProtocol:
         Returns:
         str - the char to append to an encoded message
         """
-        pos: Coordinate = self._find_position(left = char, right = None)[0]
+        pos: Coordinate = self._find_position(left=char, right=None)[0]
         # Mod the coordinate to wrap around
         return self._grid[(pos.x - 1) % 6][(pos.y - 1) % 6]
 
@@ -198,7 +198,7 @@ class CommunicationProtocol:
 
         assert pair[0] is not None
         assert pair[1] is not None
-        # Flip the co-ordinates around to find the opposite corners of the 
+        # Flip the co-ordinates around to find the opposite corners of the
         # given rectangle
         return (
             self._grid[pair[1].x][pair[0].y] +
@@ -301,7 +301,7 @@ if __name__ == "__main__":
         def test_CommunicationProtocol_create_grid(self):
             # Intentionally left out the second `2` as removing that is
             # handled elsewhere
-            c = CommunicationProtocol("MARS205")  
+            c = CommunicationProtocol("MARS205")
             valid = "BCDEFGHIJKLNOPQTUVWXYZ1346789"
             grid = c._create_grid(key="MARS205", valid=list(valid))
             expected = [
@@ -363,4 +363,4 @@ if __name__ == "__main__":
             expected = "PA5ZSRENL"
             self.assertEqual(c.encode_message(input), expected)
 
-    unittest.main(verbosity = 2)
+    unittest.main(verbosity=2)
