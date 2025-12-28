@@ -1,5 +1,4 @@
 # University Analytics System
-
 import collections
 import statistics
 from typing import Any
