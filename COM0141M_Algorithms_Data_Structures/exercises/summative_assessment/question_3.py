@@ -20,8 +20,10 @@ class Coordinate(NamedTuple):
     x: int
     y: int
 
-    def equal(self, other: Self) -> Equality:
+    def equal(self, other: Self | None) -> Equality:
         """ Compare two coordinate objects """
+        if other is None:
+            return Equality.NOMATCH
         if self.x == other.x:
             return Equality.X_ONLY
         if self.y == other.y:
@@ -62,7 +64,6 @@ class CommunicationProtocol:
                     valid_insertions.remove(c)
 
         # start constructing the grid
-        valid_insertions.reverse()
         self._grid = self._create_grid(
             key=stripped_key,
             valid=valid_insertions
@@ -79,17 +80,31 @@ class CommunicationProtocol:
 
         Returns:
             Grid_t - a 2d array built out of the provided key
+
+        Raises:
+        AssertionError - if the grid is the wrong dimensions
         """
-        grid: Grid_t = [[None] * 6] * 6
-        for i in range(6):
-            for j in range(6):
-                curr_key = (i * 6) + j
-                if curr_key < len(key):
-                    grid[i][j] = key[curr_key]
+        grid: Grid_t = []
 
-                else:
-                    grid[i][j] = valid.pop()
+        # Use a generator to populate the grid with the contents of the key
+        key_generator = itertools.batched(key, 6)
+        for gen_obj in key_generator:
+            grid.append(list(gen_obj))
 
+        # Fill the last row with valid elements
+        valid.reverse()
+        while len(grid[-1]) < 6:
+            grid[-1].append(valid.pop())
+
+        # Ensure the table is full by continually populating it
+        valid.reverse()
+        valid_char_generator = itertools.batched(valid, 6)
+        while len(grid) < 6:
+            grid.append(list(next(valid_char_generator)))
+
+        assert len(grid) == 6
+        assert len(grid[0]) == 6
+        assert len(grid[-1]) == 6, len(grid[-1])
         return grid
 
     def get_grid(self) -> Grid_t:
@@ -127,7 +142,7 @@ class CommunicationProtocol:
         Returns:
         Position_t - The locations of the two chars
         """
-        ret: Position_t = None, None
+        ret: list[Coordinate | None] = [None, None]
 
         for idx, line in enumerate(self._grid):
             for idy, char in enumerate(line):
@@ -136,7 +151,7 @@ class CommunicationProtocol:
                 elif char == right:
                     ret[1] = Coordinate(idx, idy)
 
-        return ret
+        return tuple(ret)
 
     def _create_pairs(self, message: str) -> Iterator[tuple[str, ...]]:
         """
@@ -162,7 +177,7 @@ class CommunicationProtocol:
         Returns:
         str - the char to append to an encoded message
         """
-        pos: Coordinate = self._find_position(char, None)[0]
+        pos: Coordinate = self._find_position(left = char, right = None)[0]
         # Mod the coordinate to wrap around
         return self._grid[(pos.x - 1) % 6][(pos.y - 1) % 6]
 
@@ -183,33 +198,12 @@ class CommunicationProtocol:
 
         assert pair[0] is not None
         assert pair[1] is not None
-
-        # Get the co-ordinates of the rectangle to draw in the grid
-        top_row = min(pair[0].x, pair[1].x)
-        left_col = min(pair[0].y, pair[1].y)
-        bottom_row = max(pair[0].x, pair[1].x)
-        right_col = max(pair[0].y, pair[1].y)
-        length = bottom_row - top_row
-
-        # construct a mini-grid out of the grid
-        mini_grid = []
-        for i in range(left_col, right_col + 1):
-            row = []
-            for j in range(top_row, bottom_row + 1):
-                row.append(self._grid[i][j])
-
-            mini_grid.append(row)
-
-        # Build up the return string
-        ret: str = ""
-
-        for loc in pair:
-            if loc is None:
-                continue
-            # NOTE: I think this logic is incorrect
-            ret += mini_grid[loc.x % length][loc.y % length]
-
-        return ret
+        # Flip the co-ordinates around to find the opposite corners of the 
+        # given rectangle
+        return (
+            self._grid[pair[1].x][pair[0].y] +
+            self._grid[pair[0].x][pair[1].y]
+        )
 
     def _row_rule(self, pair: Position_t) -> str:
         """
@@ -261,9 +255,10 @@ class CommunicationProtocol:
         """
         result = ""
 
-        for pair in self._create_pairs(message):
+        for pair in self._create_pairs(message.upper().replace(" ", "")):
             if len(pair) == 1:
-                result += self.handle_single(pair[0])
+                result += self._handle_single(pair[0])
+                continue
 
             pos: Position_t = self._find_position(left=pair[0], right=pair[1])
             match pos[0].equal(pos[1]):
@@ -304,9 +299,11 @@ if __name__ == "__main__":
             self.assertEqual(c._grid, expected)
 
         def test_CommunicationProtocol_create_grid(self):
-            c = CommunicationProtocol("MARS2025")
+            # Intentionally left out the second `2` as removing that is
+            # handled elsewhere
+            c = CommunicationProtocol("MARS205")  
             valid = "BCDEFGHIJKLNOPQTUVWXYZ1346789"
-            grid = c._create_grid(key="MARS2025", valid=list(valid))
+            grid = c._create_grid(key="MARS205", valid=list(valid))
             expected = [
                 ["M", "A", "R", "S", "2", "0"],
                 ["5", "B", "C", "D", "E", "F"],
@@ -340,19 +337,20 @@ if __name__ == "__main__":
 
         def test_CommunicationProtocol_handle_single(self):
             c = CommunicationProtocol("MARS2025")
-            self.assertEqual(c._handle_single("A"), "M")
-            self.assertEqual(c._handle_single("M"), "0")
+            self.assertEqual(c._handle_single("A"), "3")
             self.assertEqual(c._handle_single("N"), "L")
 
         def test_CommunicationProtocol_rectangle_rule(self):
             c = CommunicationProtocol("MARS2025")
-            input = Coordinate(0, 2), Coordinate(3, 1)
-            self.assertEqual(c._rectangle_rule(input), "PA")
+            input = Coordinate(4, 1), Coordinate(2, 3)
+            self.assertEqual(c._rectangle_rule(input), "HY")
+            input2 = Coordinate(0, 2), Coordinate(3, 1)
+            self.assertEqual(c._rectangle_rule(input2), "PA")
 
         def test_CommunicationProtocol_row_rule(self):
             c = CommunicationProtocol("MARS2025")
             input = Coordinate(0, 2), Coordinate(0, 1)
-            self.assertEqual(s._row_rule(input), "SR")
+            self.assertEqual(c._row_rule(input), "SR")
 
         def test_CommunicationProtocol_col_rule(self):
             c = CommunicationProtocol("MARS2025")
