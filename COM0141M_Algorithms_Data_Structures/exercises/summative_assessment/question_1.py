@@ -2,7 +2,6 @@
 import collections
 import statistics
 from typing import Any
-from typing import Self
 from typing import TypeAlias
 
 # Define useful type aliases for clarity in data structure
@@ -18,7 +17,7 @@ class Enrolment:
     course_code: str
     student_id: str
 
-    def __init__(self, data: enrolment_t, s_id: str) -> Self:
+    def __init__(self, data: enrolment_t, s_id: str) -> None:
         """
         Construct an object of the type Enrolment
 
@@ -55,7 +54,7 @@ class Course:
     grades: list[int]
     student_ids: set[str]
 
-    def __init__(self) -> Self:
+    def __init__(self) -> None:
         """ Construct the Course object with default values """
         self.grades = []
         self.student_ids = set()
@@ -170,10 +169,10 @@ def format_course_report(course_stats: dict[str, dict[str, int]]) -> str:
         # Ensure we collect all the data with default placeholder values
         report_contents.append([
             course_code,
-            f"{stats.get("mean", 0.00):.2f}",
-            f"{stats.get("median", 0.00):.2f}",
-            f"{stats.get("std_dev", 0.00):.2f}",
-            str(stats.get("student_count", 0))
+            f"{stats.get('mean', 0.00):.2f}",
+            f"{stats.get('median', 0.00):.2f}",
+            f"{stats.get('std_dev', 0.00):.2f}",
+            str(stats.get('student_count', 0))
         ])
 
     # Join our 2d array together into a single string
