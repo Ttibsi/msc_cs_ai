@@ -1,13 +1,16 @@
 # Mars Rover Communication System
 from __future__ import annotations
+
 import copy
 import itertools
 import operator
 import string
 from enum import Enum
 from typing import Callable
+from typing import Iterator
 from typing import NamedTuple
 from typing import TypeAlias
+
 
 class Equality(Enum):
     """ Enumeration of match values for two Coordinates """
@@ -349,7 +352,6 @@ if __name__ == "__main__":
             actual = batched("aboba", 2)
             expected = [("a", "b"), ("o", "b"), ("a",)]
             self.assertEqual(actual, expected)
-
 
         def test_CommunicationProtocol_constructor(self):
             c = CommunicationProtocol("MARS2025")
