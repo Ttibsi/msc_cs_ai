@@ -41,7 +41,18 @@ Grid_t: TypeAlias = list[list[str | None]]
 func_t: TypeAlias = Callable[[int, int], int]
 
 
-def batched(iterable: str, n: int):
+def batched(iterable: str, n: int) -> list[tuple[str, ...]]:
+    """
+    A clone of itertools.batched for python3.10 for gradescope compatibility
+
+    Args:
+    iterable: str - A string to iterate over
+    n: int - The number of chars to include per iteration
+
+    Returns:
+    list[tuple[str, ...]] - a list of tuples of n length
+    """
+
     ret = []
     temp = []
 
@@ -333,6 +344,12 @@ if __name__ == "__main__":
             p3 = Coordinate(2, 3)
             self.assertEqual(p1.equal(p3), Equality.NOMATCH)
             self.assertEqual(p2.equal(p3), Equality.Y_ONLY)
+
+        def test_batched(self):
+            actual = batched("aboba", 2)
+            expected = [("a", "b"), ("o", "b"), ("a",)]
+            self.assertEqual(actual, expected)
+
 
         def test_CommunicationProtocol_constructor(self):
             c = CommunicationProtocol("MARS2025")
