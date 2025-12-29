@@ -1,8 +1,8 @@
 # Archaeological dig site artefact recoding
+from __future__ import annotations
 import math
 from typing import Any
 from typing import NamedTuple
-from typing import Self
 
 
 class Find(NamedTuple):
@@ -12,7 +12,7 @@ class Find(NamedTuple):
     x: int
     y: int
 
-    def distance(self, other: Self | None) -> float:
+    def distance(self, other: Find | None) -> float:
         """
         Calculate the euclidian distance between two different Find objects
         """

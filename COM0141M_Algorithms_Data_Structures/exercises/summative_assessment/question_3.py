@@ -1,14 +1,13 @@
 # Mars Rover Communication System
+from __future__ import annotations
 import copy
 import itertools
 import operator
 import string
 from enum import Enum
 from typing import Callable
-from typing import Iterator
 from typing import NamedTuple
 from typing import TypeAlias
-from typing import Self
 
 class Equality(Enum):
     """ Enumeration of match values for two Coordinates """
@@ -22,7 +21,7 @@ class Coordinate(NamedTuple):
     x: int
     y: int
 
-    def equal(self, other: Self | None) -> Equality:
+    def equal(self, other: Coordinate | None) -> Equality:
         """ Compare two coordinate objects """
         if other is None:
             return Equality.NOMATCH
@@ -40,6 +39,21 @@ class Coordinate(NamedTuple):
 Position_t: TypeAlias = tuple[Coordinate | None, Coordinate | None]
 Grid_t: TypeAlias = list[list[str | None]]
 func_t: TypeAlias = Callable[[int, int], int]
+
+
+def batched(iterable: str, n: int):
+    ret = []
+    temp = []
+
+    for idx, c in enumerate(iterable, start=1):
+        temp.append(c)
+
+        if idx % n == 0:
+            ret.append(tuple(temp))
+            temp = []
+
+    ret.append(tuple(temp))
+    return ret
 
 
 class CommunicationProtocol:
@@ -92,7 +106,7 @@ class CommunicationProtocol:
         grid: Grid_t = []
 
         # Use a generator to populate the grid with the contents of the key
-        key_generator = itertools.batched(key, 6)
+        key_generator = batched(key, 6)
         for gen_obj in key_generator:
             grid.append(list(gen_obj))
 
@@ -103,12 +117,11 @@ class CommunicationProtocol:
 
         # Ensure the table is full by continually populating it
         valid.reverse()
-        valid_char_generator = itertools.batched(valid, 6)
-        while len(grid) < 6:
-            grid.append(list(next(valid_char_generator)))
+        valid_char_generator = batched(valid, 6)
+        grid.extend([list(x) for x in valid_char_generator if len(x)])
 
-        assert len(grid) == 6
-        assert len(grid[0]) == 6
+        assert len(grid) == 6, len(grid)
+        assert len(grid[0]) == 6, len(grid[0])
         assert len(grid[-1]) == 6, len(grid[-1])
         return grid
 
@@ -169,7 +182,7 @@ class CommunicationProtocol:
         Yields:
         A tuple of at most two chars from the message
         """
-        yield from itertools.batched(message, 2)
+        yield from batched(message, 2)
 
     def _handle_single(self, char: str, func: func_t) -> str:
         """
