@@ -4,10 +4,11 @@ from typing import Any
 from typing import NamedTuple
 from typing import Self
 
-# Create a named tuple for any Find to ensure the data is more structured
-
 
 class Find(NamedTuple):
+    """
+    Create a named tuple for any Find to ensure the data is more structured
+    """
     x: int
     y: int
 

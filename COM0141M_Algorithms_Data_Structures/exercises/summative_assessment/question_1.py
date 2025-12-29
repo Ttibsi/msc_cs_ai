@@ -3,11 +3,14 @@ import collections
 import statistics
 from typing import Any
 from typing import Self
+from typing import TypeAlias
 
 # Define useful type aliases for clarity in data structure
-type enrolment_t = dict[str, str | int | float]
-type students_t = dict[str, dict[str, str | list[enrolment_t]]]
-type stats_t = dict[str, dict[str, int]]
+# We here need to use the old syntax as gradescope runs in python3.10, not
+# python3.12 as the brief states
+enrolment_t: TypeAlias = dict[str, str | int | float]
+students_t: TypeAlias = dict[str, dict[str, str | list[enrolment_t]]]
+stats_t: TypeAlias = dict[str, dict[str, int]]
 
 
 class Enrolment:

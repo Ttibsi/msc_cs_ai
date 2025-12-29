@@ -7,6 +7,7 @@ from enum import Enum
 from typing import Callable
 from typing import Iterator
 from typing import NamedTuple
+from typing import TypeAlias
 from typing import Self
 
 class Equality(Enum):
@@ -34,9 +35,11 @@ class Coordinate(NamedTuple):
 
 
 # Set up type aliases for clarity
-type Position_t = tuple[Coordinate | None, Coordinate | None]
-type Grid_t = list[list[str | None]]
-type func_t = Callable[[int, int], int]
+# We here need to use the old syntax as gradescope runs in python3.10, not
+# python3.12 as the brief states
+Position_t: TypeAlias = tuple[Coordinate | None, Coordinate | None]
+Grid_t: TypeAlias = list[list[str | None]]
+func_t: TypeAlias = Callable[[int, int], int]
 
 
 class CommunicationProtocol:
