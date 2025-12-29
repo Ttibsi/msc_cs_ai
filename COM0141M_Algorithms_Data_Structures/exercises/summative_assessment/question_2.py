@@ -137,6 +137,51 @@ def _get(lst: list[Any], idx: int) -> Any | None:
         return None
 
 
+def _closest_recursive(discoveries: list[Find]) -> Distance:
+    """
+    Recursive helper to find the two closest artefacts at a given site
+
+    Args:
+        discoveries: list[Find] - a list of discoveries to recurse over
+
+    Returns:
+        Distance - the distance object that
+    """
+    # brute force - return the closest pair
+    if len(discoveries) <= 3:
+        # get the three discoveries
+        disco_x = _get(discoveries, 0)
+        disco_y = _get(discoveries, 1)
+        disco_z = _get(discoveries, 2)
+
+        # We need to check if each value is None. If not, we
+        # instead populate the value with an arbitrarily large
+        # number
+        xy_dist = disco_x.distance(disco_y) if disco_x is not None else 100
+        xz_dist = disco_x.distance(disco_z) if disco_x is not None else 100
+        yz_dist = disco_y.distance(disco_z) if disco_y is not None else 100
+        min_dist = min(xy_dist, xz_dist, yz_dist)
+
+        if min_dist == xy_dist:
+            return Distance(disco_x, disco_y, xy_dist)
+        elif min_dist == yz_dist:
+            return Distance(disco_y, disco_z, yz_dist)
+        elif min_dist == xz_dist:
+            return Distance(disco_x, disco_z, xz_dist)
+
+    # otherwise, split the slice in half and recurse on both
+    half = len(discoveries) // 2
+    lhs = _closest_recursive(discoveries[0:half])
+    rhs = _closest_recursive(discoveries[half:])
+    straddle_dist = Distance(
+        discoveries[half],
+        discoveries[half + 1],
+        discoveries[half].distance(discoveries[half + 1])
+    )
+
+    # pick the smaller pair:
+    return min(lhs, rhs, straddle_dist)
+
 def closest_artefacts(site: Site) -> Distance | None:
     """
     Recursive function to find the two closest artefacts at a given site
@@ -147,46 +192,6 @@ def closest_artefacts(site: Site) -> Distance | None:
     Returns:
         Distance - the distance object that
     """
-
-    def _closest_recursive(discoveries: list[Find]) -> Distance:
-        """ Locally scoped recursive helper function. """
-        # brute force - return the closest pair
-        if len(discoveries) <= 3:
-            # get the three discoveries
-            disco_x = _get(discoveries, 0)
-            disco_y = _get(discoveries, 1)
-            disco_z = _get(discoveries, 2)
-
-            # We need to check if each value is None. If not, we
-            # instead populate the value with an arbitrarily large
-            # number
-            xy_dist = disco_x.distance(disco_y) if disco_x is not None else 100
-            xz_dist = disco_x.distance(disco_z) if disco_x is not None else 100
-            yz_dist = disco_y.distance(disco_z) if disco_y is not None else 100
-            min_dist = min(xy_dist, xz_dist, yz_dist)
-
-            if min_dist == xy_dist:
-                return Distance(disco_x, disco_y, xy_dist)
-            elif min_dist == yz_dist:
-                return Distance(disco_y, disco_z, yz_dist)
-            elif min_dist == xz_dist:
-                return Distance(disco_x, disco_z, xz_dist)
-
-        # otherwise, split the slice in half and recurse on both
-        half = len(discoveries) // 2
-        lhs = _closest_recursive(discoveries[0:half])
-        rhs = _closest_recursive(discoveries[half:])
-        straddle_dist = Distance(
-            discoveries[half],
-            discoveries[half + 1],
-            discoveries[half].distance(discoveries[half + 1])
-        )
-
-        # pick the smaller pair:
-        return min(lhs, rhs, straddle_dist)
-
-    # End of inner helper function
-
     if len(site.discoveries) < 2:
         return None
 
