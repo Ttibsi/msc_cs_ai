@@ -95,7 +95,7 @@ in-order - does from left to right -- if the tree is sorted, so is the array
 pre-order - parent, then go left, then go right
 pre = [15,10,7,6,9,12,20,17,30]
 
-post-orde - visit the left child before the parent
+post-order - left child, right child, parent
 post = [6,9,7,12,10,17,30,20,15]
 
 ### Lesson 3 - search trees
