@@ -119,6 +119,27 @@ a BST
 RB trees enforce their shape, ensuring that the max depth is always log(n) 
 This is by the rules of the red-black colouration of the nodes
 
+Rotating an RB tree - this represents a LEFT rotate
+```
+func LeftRotate(node x):
+    node y = x.right
+    x.right = y.left
+    if (y.left != NULL):
+        y.left.parent = x
+
+    y.parent = x.parent
+    if (x.parent == NULL):
+        return y
+    else if (x == x.parent.left):
+        x.parent.left = y
+    else if (x == x.parent.right):
+        x.parent.right = y
+
+    y.left = x
+    x.parent = y
+```
+
+
 ### Lesson 4 - Maps, Sets, Hash tables
 
 ```py
