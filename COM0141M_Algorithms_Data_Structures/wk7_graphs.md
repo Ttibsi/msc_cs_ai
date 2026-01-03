@@ -75,6 +75,7 @@ A graph with both directed and undirected edges is called a Mixed Graph
     - Recurse - keep exploring until you've hit everything
     - We also need a way to keep track of what we've already visited
 
+
 pseudocode impl:
 ```
 procedure dfs(g: graph, s: vertex, visited: list[bool]):
@@ -143,6 +144,10 @@ Algorithm BFS(G, source):
 ```
 
 time complexity: O(V + E)
+
+DFS is useful when searching a maze, or scenarios where you will need to 
+backtrack on your path, whereas BFS is more useful in cases when you need to 
+know the distance between two points.
 
 ## Lesson 2 - Dijkstra's shortest path
 
