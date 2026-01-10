@@ -177,6 +177,7 @@ Algorithm ShortestPath(G, source):
 
 * DSP may not work if there are any negative distances
 * This is a greedy strategy
+* DSP runs in O(e + v log v) worst case. 
 
 * The idea here is that we aren't popping off the PQ, we're just reading from it.
 This lets us lean on the automatic reordering to know the shortest distance to
