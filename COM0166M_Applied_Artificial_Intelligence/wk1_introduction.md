@@ -54,3 +54,21 @@ Philosophy of AI study
 * how does the mind arise from the physical brain
 * where does knowledge come from
 * How does knowledge lead to action
+
+### Lesson 2 - Is AI Possible?
+Ada Lovelace and the analytical engine
+    - Babbage's analytical engine was basically a steam-powered computer
+    - Babbage built the hardware, Lovelace wrote what amounted to the software
+    - the machine was never finished as Babbage ran out of money
+
+    - Lovelace argued that their machine was not capable of original ideas
+
+Turing's 1950 responce
+* Turing had two counter arguments to Lovelace
+* 1 - in practice, the result of programming often surprises us
+    * Turning notes that Lovelace never ran any of her programs
+* 2 - The possibility that machines could be programmed to learn
+
+Weak AI - machines that only are acting like they are intelligent
+Strong AI - the assertion that machines are actually consciously thinking
+    - also known as "human-level AI" or "general AI"
