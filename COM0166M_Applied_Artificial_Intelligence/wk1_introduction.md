@@ -103,3 +103,4 @@ be defined in a practical machine
     - This more revolves around creative reactions to unexpected stimuli
     - The example given is a traffic light - what if both the red and green lights
     are active at the same time.
+
