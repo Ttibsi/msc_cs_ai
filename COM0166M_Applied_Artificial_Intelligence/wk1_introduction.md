@@ -72,3 +72,34 @@ Turing's 1950 responce
 Weak AI - machines that only are acting like they are intelligent
 Strong AI - the assertion that machines are actually consciously thinking
     - also known as "human-level AI" or "general AI"
+
+### Computing machinery and Intelligence - Alan Turing
+* A "digital computer" can usually be regarded as consisting of three parts
+    - store
+    - execute
+    - control
+
+Digital computers fall in the realm of "discrete state machines"
+
+Turing states that the question "can machines think" should be replaced with
+"are there imaginable digital computers hwichw ould do well in the imitation game"
+
+Turing's objections to artificial intelligence
+* Theological - "god has given man an immortal soul, and thinking is the function of the soul"
+    - Turing, in shorts, thinks this is nonsense
+    - different religions think who/what has a soul to differ
+    - He is unimpressed with theological arguments, comparing to the church's
+    response to galileo's heliocentric iew of the solar system
+* The "heads in the sand objection" - The consequences would be too dreadful, 
+lets hope it doesn't come to pass
+    - While not a loud objection, Turing thinks that this is not a substantial counterargument
+    to machine intelligence
+* Mathematical objection - There's a limited number of states that could ever
+be defined in a practical machine
+* Argument from conciousness - Machines aren't capable of creation (ex poems)
+* Argument from various disabilities - "you can make machines do that, but you can't do x"
+    - Turing here lists a number of things a machine may or may not learn to do
+* Argument for informality in behaviour
+    - This more revolves around creative reactions to unexpected stimuli
+    - The example given is a traffic light - what if both the red and green lights
+    are active at the same time.
