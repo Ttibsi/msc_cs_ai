@@ -56,3 +56,35 @@ Common uses of uninformed searches
 * game AI, ex NPC routing
 * web crawling
 * automation of planning activities -- ex project management
+
+### Lesson 2 - Informed Heuristic search
+In an informed search, the algorithm will use information provided about the search space to guide the search
+    * EX - distance of the current node from the goal state 
+    * cost of traversing nodes
+    * how to reach goal state
+
+Heuristic - a cost function that is used to evaluate certain paths
+    * Not guaranteed to provide the best solution, but will always provide a good solution
+
+Greedy BFS
+* Also called "best-first search" 
+* Uses a heuristic to provide the estimated cost to the goal node
+* expands the node that looks "closest" to the goal
+* In this case, this means that it's taking the next node with the shortest distance in a weighted graph
+* Algorithm strength - fast and simple
+* weaknesses - not the shortest path
+    - can get stuck "in local optima", picking a node that appears to be close but leads to a longer route
+
+Example pseudocode
+```
+Algorithm GBFS(graph, goal)
+    N = add parent node in the data structure
+    while N is not empty
+
+        L = based on the heuristic select the best successor node of N
+        if L is a goal state
+            return success and exit
+        N = L
+    end while
+```
+
