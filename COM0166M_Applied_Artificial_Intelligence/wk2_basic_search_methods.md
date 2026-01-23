@@ -88,3 +88,44 @@ Algorithm GBFS(graph, goal)
     end while
 ```
 
+A* Algorithm
+This popoular algorithm considers the cost of travenlling from node n to it's successor
+and then the successor to the goal. This will always prioritise the node with the minimum
+cost
+
+* A* is better than GBFS as it will find the shortest path based on the heuristic
+* It avoids unnessecary detours by balancing costs and estimates
+* A* also uses more memory
+
+Other variants of informed heuristic serarch algorithms
+* Beam search - explores only the best K nodes at each level
+    - sacrifices completeness for efficiency
+    - time complexity: O(`b*d`)
+    - space complexity: O(kd)
+* Iterative Deepening A* (`IDA*`) - Combines A* with iterative deepening with a cost threshhold
+    - memory efficient compared to `A*`, while more complete
+    - time complexity: exponential, but based on heuristic
+    - space complexity: linear
+* Recursive Best-first search - memory-bounded version of A*
+    - recursively explores the best path and backtracks when it hits a cost limit
+    - uses linear space, efficient for large problems
+    - time complexity: Similar to A* but with pruning
+    - space complexity: linear
+* Bidirectional heuristic search
+    - Expands bidirectional search by applying heuristics
+    - time complexity: O(b ^ d/2) but with guidance
+    - space complexity: O(b ^ d/2)
+
+* A* search
+    - time complexity: O(b^d)
+    - space complexity: O(b^d)
+* Greedy best-first
+    - time complexity: O(b^m) worst case
+    - space complexity: O(b^m)
+
+Common uses of informed searches
+    * initial pathfinding estimates
+    * natural language processing
+    * game AI
+    * web crawling
+    * image processing
