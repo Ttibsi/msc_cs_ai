@@ -96,6 +96,7 @@ cost
 * A* is better than GBFS as it will find the shortest path based on the heuristic
 * It avoids unnessecary detours by balancing costs and estimates
 * A* also uses more memory
+* A* uses both the distance already travelled to a node and the straight line distance from n to the goal
 
 Other variants of informed heuristic serarch algorithms
 * Beam search - explores only the best K nodes at each level
@@ -129,3 +130,5 @@ Common uses of informed searches
     * game AI
     * web crawling
     * image processing
+
+Frontier - the next nodes to consider
