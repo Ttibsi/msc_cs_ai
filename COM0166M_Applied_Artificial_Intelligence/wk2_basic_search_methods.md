@@ -197,3 +197,18 @@ A > C >  D >  E >  B >  A
 
 At a total cost of 34
 
+### Glossary
+Search - in the context of AI, this refers to the process of iteratively 
+exploring a problem domain in order to find a solution or solutions to a specified
+problem
+
+Problem Domain - all the data/info that is available that can be used to derive
+a solution to a given problem. In the context of AI, this would be all the 
+data and the definitions of attributes in that data
+
+Hierarchy - in the context of AI, a tree or root-like data structure in which
+all the nodes are organised.
+
+Informed search - a search algorithm that has additional information about the
+search space that can be used to steer toward reaching it's goal more efficiently
+
