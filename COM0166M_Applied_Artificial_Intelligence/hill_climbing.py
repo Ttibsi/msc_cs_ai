@@ -103,11 +103,6 @@ def greedy_initial(matrix: matrix_t, start_point: int) -> dict[int, int]:
     return ret
 
 
-def swap_in_place(path: dict[int, int], key_1: int, key_2: int) -> list[int]:
-    path[key_1], path[key_2] = path[key_2], path[key_1]
-    return path
-
-
 def hill_walk(matrix: matrix_t, path: dict[int, int]) -> dict[int, int]:
     # Don't swap the last element, or the start point
     swap_index = random.randint(1, 48)
