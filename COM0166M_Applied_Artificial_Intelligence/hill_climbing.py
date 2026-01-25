@@ -122,34 +122,49 @@ def path_cost(path: dict[int, int], matrix: matrix_t) -> int:
     return sum(path.values()) + matrix[final_elem][first_elem]
 
 
+def print_info(i: int, start: int, iter_count: int, cost: int, total_time: int) -> None:
+    print(f"\u2502 {i} \u2502 Starting element: {start:0<2} \u2502 Iterations: {iter_count} \u2502 Total cost: {cost} \u2502 Time (ns): {total_time} \u2502")
+
+
+def algorithm(matrix: matrix_t, iteration: int) -> int:
+    start = random.randint(0, 49)
+    start_time = time.perf_counter_ns()
+
+    tsp_path = greedy_initial(matrix, start)
+    cost = path_cost(tsp_path, matrix)
+
+    iter_count = 0
+    no_improvements = 0
+    while True:
+        iter_count += 1
+        tsp_path = hill_walk(matrix, tsp_path)
+        new_cost = path_cost(tsp_path, matrix)
+        if new_cost >= cost:
+            no_improvements += 1
+
+            if no_improvements == 25:
+                break
+        else:
+            cost = new_cost
+            no_improvements = 0
+
+    total_time = time.perf_counter_ns() - start_time
+    print_info(iteration, start, iter_count, cost, total_time)
+
+    return cost
+
+
 def main() -> int:
     matrix = create_matrix()
+    costs = []
 
-    print("\u250C" + ("\u2500" * 64) + "\u2510")
+    print("\u250C" + ("\u2500" * 81) + "\u2510")
     for i in range(0, 10):
-        start = random.randint(0, 49)
-        start_time = time.perf_counter_ns()
+        costs.append(algorithm(matrix, i))
 
-        tsp_path = greedy_initial(matrix, start)
-        cost = path_cost(tsp_path, matrix)
+    print("\u2514" + ("\u2500" * 81) + "\u2518")
 
-        no_improvements = 0
-        while True:
-            tsp_path = hill_walk(matrix, tsp_path)
-            new_cost = path_cost(tsp_path, matrix)
-            if new_cost >= cost:
-                no_improvements += 1
-
-                if no_improvements == 25:
-                    break
-            else:
-                cost = new_cost
-                no_improvements = 0
-
-        total_time = time.perf_counter_ns() - start_time
-        print(f"\u2502 {i} \u2502 Starting element: {start:0<2} \u2502 Total cost: {cost} \u2502 Time (ns): {total_time} \u2502")
-
-    print("\u2514" + ("\u2500" * 64) + "\u2518")
+    print(f"Average cost: {sum(costs) / len(costs)}")
     return 0
 
 if __name__ == "__main__":
