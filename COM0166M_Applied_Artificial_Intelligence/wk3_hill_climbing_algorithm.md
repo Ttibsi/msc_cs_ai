@@ -37,4 +37,11 @@ For a stopping/termination condition, we will need to define a number of
 iterations to work through, and we halt either when we hit that or 
 when there are no improvements over x iterations.
 
+* Simple hill walking's main decision is to move to the first neighbor that 
+improves the current solution
+* Limitations
+    - can get stck on plateaus
+    - does not backtrack
+    - may stop at local optima
+
 
