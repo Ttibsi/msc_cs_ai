@@ -40,7 +40,7 @@ when there are no improvements over x iterations.
 * Simple hill walking's main decision is to move to the first neighbor that
 improves the current solution
 * Limitations
-    - can get stck on plateaus
+    - can get stck on plateaus - a region where all neighbors have equal values
     - does not backtrack
     - may stop at local optima
 
@@ -106,18 +106,18 @@ Published Jan 2003
     * hill-climbing is non-parametric
 
 The paper I chose to review was: Hill-climbing Algorithm for Efficient Color-based Image Segmentation,
-published in 2003 from Kyoto University. This paper's direction of research turned to image 
-manipulation and subdivision based on region utilising the numeric properties of the HSV colourspace 
-and a Hill Walking algorithm to create these subdivisions. Most notably, this paper diverges from 
+published in 2003 from Kyoto University. This paper's direction of research turned to image
+manipulation and subdivision based on region utilising the numeric properties of the HSV colourspace
+and a Hill Walking algorithm to create these subdivisions. Most notably, this paper diverges from
 the content taught here by exploring the application of Hill Walking in more than one dimension,
-as HSV has three dimensions to work with - the hue, saturation, and value of a colour. Most 
-notably under section 2.4, the authors touch on this, explaining that each "bin" in the problem 
+as HSV has three dimensions to work with - the hue, saturation, and value of a colour. Most
+notably under section 2.4, the authors touch on this, explaining that each "bin" in the problem
 set has 3^d -1 neighbours, where d is the dimensions for the problem (here 3 dimensions).
 
-The solutions were evaluated against human subjects that performed a similar subdivision task as 
-the algorithm on a pre-defined set of images, and then compared their own results with the results 
-of algorithm, scoring on a 1-5 range. From my interpretation of the paper's results, it appears 
-that the algorithm works best with images of natural elements, or of buildings, as there are hard 
-differences between the colours used in both data sets, but the results can be affected by a 
-number of factors, including the lighting and subject of the image, as well as the subject's 
+The solutions were evaluated against human subjects that performed a similar subdivision task as
+the algorithm on a pre-defined set of images, and then compared their own results with the results
+of algorithm, scoring on a 1-5 range. From my interpretation of the paper's results, it appears
+that the algorithm works best with images of natural elements, or of buildings, as there are hard
+differences between the colours used in both data sets, but the results can be affected by a
+number of factors, including the lighting and subject of the image, as well as the subject's
 relation to the background.
