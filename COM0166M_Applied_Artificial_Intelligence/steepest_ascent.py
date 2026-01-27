@@ -101,11 +101,10 @@ def iteration(cities: list[Coordinate], loop_count: int) -> int:
 
 
 def main() -> int:
+    loop_count = 10
     if len(sys.argv) == 3:
         if sys.argv[1] == "-n":
             loop_count = int(sys.argv[2])
-        else:
-            loop_count = 10
 
     cities = parse_data()
     line_len = 42
