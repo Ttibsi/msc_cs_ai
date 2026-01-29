@@ -63,3 +63,41 @@ before it's 50th iteration, but when running the algoritm for two turbines, they
 were finding that they had to "blacklist" a specific route as it wouldn't be
 practical in the real world, but the algorithm continuously wanted to place
 a turbine in that route.
+
+### Lesson 3 - Tabu Search
+Instead of randomly, tabu search uses memory to improve the path. It's still a
+local search algorithm, using hill climbing as a starting point. However, it then
+keeps a short term memory called the tabu list to store recent moves to avoid
+repeating.
+
+Tabu search can accept bad moves if helps to excape local optima, like simulated
+annealing does.
+
+The tabu list has a fixed size, called the tabu tenure, and when an element is
+too old, it gets removed (this is a queue?). This can be overridden by the
+Aspiration Criteria, that tells the algorithm that a node can still produce
+a new best solution - "this node is tabu, but it's too good to ignore"
+
+More advanced versions of the algorithm use medium or long-term storage data
+structures, focussing on finding promising regions. If certain nodes appear
+in in good solutions more frequently, it will focus the search around those
+nodes. This is a process called intensification or exploitation.
+
+Long term memory is called diversification, and encourages the exploration
+towards paths that have been less visited by tracking locations that have been
+visited too often. Between this and intensification, this allows for a better
+result, and are a hallmark of metaheuristics
+
+Tabu search in the travelling salesman
+* generate pairs (city swaps)
+* evaluate neighbours
+* Choose the best non-tabu move
+* Update the tabu list
+* accept the best allowable move
+* repeat
+
+This allows us to avoid cycles and has a balance for exploration and exploitation
+
+Tabu search accepts bad moves bu always accepting the best local move, even if
+the solution is worse than the current best solution, as long as the best local
+move isn't tabu
