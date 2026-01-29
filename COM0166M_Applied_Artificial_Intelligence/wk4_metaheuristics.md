@@ -101,3 +101,24 @@ This allows us to avoid cycles and has a balance for exploration and exploitatio
 Tabu search accepts bad moves bu always accepting the best local move, even if
 the solution is worse than the current best solution, as long as the best local
 move isn't tabu
+
+### Tabu Search paper review
+The below notes apply to the following paper: "A two-stage approach combining
+machine learning and optimization fort he hospital patient bed assignment
+problem in emergencies" by Hela Jedidi, Hajer Benh-Romdhane, Issam Nouaouri,
+Soussen Krichen in a collaboration between the University of Tunisia,
+Universite de l'Artois in France, and the Espiriti School of Business in Tunis,
+published in late 2024
+
+This paper looks to use a combination of machine learning techniques to identify
+the best approach for assigning patients to beds in a hospital based around
+categorising those patients into 3 different buckets based on their risk category.
+Their initial solution came out of the two problem sets they had to work with,
+in which they had to backfill some data that was missing by utilising the KNN
+algorithm for average data. The neighborhood operator they implemented -- while
+hidden in this paper -- appears to be their weight of transfer constraint
+defined in table 2.
+
+The results that this paper comes to shows that utilising the K-Nearest
+Neighbours approach to their solution with a tuned K-value of 7 has a better
+accuracy than using a support vector machine, as they compared, but
