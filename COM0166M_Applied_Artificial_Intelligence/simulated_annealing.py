@@ -75,12 +75,15 @@ def probable_swap(cities: list[Coordinate], initial_cost: int, temp: int) -> boo
 
 
 def simulated_annealling(cities: list[Coordinate], temp: int) -> list[Coordinate]:
+    curr_cost = path_cost(cities)
     idx = random.randint(1, len(cities) - 1)
     cities[idx], cities[idx - 1] = cities[idx - 1], cities[idx]
+    new_path_cost = path_cost(cities)
 
-    if not probable_swap(cities, path_cost(cities), temp):
-        # If we don't reach the probability threshhold, swap back
-        cities[idx], cities[idx - 1] = cities[idx - 1], cities[idx]
+    if new_path_cost <= curr_cost:
+        if not probable_swap(cities, new_path_cost, temp):
+            # If we don't reach the probability threshhold, swap back
+            cities[idx], cities[idx - 1] = cities[idx - 1], cities[idx]
 
     return cities
 
