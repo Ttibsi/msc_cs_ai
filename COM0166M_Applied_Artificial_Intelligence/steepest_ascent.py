@@ -63,8 +63,7 @@ def path_cost(cities: list[Coordinate]) -> float:
     return total
 
 
-def steepest_ascent(cities: list[Coordinate]) -> list[Coordinate]:
-    initial_cost = path_cost(cities)
+def steepest_ascent(cities: list[Coordinate], init_cost: int) -> tuple[list[Coordinate], int]:
     initial_cities = cities
 
     for idx, elem in enumerate(cities):
@@ -72,19 +71,20 @@ def steepest_ascent(cities: list[Coordinate]) -> list[Coordinate]:
             continue
 
         cities[idx], cities[idx - 1] = cities[idx - 1], elem
-        if path_cost(cities) < initial_cost:
-            return cities
+        new_path_cost = path_cost(cities)
+        if new_path_cost < init_cost:
+            return cities, new_path_cost
 
-    return initial_cities
+    return initial_cities, init_cost 
 
 
 def iteration(cities: list[Coordinate], loop_count: int) -> int:
     total_iters = 0
     iter_count = 0
     cost = path_cost(cities)
+
     while True:
-        cities = steepest_ascent(cities)
-        iter_cost = path_cost(cities)
+        cities, iter_cost = steepest_ascent(cities, cost)
         total_iters += 1
 
         if iter_cost >= cost:

@@ -65,9 +65,9 @@ def path_cost(cities: list[Coordinate]) -> float:
     return float(f"{total:05.2f}")
 
 
-def probable_swap(cities: list[Coordinate], initial_cost: int, temp: int) -> bool:
-    prob: float = (initial_cost - path_cost(cities)) / temp
-    actual = random.randint(0, 1000) / 10
+def probable_swap(cities: list[Coordinate], init_cost: int, new_cost: int, temp: int) -> bool:
+    prob: float = (init_cost - new_cost) / temp
+    actual = (random.randint(0, 1000) / 10)
     if actual >= prob:
         return True
 
@@ -81,7 +81,7 @@ def simulated_annealling(cities: list[Coordinate], temp: int) -> list[Coordinate
     new_path_cost = path_cost(cities)
 
     if new_path_cost <= curr_cost:
-        if not probable_swap(cities, new_path_cost, temp):
+        if not probable_swap(cities, curr_cost, new_path_cost, temp):
             # If we don't reach the probability threshhold, swap back
             cities[idx], cities[idx - 1] = cities[idx - 1], cities[idx]
 
@@ -94,8 +94,8 @@ def main() -> int:
     line_len = 23
 
     temp = 10.00
-    min_temp = 0.00005
-    alpha = 0.795
+    min_temp = 0.005
+    alpha = 0.99
 
     if len(sys.argv) == 3:
         temp = float(sys.argv[1])
