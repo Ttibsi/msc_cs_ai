@@ -31,6 +31,7 @@ data = """
 """
 
 class Coordinate(NamedTuple):
+    id: int
     x: float
     y: float
 
@@ -42,11 +43,11 @@ class Coordinate(NamedTuple):
 
 def parse_data() -> list[Coordinate]:
     ret = []
-    for line in data.split("\n"):
+    for idx, line in enumerate(data.split("\n")):
         if not line:
             continue
         x, y = line.split(",")
-        ret.append(Coordinate(float(x), float(y)))
+        ret.append(Coordinate(idx, float(x), float(y)))
 
     return ret
 
@@ -78,6 +79,10 @@ def steepest_ascent(cities: list[Coordinate], init_cost: int) -> tuple[list[Coor
     return initial_cities, init_cost 
 
 
+def path(cities: list[Coordinate]) -> str:
+    return ",".join([str(x.id) for x in cities])
+
+
 def iteration(cities: list[Coordinate], loop_count: int) -> int:
     total_iters = 0
     iter_count = 0
@@ -96,7 +101,8 @@ def iteration(cities: list[Coordinate], loop_count: int) -> int:
             cost = iter_cost
             iter_count = 0
 
-    print(f"\u2502 {loop_count} \u2502 Iterations: {total_iters} \u2502 Total cost: {cost:.3f} \u2502")
+    print(f"\u2502\x1b[32m {loop_count} \u2502 Iterations: {total_iters} \u2502 Total cost: {cost:.3f}                     \x1b[0m\u2502")
+    print(f"\u2502\x1b[36m{path(cities)}\x1b[0m\u2502")
     return total_iters
 
 
@@ -107,7 +113,7 @@ def main() -> int:
             loop_count = int(sys.argv[2])
 
     cities = parse_data()
-    line_len = 42
+    line_len = 62
     total_iters = 0
 
     print("\u250C" + ("\u2500" * line_len) + "\u2510")

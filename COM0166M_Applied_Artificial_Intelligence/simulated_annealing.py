@@ -31,8 +31,10 @@ data = """
 2.9933,2.8433
 """
 
+line_len = 20 + 63
 
 class Coordinate(NamedTuple):
+    id: int
     x: float
     y: float
 
@@ -44,11 +46,11 @@ class Coordinate(NamedTuple):
 
 def parse_data() -> list[Coordinate]:
     ret = []
-    for line in data.split("\n"):
+    for idx, line in enumerate(data.split("\n")):
         if not line:
             continue
         x, y = line.split(",")
-        ret.append(Coordinate(float(x), float(y)))
+        ret.append(Coordinate(idx, float(x), float(y)))
 
     return ret
 
@@ -88,37 +90,46 @@ def simulated_annealling(cities: list[Coordinate], temp: int) -> list[Coordinate
     return cities
 
 
+def path(cities: list[Coordinate]) -> str:
+    return ",".join([str(x.id) for x in cities])
+
+
+def do_the_thing(iter: int, cities: list[Coordinate], temp: int, alpha: int, min_temp: int):
+    iter_count = 0
+    while True:
+        iter_count += 1
+        cities = simulated_annealling(cities, temp)
+        temp -= alpha
+
+        if temp <= min_temp:
+            break
+
+    print(f"\u2502 {iter} \u2502   {iter_count} \u2502 {path_cost(cities):.2f} \u2502\x1b[36m {path(cities)} \x1b[0m\u2502")
+
+
 def main() -> int:
     cities = parse_data()
     random.shuffle(cities)
-    line_len = 23
 
-    temp = 10.00
-    min_temp = 0.005
-    alpha = 0.99
+    temp = 80.00
+    min_temp = 0.0003
+    alpha = 0.85
 
     if len(sys.argv) == 3:
         temp = float(sys.argv[1])
         min_temp = float(sys.argv[2])
 
     print("\u250C" + ("\u2500" * line_len) + "\u2510")
-    print(f"\u2502 Temp: {temp}            \u2502")
-    print(f"\u2502 Threshold: {min_temp:.5f}    \u2502")
-    print(f"\u2502 Alpha: {alpha}          \u2502")
+    print(f"\u2502 Temp: \x1b[36m{temp}\x1b[0m                                                                        \u2502")
+    print(f"\u2502 Threshold: \x1b[36m{min_temp:.5f}\x1b[0m                                                                \u2502")
+    print(f"\u2502 Alpha: \x1b[36m{alpha}\x1b[0m                                                                       \u2502")
     print("\u2502" + ("\u2500" * line_len) + "\u2502")
-    print(f"\u2502 \x1b[7mIters\x1b[27m \u2502 \x1b[7mCost\x1b[27m  \u2502 \x1b[7mTemp\x1b[27m  \u2502")
+    print(f"\u2502   \u2502 \x1b[7mIter\x1b[27m \u2502 \x1b[7mCost\x1b[27m  \u2502 \x1b[7mPath\x1b[27m                                                           \u2502")
 
-    iter_count = 0
-    while True:
-        iter_count += 1
-        cities = simulated_annealling(cities, temp)
-        print(f"\u2502 {iter_count:>5d} \u2502 {path_cost(cities):.2f} \u2502 {temp:05.2f} \u2502")
-        temp -= alpha
+    for i in range(0, 10):
+        do_the_thing(i, cities, temp, alpha, min_temp)
 
-        if temp <= min_temp:
-            break
     print("\u2514" + ("\u2500" * line_len) + "\u2518")
-
 
 if __name__ == "__main__":
     raise SystemExit(main())
