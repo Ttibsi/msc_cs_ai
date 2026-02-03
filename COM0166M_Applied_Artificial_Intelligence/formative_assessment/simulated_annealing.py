@@ -127,7 +127,8 @@ def iterate(cities: cities_t, loop_count: int, temp: int) -> str:
             break
 
     cost = path_cost(city_path, cities)
-    return f"\u2502 {loop_count} \u2502 {iter_count:>04} \u2502 {cost:>4} \u2502\x1b[36m {path(city_path)}\x1b[0m"
+    div = "\x1b[0m\u2502\x1b[32m "
+    return f"\u2502\x1b[32m {loop_count} {div}{iter_count:>04} {div}{cost:>4} {div.replace('2','6')}{path(city_path)}\x1b[0m"
 
 
 def main() -> int:
@@ -136,13 +137,13 @@ def main() -> int:
     temp = 130
 
     print("\u250C" + ("\u2500" * line_len) + "\u2510")
-    headers = "\u2502   \u2502 Iter \u2502 Cost \u2502"
+    headers = "\u2502   \u2502 Iter \u2502 Cost \u2502 Path"
     print(f"{headers}{' ' * (line_len - len(headers))} \u2502")
 
     for i in range(10):
         temp -= 10
         line = iterate(cities, i, temp)
-        print(f"{line}{' ' * (line_len - len(line) + 9)} \u2502")
+        print(f"{line}{' ' * (line_len - len(line) + 36)} \u2502")
 
     print("\u2514" + ("\u2500" * line_len) + "\u2518")
     return 0

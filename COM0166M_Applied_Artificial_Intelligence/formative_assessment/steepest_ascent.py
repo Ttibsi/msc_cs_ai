@@ -20,10 +20,10 @@ def parse_data() -> cities_t:
 
 
 def steepest_ascent(cities: cities_t, key: str, path: list[str]) -> str:
-    remaining_elems = {k:v for k, v in cities[key].items() if k not in path}
+    remaining_elems = {k:v for k, v in cities[key].items() if k != "London" and k not in path}
     if not remaining_elems:
         return ""
-    return max(remaining_elems, key=remaining_elems.get)
+    return min(remaining_elems, key=remaining_elems.get)
 
 
 def path_cost(path: list[str], cities: cities_t) -> int:
@@ -50,6 +50,9 @@ def iterate(cities: cities_t, loop_count: int) -> None:
     total_iters = 0
 
     city_path = [random.choice(list(cities.keys()))]
+    while city_path[0] == "London":
+        city_path[0] = random.choice(list(cities.keys()))
+
     while True:
         total_iters += 1
         city_path.append(steepest_ascent(cities, city_path[-1], city_path))
@@ -64,12 +67,12 @@ def iterate(cities: cities_t, loop_count: int) -> None:
 
     cost = path_cost(city_path, cities)
     div = "\x1b[0m\u2502\x1b[32m "
-    return f"{div}{loop_count} {div}Iterations: {total_iters:>02} {div}Total cost: {cost:>04} {div.replace('2','6')}{path(city_path)}\x1b[0m"
+    return f"{div}{loop_count} {div}Iterations: {total_iters:>02} {div}Total cost: {cost:>03} {div.replace('2','6')}{path(city_path)}\x1b[0m"
 
 
 def main() -> int:
     cities = parse_data()
-    line_len = 121
+    line_len = 90 
 
     print("\u250C" + ("\u2500" * line_len) + "\u2510")
     for i in range(10):
