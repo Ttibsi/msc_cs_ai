@@ -42,7 +42,7 @@ def path(path: list[str]) -> str:
     for elem in path:
         text += elem[0:3] + " "
 
-    return text
+    return text[:-1]
 
 
 def iterate(cities: cities_t, loop_count: int) -> None:
@@ -63,18 +63,18 @@ def iterate(cities: cities_t, loop_count: int) -> None:
             break
 
     cost = path_cost(city_path, cities)
-    return f"\u2502\x1b[32m {loop_count} \u2502 Iterations: {total_iters:>02} \u2502 Total cost: {cost:>04} \x1b[0m\u2502\x1b[36m {path(city_path)}\x1b[0m"
-    return
+    div = "\x1b[0m\u2502\x1b[32m "
+    return f"{div}{loop_count} {div}Iterations: {total_iters:>02} {div}Total cost: {cost:>04} {div.replace('2','6')}{path(city_path)}\x1b[0m"
 
 
 def main() -> int:
     cities = parse_data()
-    line_len = 122
+    line_len = 121
 
     print("\u250C" + ("\u2500" * line_len) + "\u2510")
     for i in range(10):
         line = iterate(cities, i)
-        print(f"{line}{' ' * (line_len - len(line) + 18)} \u2502")
+        print(f"{line}{' ' * (line_len - len(line) + 40)} \u2502")
     print("\u2514" + ("\u2500" * line_len) + "\u2518")
 
     return 0
