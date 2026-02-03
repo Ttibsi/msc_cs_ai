@@ -1,7 +1,10 @@
-import random
 from collections import defaultdict
+import random
+from typing import TypeAlias
 
-def parse_data() -> list[Edge]:
+cities_t: TypeAlias = dict[str, dict[str, int]]
+
+def parse_data() -> cities_t:
     ret = defaultdict(dict)
 
     with open("route_finding.csv", "r") as f:
@@ -16,14 +19,14 @@ def parse_data() -> list[Edge]:
     return ret
 
 
-def steepest_ascent(cities, key, path) -> str:
+def steepest_ascent(cities: cities_t, key: str, path: list[str]) -> str:
     remaining_elems = {k:v for k, v in cities[key].items() if k not in path}
     if not remaining_elems:
         return ""
     return max(remaining_elems, key=remaining_elems.get)
 
 
-def path_cost(path: list[str], cities: dict[str, dict[str, int]]) -> int:
+def path_cost(path: list[str], cities: cities_t) -> int:
     ret = 0
     for idx, elem in enumerate(path):
         if idx == 0:
@@ -33,7 +36,7 @@ def path_cost(path: list[str], cities: dict[str, dict[str, int]]) -> int:
 
     return ret
 
-def iterate(cities, loop_count: int) -> None:
+def iterate(cities: cities_t, loop_count: int) -> None:
     iter_count = 0
     total_iters = 0
 
@@ -57,7 +60,7 @@ def iterate(cities, loop_count: int) -> None:
 
 def main() -> int:
     cities = parse_data()
-    line_len = 39 
+    line_len = 39
 
     print("\u250C" + ("\u2500" * line_len) + "\u2510")
     for i in range(10):
