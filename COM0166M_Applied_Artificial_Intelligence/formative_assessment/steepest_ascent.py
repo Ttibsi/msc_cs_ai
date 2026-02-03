@@ -36,6 +36,15 @@ def path_cost(path: list[str], cities: cities_t) -> int:
 
     return ret
 
+
+def path(path: list[str]) -> str:
+    text = ""
+    for elem in path:
+        text += elem[0:3] + " "
+
+    return text
+
+
 def iterate(cities: cities_t, loop_count: int) -> None:
     iter_count = 0
     total_iters = 0
@@ -54,17 +63,18 @@ def iterate(cities: cities_t, loop_count: int) -> None:
             break
 
     cost = path_cost(city_path, cities)
-    print(f"\u2502\x1b[32m {loop_count} \u2502 Iterations: {total_iters:>02} \u2502 Total cost: {cost:>04} \x1b[0m\u2502")
+    return f"\u2502\x1b[32m {loop_count} \u2502 Iterations: {total_iters:>02} \u2502 Total cost: {cost:>04} \x1b[0m\u2502\x1b[36m {path(city_path)}\x1b[0m"
     return
 
 
 def main() -> int:
     cities = parse_data()
-    line_len = 39
+    line_len = 122
 
     print("\u250C" + ("\u2500" * line_len) + "\u2510")
     for i in range(10):
-        iterate(cities, i)
+        line = iterate(cities, i)
+        print(f"{line}{' ' * (line_len - len(line) + 18)} \u2502")
     print("\u2514" + ("\u2500" * line_len) + "\u2518")
 
     return 0
