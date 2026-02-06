@@ -9,6 +9,11 @@ cities_t: TypeAlias = dict[str, dict[str, int]]
 
 
 def parse_data() -> cities_t:
+    """
+    Transform the input data into a format we can manipulate
+
+    Returns: dict[str, dict[str, int]]
+    """
     ret = defaultdict(dict)
 
     with open("route_finding.csv", "r") as f:
@@ -24,6 +29,11 @@ def parse_data() -> cities_t:
 
 
 def path_cost(path: list[str], cities: cities_t) -> int:
+    """
+    Traverse the dataset and calculate a path's cost
+
+    Returns: int - the cost of the path
+    """
     ret = 0
     for idx, elem in enumerate(path):
         if idx == 0:
@@ -34,6 +44,11 @@ def path_cost(path: list[str], cities: cities_t) -> int:
 
 
 def initial_path(cities:cities_t) -> list[str]:
+    """
+    Create a random legal path of cities to begin our algorithm
+
+    Returns: list[str] - list of city names 
+    """
     key = "London"
     while key == "London":
         key = random.choice(list(cities.keys()))
@@ -61,6 +76,11 @@ def initial_path(cities:cities_t) -> list[str]:
 
 
 def swap_probability(temp: int, init_cost: int, new_cost: int) -> bool:
+    """
+    Calculate the probability of making a change
+
+    Returns: bool - do we swap two cities
+    """
     prob: float = (init_cost - new_cost) / temp
     actual = (random.randint(0, 1000) / 10)
     if actual >= prob:
@@ -69,7 +89,12 @@ def swap_probability(temp: int, init_cost: int, new_cost: int) -> bool:
     return False
 
 
-def simulated_annealing(path: list[str], cities: cities_t, temp: int) -> str:
+def simulated_annealing(path: list[str], cities: cities_t, temp: int) -> list[str]:
+    """
+    Core algorithm of simulated annealing
+
+    Returns: list[str] - a path of city names
+    """
     curr_cost = path_cost(path, cities)
     curr_path = path
     idx = random.randint(1, len(path) - 1)
@@ -103,6 +128,7 @@ def simulated_annealing(path: list[str], cities: cities_t, temp: int) -> str:
 
 
 def path(path: list[str]) -> str:
+    """ Take a path of cities and return a displayable string """
     text = ""
     for elem in path:
         text += elem[0:3] + " "
@@ -111,6 +137,11 @@ def path(path: list[str]) -> str:
 
 
 def iterate(cities: cities_t, loop_count: int, temp: int) -> str:
+    """
+    A single run of our algorithm.
+
+    Returns: str - a string "report" to display
+    """
     iter_count = 0
     city_path = initial_path(cities)
 
