@@ -14,7 +14,7 @@ def parse_data() -> cities_t:
 
     Returns: dict[str, dict[str, int]]
     """
-    ret = defaultdict(dict)
+    dataset = defaultdict(dict)
 
     with open("route_finding.csv", "r") as f:
         for idx, line in enumerate(f.readlines()):
@@ -22,10 +22,10 @@ def parse_data() -> cities_t:
                 continue
             _from, to, dist = line.strip().replace("\"", "").split(",")
 
-            ret[_from][to] = int(dist)
-            ret[to][_from] = int(dist)
+            dataset[_from][to] = int(dist)
+            dataset[to][_from] = int(dist)
 
-    return ret
+    return dataset
 
 
 def path_cost(path: list[str], cities: cities_t) -> int:
@@ -34,13 +34,13 @@ def path_cost(path: list[str], cities: cities_t) -> int:
 
     Returns: int - the cost of the path
     """
-    ret = 0
+    total = 0
     for idx, elem in enumerate(path):
         if idx == 0:
             continue
         # default value to add is really high to it's never accepted
-        ret += cities[path[idx - 1]][elem]
-    return ret
+        total += cities[path[idx - 1]][elem]
+    return total
 
 
 def initial_path(cities:cities_t) -> list[str]:
@@ -54,25 +54,26 @@ def initial_path(cities:cities_t) -> list[str]:
         key = random.choice(list(cities.keys()))
 
     values = cities[key]
-    ret: list[str] = [key]
+    path: list[str] = [key]
 
     while True:
         if not values:
             break
 
-        valid_values = set(x for x in list(values) if x != "London") - set(ret)
+        # Filter out value cities that aren't in the path already, or London 
+        valid_values = set(x for x in list(values) if x != "London") - set(path)
         if not valid_values:
             break
 
         key = random.choice(list(valid_values))
-        ret.append(key)
+        path.append(key)
         values = cities[key]
 
-        if len(ret) == len(cities.keys()) - 1:
+        if len(path) == len(cities.keys()) - 1:
             # Nowhere left to visit
             break
 
-    return ret
+    return path 
 
 
 def swap_probability(temp: int, init_cost: int, new_cost: int) -> bool:
@@ -82,11 +83,8 @@ def swap_probability(temp: int, init_cost: int, new_cost: int) -> bool:
     Returns: bool - do we swap two cities
     """
     prob: float = (init_cost - new_cost) / temp
-    actual = (random.randint(0, 1000) / 10)
-    if actual >= prob:
-        return True
-
-    return False
+    acceptance_threshold = (random.randint(0, 1000) / 10)
+    return acceptance_threshold >= prob 
 
 
 def simulated_annealing(path: list[str], cities: cities_t, temp: int) -> list[str]:
@@ -106,6 +104,7 @@ def simulated_annealing(path: list[str], cities: cities_t, temp: int) -> list[st
         if not values:
             break
 
+        # Filter out value cities that aren't in the path already, or London 
         valid_values = set(x for x in values if x != "London") - set(path)
         if not valid_values:
             break
@@ -118,7 +117,6 @@ def simulated_annealing(path: list[str], cities: cities_t, temp: int) -> list[st
             break
 
     new_path_cost = path_cost(path, cities)
-
     if new_path_cost <= curr_cost:
         if swap_probability(temp, curr_cost, new_path_cost):
             # If we don't reach the probability threshhold, swap back
