@@ -1,8 +1,0 @@
-- Hill walking - fast at an initial approach, almost takes a brute force approach to find the fastest.
-    - Doesn't appear too viable
-
-Simulated Annealing - makes minor tweaks after an initial search to try and take an iterative approach to the fastest approach.
-    - I like this one, it looks fascinating to implement, but probably tricky.
-
-Tabu search - solves TSP by flipping two cities when iterating through the dataset and seeing if the path is any faster.
-    - I think this could be doable?
