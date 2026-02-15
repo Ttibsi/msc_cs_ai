@@ -65,3 +65,30 @@ MLP - multilayer perceptron
     - Each node in one layer connects with a certain weight to every node in the next layer
 
 Chromosome - A permutation?
+
+### Lesson 3 - Genetic Algorithm Constraints
+Objective of any search algorithm is to stay within feasable solutions from the search space.
+In a genetic algorithm, the crossover operator can be responsible for producing unfeasable
+solutions
+
+For example, in the travelling salesman, the crossover operator could result in
+the same city being visited twice, or not at all. Ways to handle this include:
+* remove unfeasable solutions from the population
+    * This is inefficient, but easy
+* Use some process to repair an unfeasable solution
+* Use only operators that are guaranteed to produce feasable solutions
+* Transform the search space (Decoding)
+
+The most common approach to indirectly dealing with unfeasable solutions is to attach
+a penalty function for their existing evaluation function
+
+Order crossover - given two parents, take a range of genes from parent 1 then iterate
+through parent 2 to find valid genes to insert in the offspring to fill the remaining
+gaps, ensuring no repeats
+
+NLP = Non Linear Programming
+
+The numbver of real-world applications for genetic algorithms are vast.
+* Roulette-wheel selection is designed to favour stronger individuals
+* Examples of mutation: random, inverse, adjacent
+* Tournament selection chooses the best individual from a random subset
