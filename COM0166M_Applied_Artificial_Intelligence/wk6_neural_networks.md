@@ -64,3 +64,9 @@ Linear Regression
     - model the relationship between multiple features and a continuous target data
     - y = w0 + w1x where y is the contiuous value, x is a single "core" value
         and w0 is the weight of the y axi and w1 is the coefficient of x
+
+Reinforcement Learning
+* Behavioural learning model
+* trained via feedback from data analysis via trial and error
+* "Markov's decision processes in systems theory"
+* common use cases - robotics, game-playing, self-driving cars
