@@ -70,3 +70,47 @@ Reinforcement Learning
 * trained via feedback from data analysis via trial and error
 * "Markov's decision processes in systems theory"
 * common use cases - robotics, game-playing, self-driving cars
+
+### Lesson 2 - Neural Networks
+
+Neurons in nature
+* recieve signals through "dendrites"
+* signals are processed in the cell body
+* signals pass down the axon electro-chemically
+* passed through electrical signals and chemicals
+* Connections between neurons are synapses
+
+Perceptron - simulating neurons
+- can take inputs that are assigned weights
+- calculate the weighted sum of inputs via matrix multiplication
+- result gets passed into an "activation" function that decides if the value
+is passed on
+- A bias value may be added to the weighted sum in a node to increase/decrease
+likelyhood of activation
+
+Applications of neural networks
+- computer vision
+- natural language processing
+- AV recognition and processing
+- autonomous navigation
+- discovery in research
+- statistical forecasting
+
+NNs use a function which in classification tasks (ex spam filtering) must have
+must have a condition to be triggered, ex if the value is over 1 so that the 
+state changes between 1 and 0. One example is the sigmoid function:
+```
+S(x) = 1 / 1+e^-x
+```
+This returns either 1 or -1 for any real number passed in
+
+```py
+import math
+def sigmoid(x):
+    return 1 / (1 + math.exp(-x))
+```
+
+Deep learning - "deep" because the logic is organised into multiple layers
+feedforward network - directed acyclic graph with designated Input and output nodes.
+
+Typically inputs are "continuous" between 0 and 1
