@@ -120,16 +120,38 @@ Expressive Artificial Intelligence -- AI + art
     - Commonly found in gaming
 
 ### Discussion - Ethics in AI
-As discussed in week 1, there are four ways to classify artificial intelligence -- thinking or acting "humanly", or thinking or acting rationally. If we are to take creative AI to be just acting humanly, instead of actually thinking, then any artwork generated is purely of the "just keep stirring" variety[1] and in my opinion is taking away from artists that have honed their craft in the same way that we currently see Large Language Models spitting out "AI Slop" code compared to the masters of software engineering.
+As discussed in week 1, there are four ways to classify artificial intelligence 
+-- thinking or acting "humanly", or thinking or acting rationally. If we are to 
+take creative AI to be just acting humanly, instead of actually thinking, then 
+any artwork generated is purely of the "just keep stirring" variety[1] and in 
+my opinion is taking away from artists that have honed their craft in the same 
+way that we currently see Large Language Models spitting out "AI Slop" code 
+compared to the masters of software engineering.
 
-From what I've observed, this comes down to questioning the value of art. If the medium is generatlly considered of value by society - for example, cimena or video games -- then it appears that there is more push back from society when AI is generated. This has come to a head in both industries, such as with the backlash toward the AI character of Tilly Norwood in Hollywood[2], or the repealing of the Game of the Year award from video game Expedition 33 due to it's use of AI generated art.[3]
+From what I've observed, this comes down to questioning the value of art. If 
+the medium is generatlly considered of value by society - for example, cimena 
+or video games -- then it appears that there is more push back from society when 
+AI is generated. This has come to a head in both industries, such as with the 
+backlash toward the AI character of Tilly Norwood in Hollywood[2], or the 
+repealing of the Game of the Year award from video game Expedition 33 due to 
+it's use of AI generated art.[3]
 
-However, on the other hand, we're seeing more and more static AI-generated artwork used across social media, looking at recent trends such as the action figure-like mini me's[4], and AI characatures of people's offices[5]. This shows that people are happier to both waiver their privacy by sharing personal information and use these image generators without any thought about how these work without any major backlash.
+However, on the other hand, we're seeing more and more static AI-generated 
+artwork used across social media, looking at recent trends such as the action 
+figure-like mini me's[4], and AI characatures of people's offices[5]. This 
+shows that people are happier to both waiver their privacy by sharing personal 
+information and use these image generators without any thought about how these 
+work without any major backlash.
 
-My personal opinion is that this is something we should move away from, as generated artwork will only cause long-term harm to an industry that already struggles. After the Covid-19 closed thousands of locations involved in film, TV, performing art, and then the SAG-AFTRA and WGA strikes of 2023, there were thousands of people throughout the film, video game, VFX, and live art industries who lost their jobs, and those industries are still trying to recover without the looming threat of AI as some see it as a financial shortcut -- an issue that I've observed that our own industrty is wmoving towards as well.
-
+My personal opinion is that this is something we should move away from, as 
+generated artwork will only cause long-term harm to an industry that already 
+struggles. After the Covid-19 closed thousands of locations involved in film, 
+TV, performing art, and then the SAG-AFTRA and WGA strikes of 2023, there were 
+thousands of people throughout the film, video game, VFX, and live art 
+industries who lost their jobs, and those industries are still trying to recover 
+without the looming threat of AI as some see it as a financial shortcut -- an 
+issue that I've observed that our own industrty is wmoving towards as well.
 ---
-
 references:
 [1] “Machine Learning,” xkcd. https://xkcd.com/1838/
 [2] Wikipedia Contributors, “Tilly Norwood,” Wikipedia, Oct. 08, 2025.
