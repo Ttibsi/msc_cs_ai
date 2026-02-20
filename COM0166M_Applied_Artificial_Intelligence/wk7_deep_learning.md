@@ -62,3 +62,5 @@ Drop out algorithm
 - sample each node in each hidden layer with a probability value
 - only keep edges that have both ends in the network
 
+Deep learning learns from multiple neural networks using hierarchical representation
+Unlike standard neural networks, DL models learn features automatically from the provided data
