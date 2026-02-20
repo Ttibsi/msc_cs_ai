@@ -64,3 +64,21 @@ Drop out algorithm
 
 Deep learning learns from multiple neural networks using hierarchical representation
 Unlike standard neural networks, DL models learn features automatically from the provided data
+
+### Lesson 2 - Convolutional neural networks
+Convolutional networks use a grid-like topology for processing data.
+EX 1d for time-series data or 2d for image data (pixels).
+Convolution is an operation on two functions of a real valued argument
+
+Example - data from a laser. Take multiple readings over a time (ex a few seconds) and 
+apply a weight to the average of those readings to get a value.
+
+The output of the convolution equation is called the "feature map"
+
+Pooling - down-sampling the data within a feature map via summarising the features present.
+Common approaches to pooling:
+    - average pooling
+    - max pooling
+
+Google Deep Mind is a Convolutional network that's free to access.
+    - This also spun off "Deep Dream" - computer vision system using a CNN
