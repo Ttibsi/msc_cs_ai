@@ -82,3 +82,39 @@ Common approaches to pooling:
 
 Google Deep Mind is a Convolutional network that's free to access.
     - This also spun off "Deep Dream" - computer vision system using a CNN
+
+### Lesson 3 - LLMs, GANs & Diffusion models
+LLM - Large Language Model
+GAN - Generative Adversarial Network
+
+LLMs
+    * main focus is in natural language processing
+    * Makes use of transformer-based neural networks and reinforcement learning
+    * Training stages:
+        - tokenization - break the sample text down into tokens
+        - embedding - derives the rules of association between tokens
+            - most important step
+            - gives tokens meaning
+        - entailment - teaches the model to make logical assertions based on the text
+            - tests weather a clause is logically true based on another clause
+        - acceptance - output is then tested against acceptance criteria to determine correctness 
+            - measured with some level of tolerance (temperature value)
+            - higher temps lead to chattier LLMs
+        - tokenization again - used to create the actual output text shown to the user
+
+    * LLM based technology has been adapted to work for images (VLM) or audo (ALM)
+
+GANs
+    * Two NNs used here 
+        - one as a generator trained through unsupervised learning that generates fake output
+        - the other a discriminator (already trained) which compares the output to "ground truth data"
+    * CNNs tend to be used as the generator and discriminator 
+    * GANS are very useful for image generation and processing
+    * can produce realistic and convincing output.
+
+Diffusion models
+    - Use a single NN to iteratively generate some image output from noise.
+    - tend to be slower than GANs
+    - capable of generating much more diverse output.
+            
+
