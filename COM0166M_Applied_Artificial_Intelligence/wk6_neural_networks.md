@@ -158,3 +158,9 @@ references:
 [f] J. Peckham, “Clair Obscur: Expedition 33 Stripped of a Game of the Year Award Because of AI,” PCMAG, Dec. 22, 2025. https://www.pcmag.com/news/clair-obscur-expedition-33-stripped-of-a-game-of-the-year-award-because (accessed Feb. 18, 2026).
 [4] Liv, “ChatGPT AI action dolls: Concerns around the Barbie-like viral social trend,” BBC News, Apr. 11, 2025. Available: https://www.bbc.co.uk/news/articles/c5yg690e9eno
 [5] K. O'Flaherty, “The New ChatGPT Caricature Trend Comes With A Privacy Warning,” Forbes, Feb. 09, 2026. Available: https://www.forbes.com/sites/kateoflahertyuk/2026/02/09/the-new-chatgpt-caricature-trend-comes-with-a-privacy-warning/
+
+### Quiz notes
+- Linear regression is for discrete values, not continuous
+- activation functions introduce non-linearity to the model
+- K-means is best for grouping data into clusters
+- regression trees are a form of decision tree
