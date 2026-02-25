@@ -28,19 +28,26 @@ https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009426
 
 ---
 Thoughts for topics
-- Use K-means to bundle plants and animals in a given region type
-    - Summary of long-term and short-term changes in the abundance of  butterflies in the UK: 1976 to 2024 
-        insects wider countryside ( sheet 2 )
-    - Worksheet 2: Species list for UK Plants of the wider countryside 
-        plants spreadsheet ( sheet 2 )
-- I can pre-process data. Combine the sheets into CSV files where relevant to be easier to parse
-    - This is part of my submission
-
-- I have locations and abundancae of butterflies over time. Can I classify a butterfly based on region then build a 
-heamap over time of where butterflies are preferring to be. I could use raylib as a visualisation tool (pyray). 
+- I have locations and abundancae of butterflies over time. Can I classify a butterfly based on region then build a
+heamap over time of where butterflies are preferring to be. I could use raylib as a visualisation tool (pyray).
     - Kmeans or naive Bayers classification
     - insects-wider-countryside spreadsheet
     - Intention is to be able to observe trends over time for butterfly thriving locations
         - do we have enough data to apply this to bees too? Can we even show two different axes?
         (no)
 
+- Effects of agricultural schemes on pollinators
+    - percentage of land covered in schemes
+    - occupancy of pollinators through the years
+    - trends in the abundance of butterflies
+    - functional connectivity of birds
+        - will need simulated data
+
+    - can talk about plant data, but don't include as that data starts a lot later
+    - can talk about how these trends may have started the next year after the scheme
+        - "delayed" expansion
+
+    - calculate effects of pollination growth over time from pollinator index
+        - this can also be a column in the data
+
+    - then I can find the best subset ("optimal") using genetic algo with a good fitness func?
