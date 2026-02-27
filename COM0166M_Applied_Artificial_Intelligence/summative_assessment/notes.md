@@ -26,6 +26,10 @@ https://arxiv.org/abs/2503.15107
 https://journals.plos.org/ploscompbiol/article?id=10.1371/journal.pcbi.1009426
     - Machine learning approach for automatic recognition of tomato-pollinating bees based on their buzzing-sounds
 
+Other useful literature
+https://committees.parliament.uk/publications/43667/documents/216787/default/
+https://publications.parliament.uk/pa/cm5804/cmselect/cmsctech/326/report.html#heading-4
+
 ---
 Thoughts for topics
 - I have locations and abundancae of butterflies over time. Can I classify a butterfly based on region then build a
@@ -53,4 +57,4 @@ heamap over time of where butterflies are preferring to be. I could use raylib a
     - then I can find the best subset ("optimal") using genetic algo with a good fitness func?
 
 Title 
-Utilising machine learning techniques to analyse the effects agricultural schemes have on the insect population across various environments in the UK
+Utilising machine learning techniques to analyse the impact agricultural schemes have on the insect population across environments in the UK
