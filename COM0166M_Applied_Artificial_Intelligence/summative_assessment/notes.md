@@ -56,5 +56,13 @@ heamap over time of where butterflies are preferring to be. I could use raylib a
 
     - then I can find the best subset ("optimal") using genetic algo with a good fitness func?
 
+Algorithms
+- genetic algo
+    <!-- - what combination of other populations signal an increase in bee population -->
+    <!-- - fitness func = bee pop size -->
+    <!-- - compare pops of other species -->
+- linear regression
+    - how does the amount of land covered in schemes impact the populations of various insects
+
 Title 
 Utilising machine learning techniques to analyse the impact agricultural schemes have on the insect population across environments in the UK
