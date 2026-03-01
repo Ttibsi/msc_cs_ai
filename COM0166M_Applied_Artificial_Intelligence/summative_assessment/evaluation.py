@@ -1,6 +1,9 @@
+from dataclasses import dataclass
+from typing import Sequence
 import itertools
 import math
-from dataclasses import dataclass
+
+import matplotlib.pyplot as plt
 
 @dataclass
 class Datum:
@@ -12,7 +15,7 @@ class Datum:
     farmland_butterfly_occupancy: float
     birds: float | None = None
 
-    def ivs(self, mask: list[int]) -> float:
+    def ivs(self, mask: tuple[int, ...]) -> float:
         values = [
             self.scheme_coverage if mask[0] else 0.0,
             self.hoverfly_occupancy if mask[1] else 0.0,
@@ -34,7 +37,7 @@ def process_csv() -> list[Datum]:
                 continue
             # We need to be sure that the birds field is populated correctly, as
             # there may be no value in that column
-            parts = line.rstrip().split(",")
+            parts: Sequence[str | int | float] = line.rstrip().split(",")
 
             # Transform the strings from the CSV file into the right data types
             parts[0] = int(parts[0])
@@ -57,88 +60,94 @@ def calculate_bias(actual: float, expected: float) -> float:
 def best_fit(mean: float, pred: float, y: float) -> float:
     top = math.pow(pred - mean, 2)
     bottom = math.pow(y - mean, 2)
-    return (top / bottom) 
+    return top / bottom
 
 
 # y = c + (m * x)
 # x = input data points
 # c = intercept - the point where the estimated regression line crosses the y axis
 # m = bias/slope of the regression line
-def linear_regression(data: list[Datum], mask: list[int]) -> list[float]:
+# https://medium.com/geekculture/linear-regression-from-scratch-in-python-without-scikit-learn-a06efe5dedb6
+def linear_regression(data: list[Datum], mask: tuple[int, ...]) -> tuple[list[float], float]:
     mean_bee_pop = sum([x.bee_occupancy for x in data]) / len(data)
     mean_ivs = sum([x.ivs(mask) for x in data]) / len(data)
-    c = 0.1
+    c = 1.2
 
-    sum_total = 0
-    fits = [False] * len(data)
+    points: list[float] = []
     ys = [0.0] * len(data)
+    sum_total = 0.0
     for idx, datum in enumerate(data):
         x = datum.bee_occupancy
         y = datum.ivs(mask)
         ys[idx] = y
 
         x_bias = calculate_bias(x, mean_bee_pop)
-        bias = x_bias * calculate_bias(y, mean_ivs)
-        m = bias / math.pow(x_bias, 2)
+        y_bias = calculate_bias(y, mean_ivs)
+        numerator = x_bias * y_bias
+        denominator = math.pow(x_bias, 2)
+        m = numerator / denominator
+
+        c = mean_bee_pop / m
 
         total = c + (m * x)
         sum_total += total
+        points.append(total)
 
     regressions: list[float] = []
-    for y in ys:
-        r_squared = best_fit(sum_total, sum(ys), y)
+    for idx, y in enumerate(ys):
+        r_squared = best_fit(points[idx], sum(ys) / len(ys), y)
         regressions.append(r_squared)
 
     # Return the mean of the r_squared calculation
-    return regressions
+    return points, sum(regressions)
 
 
 def compare(result: list[float], best: list[float]) -> bool:
     return (sum(result) / len(result)) > (sum(best) / len(best))
 
 
-def hill_walk(data: list[Datums]) -> list[int]:
+def hill_walk(data: list[Datum]) -> tuple[int, ...]:
     # Generate every possible mask
     masks = itertools.product([1, 0], repeat=5)
 
     best: list[float] = [0,0,0,0,0]
-    best_mask: list[int] = []
+    best_mask: tuple[int, ...] = []
     counter = 0
     for m in masks:
-        result = linear_regression(data, m)
+        if m == (0,0,0,0,0):
+            print("skipped")
+            continue
+        result, _ = linear_regression(data, m)
         if compare(result, best):
             best = result
+            print(f"new best: {best}")
             best_mask = m
             counter += 1
 
             if counter == 3:
                 return best_mask
 
-    return [0,0,0,0,0]
+    return (0,0,0,0,0)
 
 
-def display_best(preds: list[int]) -> None:
-    ret = ""
+def draw_line_graph(data: list[Datum], preds: tuple[int, ...]):
+    result, regressions = linear_regression(data, preds)
+    result.remove(max(result))
+    result.remove(min(result))
 
-    if preds[0]:
-        ret += "scheme_coverage, "
-    if preds[1]:
-        ret += "hoverfly_occupancy, "
-    if preds[2]:
-        ret += "woodland_butterfly_occupancy, "
-    if preds[3]:
-        ret += "farmland_butterfly_occupancy, "
-    if preds[4]:
-        ret += "birds, "
+    plt.plot(result, "ro", label="data points")
+    plt.plot([0, regressions], [0, regressions], label="regression")
+    plt.legend()
+    plt.show()
 
-    return ret
 
 def main() -> int:
     data: list[Datum] = process_csv()
     best_predictors = hill_walk(data)
-    print(display_best(best_predictors))
+    print(best_predictors)
 
     # draw the best chart on the screen?
+    draw_line_graph(data, best_predictors)
     return 0
 
 
