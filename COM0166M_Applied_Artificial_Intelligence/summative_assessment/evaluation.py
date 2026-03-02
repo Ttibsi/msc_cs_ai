@@ -24,7 +24,7 @@ class Datum:
             self.birds if self.birds is not None and mask[4] else 0.0
         ]
 
-        return sum(values)
+        return sum(values) / len(values)
 
 
 def process_csv() -> list[Datum]:
@@ -52,15 +52,18 @@ def process_csv() -> list[Datum]:
     return data
 
 
-def calculate_bias(actual: float, expected: float) -> float:
-    return actual - expected
-
-
 # r^2 = (Ypred - mean) ^2 / (Y - mean) ^ 2
 def best_fit(mean: float, pred: float, y: float) -> float:
     top = math.pow(pred - mean, 2)
     bottom = math.pow(y - mean, 2)
     return top / bottom
+
+
+def mean_squared_error(points: list[float], ys: list[float]) -> float:
+    return sum(
+        math.pow(ys[idx] - points[idx], 2)
+        for idx in range(len(points))
+    ) / len(points)
 
 
 # y = c + (m * x)
@@ -69,74 +72,58 @@ def best_fit(mean: float, pred: float, y: float) -> float:
 # m = bias/slope of the regression line
 # https://medium.com/geekculture/linear-regression-from-scratch-in-python-without-scikit-learn-a06efe5dedb6
 def linear_regression(data: list[Datum], mask: tuple[int, ...]) -> tuple[list[float], float]:
-    mean_bee_pop = sum([x.bee_occupancy for x in data]) / len(data)
-    mean_ivs = sum([x.ivs(mask) for x in data]) / len(data)
+    sum_bee_pop = sum([x.bee_occupancy for x in data])
+    sum_ivs = sum([x.ivs(mask) for x in data])
     c = 1.2
 
     points: list[float] = []
-    ys = [0.0] * len(data)
-    sum_total = 0.0
+    ys = []
     for idx, datum in enumerate(data):
         x = datum.bee_occupancy
         y = datum.ivs(mask)
-        ys[idx] = y
+        ys.append(y)
 
-        x_bias = calculate_bias(x, mean_bee_pop)
-        y_bias = calculate_bias(y, mean_ivs)
+        x_bias = x - sum_bee_pop
+        y_bias = y - sum_ivs 
         numerator = x_bias * y_bias
         denominator = math.pow(x_bias, 2)
         m = numerator / denominator
 
-        c = mean_bee_pop / m
+        c = y - ((sum_bee_pop / len(data)) * m)
 
         total = c + (m * x)
-        sum_total += total
         points.append(total)
 
-    regressions: list[float] = []
-    for idx, y in enumerate(ys):
-        r_squared = best_fit(points[idx], sum(ys) / len(ys), y)
-        regressions.append(r_squared)
-
-    # Return the mean of the r_squared calculation
-    return points, sum(regressions)
+    residual = mean_squared_error(points, ys)
+    return points, residual
 
 
 def compare(result: list[float], best: list[float]) -> bool:
-    return (sum(result) / len(result)) > (sum(best) / len(best))
+    return sum(result) < sum(best)
+    return (sum(result) / len(result)) < (sum(best) / len(best))
 
 
 def hill_walk(data: list[Datum]) -> tuple[int, ...]:
     # Generate every possible mask
-    masks = itertools.product([1, 0], repeat=5)
+    masks = itertools.product([0, 1], repeat=5)
+    next(masks)  # Skip all 0s
 
-    best: list[float] = [0,0,0,0,0]
+    best: float = 0.0
     best_mask: tuple[int, ...] = []
     counter = 0
     for m in masks:
-        if m == (0,0,0,0,0):
-            print("skipped")
-            continue
-        result, _ = linear_regression(data, m)
-        if compare(result, best):
-            best = result
-            print(f"new best: {best}")
+        result, residual = linear_regression(data, m)
+        if not best or residual < best:
+            best = residual 
             best_mask = m
             counter += 1
 
-            if counter == 3:
-                return best_mask
-
-    return (0,0,0,0,0)
+    return best_mask
 
 
-def draw_line_graph(data: list[Datum], preds: tuple[int, ...]):
-    result, regressions = linear_regression(data, preds)
-    result.remove(max(result))
-    result.remove(min(result))
-
+def draw_line_graph(data: list[Datum], mask: tuple[int, ...]):
+    result, residual = linear_regression(data, mask)
     plt.plot(result, "ro", label="data points")
-    plt.plot([0, regressions], [0, regressions], label="regression")
     plt.legend()
     plt.show()
 
