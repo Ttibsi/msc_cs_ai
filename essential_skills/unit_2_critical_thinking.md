@@ -107,3 +107,28 @@ Effective reading strategies:
 * Scanning - looking for specific information and ignoring the rest of the text
 * Close reading
 * section hopping
+
+### Lesson 3 - Critical Writing
+* Analysis - breaking down complex information into smaller parts to understand how they work 
+            together, examine the structure of an argument, the evidence provided, the 
+            assumptions under the claims
+* Evaluation - Assess the validity, relevance, significance of the information. Question the
+            credibility, the strength of evidence and the logic of conclusions
+* Argumentation - Present your own reasoned arguments supported with evidence. State a clear 
+                position, back it up with reasoning and evidence, and address counterargument
+* Clarity and Precision - Writing clearly and precisely to convey your analysis and evaluation  
+                        effectively, avoid vague language, be specific about points of evidence
+* Structure - Organise your writing in a logical and coherent way. This involves an introduction,
+                a body that develops an analysis and evaluation, and a conclusion that 
+                summarises your findings
+* Engagement with sources - Critically engaging with a range of sources to support your argument,
+                            not just summarising, but analysing and critiquing in the context
+                            of your argument
+
+
+Writing that goes beyond mere description   
+    - analysis, evaluation, synthesis of information
+    - Use higher quality academic resources, not just wikipedia/blog posts etc
+    - present facts and interpret them. What do these mean?
+    - organised around a central argument
+
