@@ -71,7 +71,7 @@ def mean_squared_error(points: list[float], ys: list[float]) -> float:
 # c = intercept - the point where the estimated regression line crosses the y axis
 # m = bias/slope of the regression line
 # https://medium.com/geekculture/linear-regression-from-scratch-in-python-without-scikit-learn-a06efe5dedb6
-def linear_regression(data: list[Datum], mask: tuple[int, ...]) -> tuple[list[float], float]:
+def linear_regression(data: list[Datum], mask: tuple[int, ...]) -> tuple[list[float], list[float], float]:
     sum_bee_pop = sum([x.bee_occupancy for x in data])
     sum_ivs = sum([x.ivs(mask) for x in data])
     c = 1.2
@@ -95,7 +95,7 @@ def linear_regression(data: list[Datum], mask: tuple[int, ...]) -> tuple[list[fl
         points.append(total)
 
     residual = mean_squared_error(points, ys)
-    return points, residual
+    return points, ys, residual
 
 
 def compare(result: list[float], best: list[float]) -> bool:
@@ -112,7 +112,7 @@ def hill_walk(data: list[Datum]) -> tuple[int, ...]:
     best_mask: tuple[int, ...] = []
     counter = 0
     for m in masks:
-        result, residual = linear_regression(data, m)
+        _, _, residual = linear_regression(data, m)
         if not best or residual < best:
             best = residual 
             best_mask = m
@@ -122,8 +122,9 @@ def hill_walk(data: list[Datum]) -> tuple[int, ...]:
 
 
 def draw_line_graph(data: list[Datum], mask: tuple[int, ...]):
-    result, residual = linear_regression(data, mask)
-    plt.plot(result, "ro", label="data points")
+    results, ys, residual = linear_regression(data, mask)
+    plt.plot(results, label="Regression line")
+    plt.plot(ys, "ro", label="Data points")
     plt.legend()
     plt.show()
 
