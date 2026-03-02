@@ -123,8 +123,13 @@ def hill_walk(data: list[Datum]) -> tuple[int, ...]:
 
 def draw_line_graph(data: list[Datum], mask: tuple[int, ...]):
     results, ys, residual = linear_regression(data, mask)
-    plt.plot(results, label="Regression line")
-    plt.plot(ys, "ro", label="Data points")
+
+    x_list = list(range(1992, 2023))
+    plt.plot(x_list, results, label="Regression line")
+    plt.plot(x_list, ys,"ro", label="Data points")
+    plt.xlabel("Year")
+    plt.ylabel("Value")
+
     plt.legend()
     plt.show()
 
