@@ -132,3 +132,18 @@ Writing that goes beyond mere description
     - present facts and interpret them. What do these mean?
     - organised around a central argument
 
+### Activity - Critical Analysis
+Define an argument:
+Public transportation should be free to use to encourage and bolster it's usage. This will have a 
+number of benefits, including encouraging tourism, opening up the city to young people, and
+encouraging safer travel for the young and vulnerable.
+
+Supporting Arguments:
+    - we can find an example to back up any of our reasoning.
+    - Find examples of other cities that have made this change and then analyse the results
+
+Address counterarguments:
+    - try and address them by turning their arguments around. What would offset these issues?
+
+Conclusion
+
