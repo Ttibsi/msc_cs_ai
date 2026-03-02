@@ -52,13 +52,6 @@ def process_csv() -> list[Datum]:
     return data
 
 
-# r^2 = (Ypred - mean) ^2 / (Y - mean) ^ 2
-def best_fit(mean: float, pred: float, y: float) -> float:
-    top = math.pow(pred - mean, 2)
-    bottom = math.pow(y - mean, 2)
-    return top / bottom
-
-
 def mean_squared_error(points: list[float], ys: list[float]) -> float:
     return sum(
         math.pow(ys[idx] - points[idx], 2)
@@ -98,11 +91,6 @@ def linear_regression(data: list[Datum], mask: tuple[int, ...]) -> tuple[list[fl
     return points, ys, residual
 
 
-def compare(result: list[float], best: list[float]) -> bool:
-    return sum(result) < sum(best)
-    return (sum(result) / len(result)) < (sum(best) / len(best))
-
-
 def hill_walk(data: list[Datum]) -> tuple[int, ...]:
     # Generate every possible mask
     masks = itertools.product([0, 1], repeat=5)
@@ -131,15 +119,13 @@ def draw_line_graph(data: list[Datum], mask: tuple[int, ...]):
     plt.ylabel("Value")
 
     plt.legend()
+    plt.savefig("chart.png")
     plt.show()
 
 
 def main() -> int:
     data: list[Datum] = process_csv()
     best_predictors = hill_walk(data)
-    print(best_predictors)
-
-    # draw the best chart on the screen?
     draw_line_graph(data, best_predictors)
     return 0
 
