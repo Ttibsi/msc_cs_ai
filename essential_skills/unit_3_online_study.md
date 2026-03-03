@@ -28,3 +28,26 @@ Pomodoro technique
 25 minute focus sections, 5 minute breaks
 After 4 focus sections, take a longer 30 min break
 
+### Lesson 3 - Digital Literacy and Self Assessment
+Library resources - potentially visit other libraries in London?
+
+Computer Science resoures
+- Kortext
+- YorSearch
+- IEEE Xplore
+- ACM Digital Library
+- Web of Science
+
+Reflective practice
+- Self-examination - analyse your thoughts, feelings, actions in specific situations
+- Learn from Experience - identify what went well and what didn't, and understand why
+- Personal/Professional growth - Use this knowledge to make informed changes and improvements
+- repeat
+
+Gibbs Reflective Cycle
+- what happened
+- what were you thinking/feeling
+- what was good/bad about the experience
+- what else can you make of the situation
+- what else could you have done
+- if it rose again, what would you do
