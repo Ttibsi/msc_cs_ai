@@ -17,3 +17,68 @@ Programming = telling a computer what to do and how to do it
 Computational thinking = enabling you to work out exactly what to tell the computer
                         to do 
 
+### Lesson 2 - Fundamentals of Computer Science
+"Computer science is no more about computers than astronomy is about telescopes"
+- Edgar Dijkstra, 1972
+
+Five key areas ofcomputer science
+- computational thinking
+- algorithms 
+- data Structures
+- computer systems 
+- programming paradigms
+
+Algorithms
+Components of algorithms - input, output, definiteness, finiteness, effectiveness
+Properties - correctness, efficiency, robustness, usability
+Characteristics - clarity, deterministic, terminating
+
+Data Structures
+Two types: Linear, non-linear
+
+Linear data types:
+- array
+- linked list
+- stack
+- queue
+
+non-linear data structures:
+- Tree
+- Binary Tree
+- graph
+
+Computer systems
+- Hardware components:
+    - CPU, Memory (RAM, storage), Motherboard, input/output devices, peripherals
+- software components:
+    - OS, utility software (antivirus, file management, disk cleanup), 
+    - application software (word processor, web browser, game, business applications)
+
+- Computer architecture -- Von Neumann architecture. 
+    - Control unit, arithmetic logic unit (ALU), memory unit
+- Operating system:
+    - resource management, file system management, user interface
+
+Programming Paradigms:
+- provide structure to code
+- a language can include multiple paradigms
+- paradigms may prioritise different things
+
+Examples of paradigms:
+- Imperative - simple sequence of statements
+- Declarative - specify what to achieve, not how. (SQL, HTML)
+- Object Oriented - Encapsulation, Inheritance, Polymorphism, Abstraction
+- Functional - computation is the evaluation of mathematical functions.
+    - functions are first-class citizens
+    - emphasis on immutability and pure functions 
+- Logic programming - Based on formal logic. Uses facts, rules, queries to solve problems
+    - ex: prolog (LEAN as well?)
+- Event driven programming - reacting to events or changes in state
+    - often used for real-time systems or GUIs
+    - event handlers and callbacks
+    - ex jS for webdev, VB.NET
+- Procedural - subtype of imperative that emphasises a structured approach
+    - functions and procedures
+    - C, Pascal, Basic
+- Concurrent programming - Allows multiple processes/threads to execute simultaneously
+    - Java (multithreading), Go (goroutines), Erlang (processes)
