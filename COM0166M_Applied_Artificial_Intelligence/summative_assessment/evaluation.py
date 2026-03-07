@@ -5,6 +5,7 @@ import math
 
 import matplotlib.pyplot as plt
 
+
 @dataclass
 class Datum:
     year: int
@@ -65,30 +66,19 @@ def mean_squared_error(points: list[float], ys: list[float]) -> float:
 # m = bias/slope of the regression line
 # https://medium.com/geekculture/linear-regression-from-scratch-in-python-without-scikit-learn-a06efe5dedb6
 def linear_regression(data: list[Datum], mask: tuple[int, ...]) -> tuple[list[float], list[float], float]:
-    sum_bee_pop = sum([x.bee_occupancy for x in data])
-    sum_ivs = sum([x.ivs(mask) for x in data])
-    c = 1.2
+    ys = [x.ivs(mask) for x in data]
+    mean_bee_pop = sum([x.bee_occupancy for x in data]) / len(data)
+    mean_ivs = sum(ys) / len(data)
 
-    points: list[float] = []
-    ys = []
-    for idx, datum in enumerate(data):
-        x = datum.bee_occupancy
-        y = datum.ivs(mask)
-        ys.append(y)
-
-        x_bias = x - sum_bee_pop
-        y_bias = y - sum_ivs 
-        numerator = x_bias * y_bias
-        denominator = math.pow(x_bias, 2)
-        m = numerator / denominator
-
-        c = y - ((sum_bee_pop / len(data)) * m)
-
-        total = c + (m * x)
-        points.append(total)
-
-    residual = mean_squared_error(points, ys)
-    return points, ys, residual
+    numerator = sum(
+        (data[i].bee_occupancy - mean_bee_pop) * (ys[i] - mean_ivs)
+        for i in range(len(data))
+    )
+    denominator = sum([math.pow(x.bee_occupancy - mean_bee_pop, 2) for x in data])
+    m = numerator / denominator
+    c = mean_ivs - (m * mean_bee_pop)
+    predicted_y = [m * x.bee_occupancy + c for x in data]
+    return predicted_y, ys, mean_squared_error(predicted_y, ys)
 
 
 def hill_walk(data: list[Datum]) -> tuple[int, ...]:
@@ -96,13 +86,14 @@ def hill_walk(data: list[Datum]) -> tuple[int, ...]:
     masks = itertools.product([0, 1], repeat=5)
     next(masks)  # Skip all 0s
 
-    best: float = 0.0
+    best_mse: float = math.inf
     best_mask: tuple[int, ...] = []
     counter = 0
     for m in masks:
-        _, _, residual = linear_regression(data, m)
-        if not best or residual < best:
-            best = residual 
+        _, _, mse = linear_regression(data, m)
+        print(f"  | MSE:{mse:05.2f}, best:{best_mse:05.2f}, mask = {m} | ")
+        if mse < best_mse:
+            best_mse = mse 
             best_mask = m
             counter += 1
 
@@ -110,17 +101,17 @@ def hill_walk(data: list[Datum]) -> tuple[int, ...]:
 
 
 def draw_line_graph(data: list[Datum], mask: tuple[int, ...]):
-    results, ys, residual = linear_regression(data, mask)
+    results, ys, _ = linear_regression(data, mask)
 
     x_list = list(range(1992, 2023))
     plt.plot(x_list, results, label="Regression line")
-    plt.plot(x_list, ys,"ro", label="Data points")
+    plt.plot(x_list, ys, "ro", label="IVs (mean)")
     plt.xlabel("Year")
-    plt.ylabel("Value")
+    plt.ylabel("Change in Bee population")
 
     plt.legend()
     plt.savefig("chart.png")
-    plt.show()
+    # plt.show()
 
 
 def main() -> int:
