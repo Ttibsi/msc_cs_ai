@@ -67,3 +67,25 @@ Algorithms
 
 Title 
 Utilising machine learning techniques to analyse the impact agricultural schemes have on the insect population across environments in the UK
+
+--- 
+Part 4
+1. Present your findings in a clear and concise manner.
+2. Discuss your results in the context of the selected optimisation/search algorithm and supervised/unsupervised learning technique.
+3. Discuss how these results can help the NGO to justify further research into the use of AI in this area.
+4. Your arguments should also be supported by the relevant literature.
+
+Findings:
+    Steadily increasing over time
+    Mostly lower than the mean with some outliers
+    This iteration was found to be on average closest to the real data we have
+        Need to include the mask and explain how it's impacted the data
+
+Context:
+    Talk aabout how this doesn't give the traditional linear regression shape
+        likely reason: data isn't linear, showing the other columns aren't good indicators
+    hill walking the right approach to filtering
+    polynomial regression did not give as much info as expected
+        for future approach, redesign what we do so we can instead find which
+        single IV is the better indicator
+
