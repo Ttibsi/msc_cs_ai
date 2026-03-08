@@ -89,3 +89,12 @@ Context:
         for future approach, redesign what we do so we can instead find which
         single IV is the better indicator
 
+---
+Predicted points per section (total in brackets)
+Exec summary (10): 7
+Intro (10):  7-8
+Literature review (20): 14
+Research design (20): 14-15
+Results/Analysis (20): 
+Conclusion (10): 6
+Academic best practice (10): 7

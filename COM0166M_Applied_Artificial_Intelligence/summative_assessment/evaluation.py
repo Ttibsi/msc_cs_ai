@@ -111,7 +111,7 @@ def draw_line_graph(data: list[Datum], mask: tuple[int, ...]):
 
     plt.legend()
     plt.savefig("chart.png")
-    # plt.show()
+    plt.show()
 
 
 def main() -> int:
