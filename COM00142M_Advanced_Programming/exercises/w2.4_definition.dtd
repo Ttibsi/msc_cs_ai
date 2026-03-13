@@ -1,0 +1,8 @@
+<!ELEMENT test_results (students)>
+<!ELEMENT students (student+)>
+<!ELEMENT student (result+)>
+    <!ATTLIST student id #CDATA>
+    <!ATTLIST student name #CDATA>
+<!ELEMENT result (int)>
+    <!ATTLIST result class #CDATA>
+    <!ATTLIST result type #CDATA>
