@@ -18,6 +18,8 @@ class Person(NamedTuple):
     company: str
     updated: datetime.date
 
+    def __repr__(self) -> str:
+        return f"{str(self.updated)} {self.given_names} {self.surname}"
 
 def get_title_enum(titleStr: str) -> Title | None:
     if not titleStr:
@@ -33,6 +35,9 @@ def get_title_enum(titleStr: str) -> Title | None:
 
 def date_to_obj(dateStr: str) -> datetime.date:
     return datetime.datetime.strptime(dateStr, "%d/%m/%Y").date()
+
+def sort_data(data: list[Person]) -> None:
+    data.sort(key=lambda x: x.updated)
 
 def main() -> int:
     with open("PeopleTrainingDate.csv", "r") as f:
@@ -52,6 +57,7 @@ def main() -> int:
             date_to_obj(elems[-1])
         ))
 
+    sort_data(data)
     print(data[0])
     return 0
 
