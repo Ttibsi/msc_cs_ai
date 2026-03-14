@@ -85,3 +85,22 @@ Assertions can throw exceptions as well, useful for checking the state of the co
 Regular expression (regex for short) are patterns of characters that describe how
 to match any other pattern of characters within a string
 Regex can be compiled to speed up the usage of the regex if it's used in multiple locations
+
+### Lesson 6 - Parsing
+Analysing a string to resolve it into logical syntactical components
+
+### Lesson 7 - Databases
+high-access databases tend to require dedicated hardware infra to manage range/load
+This is a database server
+THe ability to scale is one of the reasons for a database's success
+
+Types of DB:
+- relational - designed as a set of tables and their relationships
+- document-oriented - modelled as a collection of files with different contents
+- object-oriented - a collection of objects with hierarchical structures
+
+Databases can also be distributed, shared across multiple machines
+relational databases tend to be queryable with SQL Structured Query Language
+
+The only open source popular object oriented database is `Db40`. Most of the common features
+in object oriented DBs have been replicated in relational databases
