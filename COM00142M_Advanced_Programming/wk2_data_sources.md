@@ -66,3 +66,17 @@ Relative path - path to a file from the current position in the path
 
 Reading from a file - use `open()` and `read()`/`readlines()`
 Writing to a file - use `write()`
+
+### Lesson 4 - Exception handling
+Two types of errors
+ - syntax
+ - execution/runtime
+
+Exceptions can be caught with `try...catch` blocks
+You can also add an 'else' block that triggers if no exception is thrown
+There's also a 'finally' keyword that runs for cleanup code, weather an error occurs or not
+
+Exceptions can be reraised by the user.
+
+User-defined exceptions can be added with a class that extends the `Exception` type
+Assertions can throw exceptions as well, useful for checking the state of the code
