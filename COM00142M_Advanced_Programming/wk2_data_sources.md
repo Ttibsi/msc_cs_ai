@@ -59,3 +59,10 @@ DTD files will define the attributes and values in a tag
 
 YAML
 - Created in 2001
+
+### Lesson 3 - File IO
+Absolute path - the path to a file using the whole file structure, starting at the drive root.
+Relative path - path to a file from the current position in the path
+
+Reading from a file - use `open()` and `read()`/`readlines()`
+Writing to a file - use `write()`
