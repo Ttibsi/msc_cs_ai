@@ -80,3 +80,8 @@ Exceptions can be reraised by the user.
 
 User-defined exceptions can be added with a class that extends the `Exception` type
 Assertions can throw exceptions as well, useful for checking the state of the code
+
+### Lesson 5 - Regular Expressions
+Regular expression (regex for short) are patterns of characters that describe how
+to match any other pattern of characters within a string
+Regex can be compiled to speed up the usage of the regex if it's used in multiple locations
