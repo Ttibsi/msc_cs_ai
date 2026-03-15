@@ -9,9 +9,9 @@
 ### Lesson 1 - Arithmetic expressions
 Arithmetic expressions - addition, subtraction, multiplication, division, power, brackets
 
-Absolute value (drops negative sign) 
+Absolute value (drops negative sign)
     - uses two bars either side of the value/expression
-    - ex |x| 
+    - ex |x|
 
 factorial (!)
     - multiply by every value between that and 0
@@ -32,3 +32,37 @@ Reciprocal of x is 1/x
     - Reciprocal of a fraction is just to flip the fraction
     - Reciprocal of a negative is also negative
 
+### Lesson 2 - Sets and Probability
+A set is a group of values that share a property.
+    - EG: engineers may study all components from a production run that fail to meet a certain tolerance
+
+If a set is contained completely in another set, we say one set is a _subset_ of the other.
+"element" symbol used when an element belongs to a set (funky E symbol)
+An empty set is notated with an O with a strike through it
+Sets with overlaps can be represented with a venn diagram
+
+A' (A with an apostrophe) denotes all the elements not in set A that are in the "universal" set
+    (universal set is sometimes denoted as S)
+
+The intersection between two sets are denoted with an arch/'n' character, ex `AnB`
+The union of two sets (two sets combined) are denoted with a 'u' character (upside down arch)
+    ex `AuB`
+
+Set difference (elements in A that aren't in B) is usually written as `A \ B`
+    This can also be written as `A - B`
+
+AuB = ABCDEFH
+BnC = F
+An(BuC) = ACDEF
+AnBnC = F
+Bu(AnC) = F
+
+a = 0,1,2,3,4,8
+b = 1,3,5,7,9
+c = 0,1,2,3,4,5,7,8,9
+d = 1,3
+e = 0,2,4,5,6,7,8,9
+f = 1,3
+g = everything but 6
+h = everything but 0,2,4,8
+i = everything but 1,5,7,9
