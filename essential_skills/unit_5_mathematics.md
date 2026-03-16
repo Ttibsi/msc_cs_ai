@@ -66,3 +66,17 @@ f = 1,3
 g = everything but 6
 h = everything but 0,2,4,8
 i = everything but 1,5,7,9
+
+### Lesson 3 - Probability
+Probability is the study of uncertainty, dealing with situations where chance is involved
+
+Probability can be seen in:
+- Algorithm Design - for sorting data, detecting problems, and predicting user behaviour
+- Machine Learning - to model uncertainty, variability, and noise in ML algorithms.
+- Probabilistic Programming Languages - PPLS allow programmers to work at a higher level of
+    abstraction
+- Probability Distributions - Can calculate confidence intervals for parameters and critical
+    regions for hypothesis tests
+
+Mutually exclusive events - events that can't happen at the same time
+    ex tossing a coin: heads and tails are mutually exclusive
