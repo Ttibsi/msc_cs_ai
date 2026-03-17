@@ -80,3 +80,35 @@ Probability can be seen in:
 
 Mutually exclusive events - events that can't happen at the same time
     ex tossing a coin: heads and tails are mutually exclusive
+
+### Lesson 4 - Logic and Proofs
+logic are the rules of mathematics, such as "There exists an integer that is not the sum of
+two squares"
+
+Proofs are used to verify that computer programs produce the correct output.
+There are programming languages that can be used to design proofs.
+
+A proposition is a sentence that declares a fact which is either true or false but not both
+
+A truth table can be used to show the combination of two propositions P and Q.
+This is called a conjunction, using the ^ symbol
+ex an AND table
+
+0 ^ 0 = 0
+0 ^ 1 = 0
+1 ^ 0 = 0
+1 ^ 1 = 1
+
+A disjunction is an "or", using the v symbol
+0 v 0 = 0
+0 v 1 = 1
+1 v 0 = 1
+1 v 1 = 1
+
+Propositions use the format "if P then Q. Therefore if Q is false then P is false"
+Some propositions can't be proven because we don't have enough information
+    - ex it could be true some of the time but not all of the time.
+    This is not a proposition
+
+Implication smbol is `=>`. This is the denotion of "if P then Q"
+    `p => q`
