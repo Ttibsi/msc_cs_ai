@@ -112,3 +112,12 @@ Some propositions can't be proven because we don't have enough information
 
 Implication smbol is `=>`. This is the denotion of "if P then Q"
     `p => q`
+
+Biconditional statements are true with both sides carry the same truth value and are
+false otherwise. Sometimes called "iff"
+    ex - `p <=> q`
+    or - `p iff q`
+    or `(p => q) ^ (q => p)`
+
+Exercise:
+Smartphone B's ram > A or C's ram therefore A and C are both less than B
