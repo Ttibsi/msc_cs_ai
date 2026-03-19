@@ -121,3 +121,18 @@ false otherwise. Sometimes called "iff"
 
 Exercise:
 Smartphone B's ram > A or C's ram therefore A and C are both less than B
+
+### Lesson 5 - Series
+When each sequence member is already a sum and each further sequence member adds
+something to the sum, this is a series.
+
+Series are used in:
+Data structures - linked lists and arrays are examples
+Sortin/Searching algorithms
+Sequence numbers
+
+Elements in a sequence can be calculated by using previous elements
+    ex fibonacci sequence
+
+Discrete variable - a variable that can only take specific values.
+EX weight in KG.
