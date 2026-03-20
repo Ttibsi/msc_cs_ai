@@ -8,7 +8,7 @@ def main() -> int:
     print(f"bleak: {bool(re.search(r'[bB]leak', text))}")
     print(f"pp count: {len(re.findall(r'[pP]{2}', text))}")
     print(re.sub(f"!", "#", text))
-    print(f"t..e count: {len(re.findall(r'\s[tT]\w+[eE]\s', text))}")
+    print(f"t..!e count: {len(re.findall(r'\b[tT][^eE]+\b', text))}")
     return 0 
 
 if __name__ == "__main__":
