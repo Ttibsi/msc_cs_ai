@@ -26,3 +26,11 @@ Making a cup of tea - event driven process:
     * event: append sugar to contents of mug
 * Add hot water to mug
     * event: append water to contents of mug
+
+### Lesson 2 - Formal tools
+UML diagrams - a range of tools and frameworks to enable system analysis and specification.
+
+State diagram
+- Shows the state changes between each interaction
+- larger systems can be broken down into multiple state diagrams.
+- UML is more flexible by design
