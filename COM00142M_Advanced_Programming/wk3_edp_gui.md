@@ -34,3 +34,25 @@ State diagram
 - Shows the state changes between each interaction
 - larger systems can be broken down into multiple state diagrams.
 - UML is more flexible by design
+
+### Lesson 3 - Closures and Lambda expressions
+Closure - a state that can be generated.
+    - a stored function that has its initial environment stored within it.
+
+To have a closure, a language must have first-class functions
+The `nonlocal` keyword allows you to access a var from an outer function in an inner function
+
+```py
+def outer():
+    x = 0
+    def inner():
+        # nonlocal x
+        x += 1
+        print(x)
+    inner()
+outer()
+```
+
+The above crashes if you don't have the `nonlocal` call where it's currently commented out
+
+Lambdas are anonymous functions that can take any number of arguments
