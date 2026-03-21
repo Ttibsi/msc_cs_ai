@@ -109,3 +109,34 @@ For programmers, GUI dev can be a source of difficulty from the design aspects
 
 One of the best ways to understand how effective a GUI is can be to perform user testing
 Tests can be of a variety of types: observing users, users completing evaluation forms
+
+### Lesson 5 - Tkinter for GUIs in python
+Tkinter is a first-party library, which is why we're learning it
+Containers are widgets specifically designed to hold other widgets
+    - the window is a container
+    - Another example is a "Frame"
+
+```py
+# Frame example
+In [43]: from tkinter import *
+In [44]: window = Tk()
+In [45]: window.title("Main Frame")
+Out[45]: ''
+In [46]: window.geometry("300x100")
+Out[46]: ''
+In [47]: left = Frame(borderwidth=5)
+In [48]: text = Label(left, text="Hello World")
+In [49]: button1 = Button(left, text='Press Me!')
+In [50]: left.pack(side='left')
+In [50]: button1.pack()
+In [51]: text.pack()
+In [52]: window.mainloop()
+```
+
+Other examples include `ttk.LabelFrame`, `ttk.NoteBook`, `tkinter.PanedWindow`
+
+Layout managers
+- `pack()`
+- `grid()` - uses an underlying grid system
+- `place()` - place the element at a given xy coordinate on the window
+
