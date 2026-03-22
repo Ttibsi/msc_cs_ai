@@ -151,3 +151,17 @@ ttk.Style().configure("TButton", foreground="SteelBlue", background="LightGray")
 
 Themes can also be built from a number of styles
 Canvas components allow for freeform drawing of colours, shapes and images.
+
+### Lesson 6 - Implementing Interaction
+Each widget in tkinter can generate an event that is associated with it, that
+can be tied to an event handler to trigger some logic.
+For example, a button can have an event handler to trigger some logic when the button
+is presssed
+
+```py
+def get_def():
+    ...
+ttk.Button(window, text="GET", width=6, command=get_def)
+```
+
+A callback can be bound to a widget with the `.bind()` method
