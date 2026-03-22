@@ -165,3 +165,21 @@ ttk.Button(window, text="GET", width=6, command=get_def)
 ```
 
 A callback can be bound to a widget with the `.bind()` method
+
+### Lesson 7 - Other Event driven Context
+- Client server architecture
+    - requests are "events"
+- IOT
+    - They usually have a central "hub" machine that communicates with each device
+    separately
+
+In the context of read/write access to a shared pool of documents, one issue that may arise
+would involve multiple users trying to write to the same file at the same time - an issue
+known as a race condition. This is a well-known issue in computer science, and is most
+commonly resolved by enforcing write operations to be atomic, or using queue of actions
+to write to the file in a specific order. While there are benefits to this, the clearest
+downside is that some content will be overwritten if person A is saving changes at the same
+time as person B saving different changes. This could be mitigated by instead defining a
+file as a series of changes, such as git diffs or using a Piece Table data structure as part
+of your file format.
+
