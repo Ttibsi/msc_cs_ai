@@ -140,3 +140,14 @@ Layout managers
 - `grid()` - uses an underlying grid system
 - `place()` - place the element at a given xy coordinate on the window
 
+Styling
+- Two forms of styling - `tk` and `ttk` objects each have their own approach
+- `tk` objects use kwargs such as `fg` and `bg`
+- `ttk` objects use string tags for extra flexibility
+
+```py
+ttk.Style().configure("TButton", foreground="SteelBlue", background="LightGray")
+```
+
+Themes can also be built from a number of styles
+Canvas components allow for freeform drawing of colours, shapes and images.
