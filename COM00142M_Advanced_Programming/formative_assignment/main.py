@@ -1,29 +1,47 @@
 import os
 import sqlite3
-import string
+import tkinter
+from tkinter import ttk
 
-import flask
-
-app = flask.Flask(__name__)
-
-homepage: string.Template = string.Template("""
-<!doctype HTML>
-<head>
-    <style>
-        body {
-            background-color: #181818;
-        }
-    </style>
-    <title>CSV Parser</title>
-</head>
-<body>
-    <form method=post enctype=multipart/form-data>
-        <input type=file name=file>
-        <input type=submit value=Upload>
-    </form>
-</body>
-""")
-
+ANTENNAS_HEADERS: list[str] = [
+    "id", "NGR", "LongitudeLatitude", "Site_Height", "In", "In",
+    "Dir_Max_ERP", "0", "10", "20", "30", "40", "50", "60", "70",
+    "80", "90", "100", "110", "120", "130", "140", "150", "160",
+    "170", "180", "190", "200", "210", "220", "230", "240", "250",
+    "260", "270", "280", "290", "300", "310", "320", "330", "340",
+    "350", "Lat", "Long",
+]
+PARAMS_HEADERS: list[str] = [
+    "id", "Date", "Ensemble", "Licence", "Ensemble_Area", "EID" "Transmitter_Area",
+    "Site", "Freq" "Block", "TII_Main_Id_(Hex)", "TII_Sub_Id_(Hex)", "Serv_Label1",
+    "SId_1_(Hex)", "LSN_1_(Hex)", "Serv_Label2", "SId_2_(Hex)", "LSN_2_(Hex)",
+    "Serv_Label3", "SId_3_(Hex)", "LSN_3_(Hex)", "Serv_Label4", "SId_4_(Hex)",
+    "LSN_4_(Hex)", "Serv_Label5", "SId_5_(Hex)", "LSN_5_(Hex)", "Serv_Label6",
+    "SId_6_(Hex)", "LSN_6_(Hex)", "Serv_Label7", "SId_7_(Hex)", "LSN_7_(Hex)",
+    "Serv_Label8", "SId_8_(Hex)", "LSN_8_(Hex)", "Serv_Label9", "SId_9_(Hex)",
+    "LSN_9_(Hex)", "Serv_Label10", "SId_10_(Hex)", "LSN_10_(Hex)", "Serv_Label11",
+    "SId_11_(Hex)", "LSN_11_(Hex)", "Serv_Label12", "SId_12_(Hex)", "LSN_12_(Hex)",
+    "Serv_Label13", "SId_13_(Hex)", "LSN_13_(Hex)", "Serv_Label14", "SId_14_(Hex)",
+    "LSN_14_(Hex)", "Serv_Label15", "SId_15_(Hex)", "LSN_15_(Hex)", "Serv_Label16",
+    "SId_16_(Hex)", "LSN_16_(Hex)", "Serv_Label17", "SId_17_(Hex)", "LSN_17_(Hex)",
+    "Serv_Label18", "SId_18_(Hex)", "LSN_18_(Hex)", "Serv_Label19", "SId_19_(Hex)",
+    "LSN_19_(Hex)", "Serv_Label20", "SId_20_(Hex)", "LSN_20_(Hex)", "Serv_Label21",
+    "SId_21_(Hex)", "LSN_21_(Hex)", "Serv_Label22", "SId_22_(Hex)", "LSN_22_(Hex)",
+    "Serv_Label23", "SId_23_(Hex)", "LSN_23_(Hex)", "Serv_Label24", "SId_24_(Hex)",
+    "LSN_24_(Hex)", "Serv_Label25", "SId_25_(Hex)", "LSN_25_(Hex)", "Serv_Label26",
+    "SId_26_(Hex)", "LSN_26_(Hex)", "Serv_Label27", "SId_27_(Hex)", "LSN_27_(Hex)",
+    "Serv_Label28", "SId_28_(Hex)", "LSN_28_(Hex)", "Serv_Label29", "SId_29_(Hex)",
+    "LSN_29_(Hex)", "Serv_Label30", "SId_30_(Hex)", "LSN_30_(Hex)", "Serv_Label31",
+    "SId_31_(Hex)", "LSN_31_(Hex)", "Serv_Label32", "SId_32_(Hex)", "LSN_32_(Hex)",
+    "Data_Serv_Label1", "Data_SId_1_(Hex)", "Data_Serv_Label2", "Data_SId_2_(Hex)",
+    "Data_Serv_Label3", "Data_SId_3_(Hex)", "Data_Serv_Label4", "Data_SId_4_(Hex)",
+    "Data_Serv_Label5", "Data_SId_5_(Hex)", "Data_Serv_Label6", "Data_SId_6_(Hex)",
+    "Data_Serv_Label7", "Data_SId_7_(Hex)", "Data_Serv_Label8", "Data_SId_8_(Hex)",
+    "Data_Serv_Label9", "Data_SId_9_(Hex)", "Data_Serv_Label10", "Data_SId_10_(Hex)",
+    "Data_Serv_Label11", "Data_SId_11_(Hex)", "Data_Serv_Label12", "Data_SId_12_(Hex)",
+    "Data_Serv_Label13", "Data_SId_13_(Hex)", "Data_Serv_Label14", "Data_SId_14_(Hex)",
+    "Data_Serv_Label15", "Data_SId_15_(Hex)",
+]
 
 def db_exists() -> bool:
     return os.path.isfile("db.db")
@@ -33,12 +51,11 @@ def setup_db():
     conn = sqlite3.connect("db.db")
     cur = conn.cursor()
 
-    # TODO
     cur.execute("""
         CREATE TABLE antenna(
             id INTEGER NOT NULL UNIQUE,
             NGR	TEXT,
-            Longitude/Latitude TEXT,
+            LongitudeLatitude TEXT,
             Site_Height INTEGER DEFAULT 0,
             In-Use_Ae_Ht INTEGER DEFAULT 0,
             In-Use_ERP_Total INTEGER DEFAULT 0,
@@ -227,36 +244,87 @@ def setup_db():
         );
     """)
 
+def get_params_table() -> list[list[str]]:
+    ...
 
-def parse_file(text: list[str], filename: str):
-    if not text:
+def get_antennas_table() -> list[list[str]]:
+    ...
+
+def parse_file(filename: str):
+    with open(filename) as f:
+        lines = f.readlines()
+
+    headers = lines[0].split(",")
+    if headers[1] == ANTENNAS_HEADERS[1]:
+        # parse as antennas
+    elif headers[1] == PARAMS_HEADERS[1]:
+        # parse as params
+    else:
         return
-    headers = text[0]
-
-    for line in text[1:]:
-        ...
 
 
-@app.route("/antenna")
-def antenna():
+def upload_file():
+    file_path = filedialog.askopenfilename()
+    if file_path:
+        parse_file(file_path)
+
+def save():
     ...
 
-
-@app.route("/params")
-def params():
+def modify_row():
     ...
 
+def build_table(frame: ttk.Frame, cols: list[str], query_func):
+    table = ttk.Treeview(frame)
+    table["columns"] = cols
+    table.tag_configure('oddrow', background='#E8E8E8')
+    table.tag_configure('evenrow', background='#FFFFFF')
 
-@app.route("/", methods=["GET", "POST"])
-def index():
+    table.column('#0', width=0, stretch=tk.NO)
+    table.heading('#0', text='', anchor=tk.W)
+
+    for col in cols:
+        table.column(col, anchor=tk.W, width=150)
+        table.heading(col, text=col, anchor=tk.W)
+
+    for idx, row in enumerate(query_func()):
+        table.insert(
+            parent='',
+            index=1, 
+            values=row,
+            tags=("oddrow") if idx % 2 else ("evenrow")
+        )
+
+    return table
+
+
+def main() -> int:
     if not db_exists():
         setup_db()
 
-    if flask.request.method == "POST":
-        f = flask.request.files["file"]
-        text = [line.decode("utf-8") for line in f]
-        parse_file(text, f.filename)
-        return "<p>thx</p>"
-    else:
-        return homepage.substitute()
+    win = tkinter.Tk()
+    win.title("Window")
+    win.geometry("980x540")
 
+    # TODO: 45% width each, 80% height
+    lhs_frame = ttk.Frame(win, borderwidth=1).grid(row=0, column=0, columnspan=2)
+    build_table(lhs_frame, ANTENNAS_HEADERS, get_antennas_table)
+    rhs_frame = ttk.Frame(win, borderwidth=1).grid(row=0, column=3, columnspan=2)
+    build_table(rhs_frame, PARAMS_HEADERS, get_params_table)
+
+    upload_btn = tkinter.Button(win, text="Upload File", command=upload_file).grid(row=1, column=0)
+    save_btn = tkinter.Button(win, text="Save", command=save).grid(row=1, column=2)
+    modify_btn = tkinter.Button(win, text="Modify", command=modify_row).grid(row=1, column=4)
+
+    win.grid_columnconfigure(0, weight=1)
+    win.grid_columnconfigure(1, weight=1)
+    win.grid_columnconfigure(2, weight=1)
+    win.grid_columnconfigure(3, weight=1)
+    win.grid_columnconfigure(4, weight=1)
+    win.grid_columnconfigure(5, weight=1)
+
+    win.mainloop()
+    return 0
+
+if __name__ == "__main__":
+    raise SystemExit(main())
