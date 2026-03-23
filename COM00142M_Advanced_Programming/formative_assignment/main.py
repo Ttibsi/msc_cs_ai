@@ -1,7 +1,9 @@
 import os
 import sqlite3
 import tkinter
+from tkinter import filedialog
 from tkinter import ttk
+from typing import Callable
 
 ANTENNAS_HEADERS: list[str] = [
     "id", "NGR", "LongitudeLatitude", "Site_Height", "In", "In",
@@ -43,11 +45,12 @@ PARAMS_HEADERS: list[str] = [
     "Data_Serv_Label15", "Data_SId_15_(Hex)",
 ]
 
+
 def db_exists() -> bool:
     return os.path.isfile("db.db")
 
 
-def setup_db():
+def setup_db() -> None:
     conn = sqlite3.connect("db.db")
     cur = conn.cursor()
 
@@ -244,53 +247,87 @@ def setup_db():
         );
     """)
 
+    cur.close()
+
+
 def get_params_table() -> list[list[str]]:
-    ...
+    conn = sqlite3.connect("db.db")
+    cur = conn.cursor()
+    res = cur.execute("SELECT * FROM params;")
+    return res.fetchall()
+
 
 def get_antennas_table() -> list[list[str]]:
-    ...
+    conn = sqlite3.connect("db.db")
+    cur = conn.cursor()
+    res = cur.execute("SELECT * FROM antenna;")
+    return res.fetchall()
 
-def parse_file(filename: str):
+
+def parse_file(filename: str) -> None:
     with open(filename) as f:
         lines = f.readlines()
 
+    conn = sqlite3.connect("db.db")
+    cur = conn.cursor()
+
     headers = lines[0].split(",")
+    broken_lines = [x.split(",") for x in lines[1:]]
+
     if headers[1] == ANTENNAS_HEADERS[1]:
-        # parse as antennas
+        cur.executemany(
+            f"INSERT INTO antenna VALUES({'?,' * (len(broken_lines) - 1)} ?);",
+            broken_lines
+        )
+
     elif headers[1] == PARAMS_HEADERS[1]:
-        # parse as params
+        cur.executemany(
+            f"INSERT INTO params VALUES({'?,' * (len(broken_lines) - 1)} ?);",
+            broken_lines
+        )
     else:
+        conn.close()
         return
 
+    conn.close()
 
-def upload_file():
+
+def upload_file() -> None:
     file_path = filedialog.askopenfilename()
     if file_path:
         parse_file(file_path)
 
+
 def save():
     ...
 
-def modify_row():
-    ...
 
-def build_table(frame: ttk.Frame, cols: list[str], query_func):
+def modify_row(win: tkinter.Tk, data: tuple[str, ...]) -> None:
+    popup = tkinter.Toplevel(win)
+    popup.title("Modify row")
+
+
+def build_table(
+    frame: ttk.Frame,
+    cols: list[str],
+    query_func: Callable[[], list[list[str]]]
+) -> ttk.Treeview:
     table = ttk.Treeview(frame)
     table["columns"] = cols
     table.tag_configure('oddrow', background='#E8E8E8')
     table.tag_configure('evenrow', background='#FFFFFF')
 
-    table.column('#0', width=0, stretch=tk.NO)
-    table.heading('#0', text='', anchor=tk.W)
+    table.column('#0', width=0, stretch=tkinter.NO)
+    table.heading('#0', text='', anchor=tkinter.W)
 
     for col in cols:
-        table.column(col, anchor=tk.W, width=150)
-        table.heading(col, text=col, anchor=tk.W)
+        table.column(col, anchor=tkinter.W, width=150)
+        table.heading(col, text=col, anchor=tkinter.W)
 
     for idx, row in enumerate(query_func()):
         table.insert(
             parent='',
-            index=1, 
+            index=1,
             values=row,
             tags=("oddrow") if idx % 2 else ("evenrow")
         )
@@ -307,24 +344,27 @@ def main() -> int:
     win.geometry("980x540")
 
     # TODO: 45% width each, 80% height
-    lhs_frame = ttk.Frame(win, borderwidth=1).grid(row=0, column=0, columnspan=2)
+    lhs_frame = ttk.Frame(win, borderwidth=1)
+    lhs_frame.grid(row=0, column=0, columnspan=2)
     build_table(lhs_frame, ANTENNAS_HEADERS, get_antennas_table)
-    rhs_frame = ttk.Frame(win, borderwidth=1).grid(row=0, column=3, columnspan=2)
+
+    rhs_frame = ttk.Frame(win, borderwidth=1)
+    rhs_frame.grid(row=0, column=3, columnspan=2)
     build_table(rhs_frame, PARAMS_HEADERS, get_params_table)
 
-    upload_btn = tkinter.Button(win, text="Upload File", command=upload_file).grid(row=1, column=0)
-    save_btn = tkinter.Button(win, text="Save", command=save).grid(row=1, column=2)
-    modify_btn = tkinter.Button(win, text="Modify", command=modify_row).grid(row=1, column=4)
+    upload_btn = tkinter.Button(
+        win, text="Upload File", command=upload_file).grid(row=1, column=0)
+    save_btn = tkinter.Button(
+        win, text="Save", command=save).grid(row=1, column=2)
+    modify_btn = tkinter.Button(
+        win, text="Modify", command="modify_row").grid(row=1, column=4)
 
-    win.grid_columnconfigure(0, weight=1)
-    win.grid_columnconfigure(1, weight=1)
-    win.grid_columnconfigure(2, weight=1)
-    win.grid_columnconfigure(3, weight=1)
-    win.grid_columnconfigure(4, weight=1)
-    win.grid_columnconfigure(5, weight=1)
+    for i in range(0, 6):
+        win.grid_columnconfigure(i, weight=1)
 
     win.mainloop()
     return 0
+
 
 if __name__ == "__main__":
     raise SystemExit(main())
