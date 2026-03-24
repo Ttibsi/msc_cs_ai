@@ -1,3 +1,4 @@
+import csv
 import os
 import sqlite3
 import tkinter
@@ -144,36 +145,40 @@ def get_params_table() -> list[list[str]]:
 def get_antennas_table() -> list[list[str]]:
     conn = sqlite3.connect("db.db")
     cur = conn.cursor()
-    # res = cur.execute("SELECT * FROM antenna;")
-    # return res.fetchall()
-    return []
+    res = cur.execute("SELECT * FROM antenna;")
+    return res.fetchall()
 
 
 def parse_file(filename: str) -> None:
-    with open(filename) as f:
-        lines = f.readlines()
+    try:
+        with open(filename) as f:
+            lines = list(csv.reader(f, delimiter=',', quotechar='"'))
+    except UnicodeDecodeError:
+        tkinter.messagebox.showerror(
+            "Invalid",
+            "Invalid file encoding uploaded. Provided file is not utf-8 compliant."
+        )
+
+        return;
 
     conn = sqlite3.connect("db.db")
     cur = conn.cursor()
 
-    headers = lines[0].split(",")
-    broken_lines = [x.split(",") for x in lines[1:]]
+    headers = lines[0]
 
     if headers[1] == ANTENNAS_HEADERS[1]:
         cur.executemany(
-            f"INSERT INTO antenna VALUES({'?,' * (len(broken_lines) - 1)} ?);",
-            broken_lines
+            f"INSERT INTO antenna VALUES({'?,' * (len(headers) - 1)} ?);",
+            lines[1:]
         )
 
     elif headers[1] == PARAMS_HEADERS[1]:
         cur.executemany(
-            f"INSERT INTO params VALUES({'?,' * (len(broken_lines) - 1)} ?);",
-            broken_lines
+            f"INSERT INTO params VALUES({'?,' * (len(headers) - 1)} ?);",
+            lines[1:]
         )
-    else:
-        conn.close()
-        return
 
+    conn.commit()
     conn.close()
 
 
