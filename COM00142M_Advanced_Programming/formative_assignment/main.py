@@ -213,6 +213,7 @@ def build_table(
             tags=("oddrow") if idx % 2 else ("evenrow")
         )
 
+    table.pack(expand=True, fill=tkinter.BOTH)
     return table
 
 
@@ -242,22 +243,18 @@ def main() -> int:
     win.title("Window")
     win.geometry("980x540")
 
-    # TODO: 45% width each, 80% height
     lhs_frame = ttk.Frame(win, borderwidth=1)
-    lhs_frame.grid(row=0, column=0)
-    build_table(lhs_frame, ANTENNAS_HEADERS, get_antennas_table)
+    lhs_frame.place(relx=0.05, rely=0.01, relwidth=0.4, relheight=0.75)
+    lhs_tbl = build_table(lhs_frame, ANTENNAS_HEADERS, get_antennas_table)
 
     rhs_frame = ttk.Frame(win, borderwidth=1)
-    rhs_frame.grid(row=0, column=1)
-    build_table(rhs_frame, PARAMS_HEADERS, get_params_table)
+    rhs_frame.place(relx = 0.55, rely=0.01, relwidth=0.4, relheight=0.75)
+    rhs_tbl = build_table(rhs_frame, PARAMS_HEADERS, get_params_table)
 
-    upload_btn = tkinter.Button(
-        win, text="Upload File", command=upload_file).grid(row=1, column=0)
-    modify_btn = tkinter.Button(
-        win, text="Modify", command="modify_row").grid(row=1, column=1)
-
-    win.grid_columnconfigure(0, weight=1)
-    win.grid_columnconfigure(1, weight=1)
+    upload_btn = tkinter.Button(win, text="Upload File", command=upload_file)
+    upload_btn.place(relx=0.2, rely=0.8)
+    modify_btn = tkinter.Button(win, text="Modify", command="modify_row")
+    modify_btn.place(relx=0.75, rely=0.8)
 
     win.mainloop()
     return 0
