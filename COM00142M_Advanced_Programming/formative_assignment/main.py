@@ -228,16 +228,28 @@ def main() -> int:
         ...
 
     def modify_row() -> None:
-        nonlocal win
+        nonlocal lhs_tbl
+        nonlocal rhs_tbl
         popup = tkinter.Toplevel(win)
         popup.title("Modify row")
 
-        for idx, row in enumerate(selected_frame):
-            tkinter.Label(popup, row).grid(row=idx, col=0)
-            tkinter.Text(popup).grid(row=idx, col=1)
+        # Stores the index of the selected row
+        selected_row = lhs_tbl.focus()
+        values = lhs_tbl.item(selected_row, "values")
+        headers = ANTENNAS_HEADERS
+        if values is None:
+            selected_row = rhs_tbl.focus()
+            values = rhs_tbl.item(selected_row, "values")
+            headers = PARAMS_HEADERS
+
+        header_val_pairs = list(zip(headers, values))
+        for idx, val in enumerate(header_val_pairs):
+            tkinter.Label(popup, text=val[0]).grid(row=idx, column=0)
+            entry = tkinter.Entry(popup)
+            entry.grid(row=idx, column=1)
+            entry.insert(0, val[0])
 
         tkinter.Button(popup, text="Submit Changes", command=submit_changes).grid(sticky="NSEW")
-
 
     win = tkinter.Tk()
     win.title("Window")
@@ -253,7 +265,7 @@ def main() -> int:
 
     upload_btn = tkinter.Button(win, text="Upload File", command=upload_file)
     upload_btn.place(relx=0.2, rely=0.8)
-    modify_btn = tkinter.Button(win, text="Modify", command="modify_row")
+    modify_btn = tkinter.Button(win, text="Modify", command=modify_row)
     modify_btn.place(relx=0.75, rely=0.8)
 
     win.mainloop()
