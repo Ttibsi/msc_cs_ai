@@ -217,19 +217,38 @@ def build_table(
     return table
 
 
-def _submit_changes():
-    ...
-
 def main() -> int:
     if not db_exists():
         setup_db()
 
+    selected_table = ""
+    entries = []
+
     def submit_changes():
-        ...
+        nonlocal selected_table
+        nonlocal entries
+
+        headers = ANTENNAS_HEADERS if selected_table == "antenna" else PARAMS_HEADERS
+        values = [e.get() for e in entries]
+        set_vals = ""
+        for header, value in list(zip(headers[1:], values[1:])):
+            set_vals += f"{header} = \"{value}\""
+            if header != headers[-1]:
+                set_vals += ", "
+
+        conn = sqlite3.connect("db.db")
+        cur = conn.cursor()
+        res = cur.execute(f"UPDATE {selected_table} SET {set_vals} WHERE id = {values[0]};")
+
+        conn.commit()
+        conn.close()
 
     def modify_row() -> None:
         nonlocal lhs_tbl
         nonlocal rhs_tbl
+        nonlocal selected_table
+        nonlocal entries
+
         popup = tkinter.Toplevel(win)
         popup.title("Modify row")
 
@@ -237,17 +256,20 @@ def main() -> int:
         selected_row = lhs_tbl.focus()
         values = lhs_tbl.item(selected_row, "values")
         headers = ANTENNAS_HEADERS
+        selected_table = "antenna"
         if values is None:
             selected_row = rhs_tbl.focus()
             values = rhs_tbl.item(selected_row, "values")
             headers = PARAMS_HEADERS
+            selected_table = "params"
 
         header_val_pairs = list(zip(headers, values))
         for idx, val in enumerate(header_val_pairs):
             tkinter.Label(popup, text=val[0]).grid(row=idx, column=0)
             entry = tkinter.Entry(popup)
             entry.grid(row=idx, column=1)
-            entry.insert(0, val[0])
+            entry.insert(0, val[1])
+            entries.append(entry)
 
         tkinter.Button(popup, text="Submit Changes", command=submit_changes).grid(sticky="NSEW")
 
