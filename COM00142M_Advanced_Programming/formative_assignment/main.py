@@ -227,6 +227,10 @@ def main() -> int:
     def submit_changes():
         nonlocal selected_table
         nonlocal entries
+        nonlocal lhs_frame
+        nonlocal rhs_frame
+        nonlocal lhs_tbl
+        nonlocal rhs_tbl
 
         headers = ANTENNAS_HEADERS if selected_table == "antenna" else PARAMS_HEADERS
         values = [e.get() for e in entries]
@@ -239,10 +243,16 @@ def main() -> int:
         conn = sqlite3.connect("db.db")
         cur = conn.cursor()
         cmd = f"UPDATE {selected_table} SET {set_vals} WHERE id = {values[0]};"
-        print(cmd)
         res = cur.execute(cmd)
 
         conn.commit()
+
+        # refresh table in main window
+        if (selected_table == "antenna"):
+            lhs_tbl = build_table(lhs_frame, ANTENNAS_HEADERS, get_antennas_table)
+        else:
+            rhs_tbl = build_table(rhs_frame, PARAMS_HEADERS, get_params_table)
+
         conn.close()
 
     def modify_row() -> None:
@@ -273,7 +283,7 @@ def main() -> int:
             entry.insert(0, val[1])
             entries.append(entry)
 
-        tkinter.Button(popup, text="Submit Changes", command=submit_changes).grid(sticky="NSEW")
+        tkinter.Button(popup, text="Submit Changes", command=submit_changes).grid(row=0, column=2, sticky="NSEW")
 
     win = tkinter.Tk()
     win.title("Window")
