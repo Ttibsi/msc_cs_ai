@@ -7,12 +7,12 @@ from tkinter import ttk
 from typing import Callable
 
 ANTENNAS_HEADERS: list[str] = [
-    "id", "NGR", "LongitudeLatitude", "Site_Height", "In", "In",
-    "Dir_Max_ERP", "0", "10", "20", "30", "40", "50", "60", "70",
-    "80", "90", "100", "110", "120", "130", "140", "150", "160",
-    "170", "180", "190", "200", "210", "220", "230", "240", "250",
-    "260", "270", "280", "290", "300", "310", "320", "330", "340",
-    "350", "Lat", "Long",
+    "id", "NGR", "LongitudeLatitude", "Site_Height", "In_Use_Ae_Ht",
+    "In_Use_ERP_Total", "Dir_Max_ERP", "0", "10", "20", "30", "40", 
+    "50", "60", "70", "80", "90", "100", "110", "120", "130", "140", 
+    "150", "160", "170", "180", "190", "200", "210", "220", "230",
+    "240", "250", "260", "270", "280", "290", "300", "310", "320", 
+    "330", "340", "350", "Lat", "Long",
 ]
 PARAMS_HEADERS: list[str] = [
     "id", "Date", "Ensemble", "Licence", "Ensemble_Area", "EID" "Transmitter_Area",
@@ -65,7 +65,7 @@ def setup_db() -> None:
             In_Use_ERP_Total INTEGER DEFAULT 0,
             Dir_Max_ERP    INTEGER DEFAULT 0,
             '0'    REAL DEFAULT 0.0, '10' REAL DEFAULT 0.0, '20' REAL DEFAULT 0.0,
-            '30'    REAL DEFAULT 0.0, '4' REAL DEFAULT 0.0, '50' REAL DEFAULT 0.0,
+            '30'    REAL DEFAULT 0.0, '40' REAL DEFAULT 0.0, '50' REAL DEFAULT 0.0,
             '60'    REAL DEFAULT 0.0, '70' REAL DEFAULT 0.0, '80' REAL DEFAULT 0.0,
             '90'    REAL DEFAULT 0.0, '100' REAL DEFAULT 0.0, '110'    REAL DEFAULT 0.0,
             '120'    REAL DEFAULT 0.0, '130' REAL DEFAULT 0.0, '140'    REAL DEFAULT 0.0,
@@ -232,13 +232,15 @@ def main() -> int:
         values = [e.get() for e in entries]
         set_vals = ""
         for header, value in list(zip(headers[1:], values[1:])):
-            set_vals += f"{header} = \"{value}\""
+            set_vals += f"\"{header}\" = \"{value}\""
             if header != headers[-1]:
                 set_vals += ", "
 
         conn = sqlite3.connect("db.db")
         cur = conn.cursor()
-        res = cur.execute(f"UPDATE {selected_table} SET {set_vals} WHERE id = {values[0]};")
+        cmd = f"UPDATE {selected_table} SET {set_vals} WHERE id = {values[0]};"
+        print(cmd)
+        res = cur.execute(cmd)
 
         conn.commit()
         conn.close()
