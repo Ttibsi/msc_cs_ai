@@ -249,8 +249,10 @@ def main() -> int:
 
         # refresh table in main window
         if (selected_table == "antenna"):
+            lhs_tbl.pack_forget()
             lhs_tbl = build_table(lhs_frame, ANTENNAS_HEADERS, get_antennas_table)
         else:
+            rhs_tbl.pack_forget()
             rhs_tbl = build_table(rhs_frame, PARAMS_HEADERS, get_params_table)
 
         conn.close()
