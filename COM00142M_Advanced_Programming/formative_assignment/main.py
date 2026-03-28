@@ -6,6 +6,10 @@ from tkinter import filedialog
 from tkinter import ttk
 from typing import Callable
 
+# A graphical interface for storing, retrieving, and modifying data
+# in the format of two provided CSV files
+
+# Ensure we store a copy of the headers
 ANTENNAS_HEADERS: list[str] = [
     "id", "NGR", "LongitudeLatitude", "Site_Height", "In_Use_Ae_Ht",
     "In_Use_ERP_Total", "Dir_Max_ERP", "0", "10", "20", "30", "40", 
@@ -48,10 +52,12 @@ PARAMS_HEADERS: list[str] = [
 
 
 def db_exists() -> bool:
+    """ Check if the current sqlite database exists """ 
     return os.path.isfile("db.db")
 
 
 def setup_db() -> None:
+    """ Instantiate a sqlite database locally with some "default" tables """
     conn = sqlite3.connect("db.db")
     cur = conn.cursor()
 
@@ -136,6 +142,7 @@ def setup_db() -> None:
 
 
 def get_params_table() -> list[list[str]]:
+    """ Retrieve all from the params table in the sqlite database """
     conn = sqlite3.connect("db.db")
     cur = conn.cursor()
     res = cur.execute("SELECT * FROM params;")
@@ -143,6 +150,7 @@ def get_params_table() -> list[list[str]]:
 
 
 def get_antennas_table() -> list[list[str]]:
+    """ Retrieve all from the antenna table in the sqlite database """
     conn = sqlite3.connect("db.db")
     cur = conn.cursor()
     res = cur.execute("SELECT * FROM antenna;")
@@ -150,6 +158,15 @@ def get_antennas_table() -> list[list[str]]:
 
 
 def parse_file(filename: str) -> None:
+    """ 
+    Parse an uploaded CSV file. If the file isn't valid UTF-8, we instead
+    display an error.
+    """
+
+    # We only accept CSV files
+    if not filename.lower().endswith("csv"):
+        return
+
     try:
         with open(filename) as f:
             lines = list(csv.reader(f, delimiter=',', quotechar='"'))
@@ -164,8 +181,10 @@ def parse_file(filename: str) -> None:
     conn = sqlite3.connect("db.db")
     cur = conn.cursor()
 
+    # Detect which filetype we have from the second column.
+    # the first column has the same name in both files
+    # This way, we can ensure the values get written into the correct table
     headers = lines[0]
-
     if headers[1] == ANTENNAS_HEADERS[1]:
         cur.executemany(
             f"INSERT INTO antenna VALUES({'?,' * (len(headers) - 1)} ?);",
@@ -178,11 +197,13 @@ def parse_file(filename: str) -> None:
             lines[1:]
         )
 
+    # Ensure our changes are committed to the databse
     conn.commit()
     conn.close()
 
 
 def upload_file() -> None:
+    """ Provide a tkinter fileopendialog for the user to upload a file. """
     file_path = filedialog.askopenfilename()
     if file_path:
         parse_file(file_path)
@@ -193,11 +214,26 @@ def build_table(
     cols: list[str],
     query_func: Callable[[], list[list[str]]]
 ) -> ttk.Treeview:
+    """
+    Build a tkinter table from an SQL table for display. 
+    We return the table stored in a Treeview object so as to allow
+    for further manipulation later on in development.
+
+    Params:
+    frame: ttk.Frame - A frame to draw the table inside to control the table's 
+        display size
+    cols: list[str] - The column headers to draw in our table
+    query_func: Callable[[], list[list[str]]] - A function that queries the database 
+        and retrieves data to display. Valid options: `get_params_table`, `get_antennas_table`
+    """
     table = ttk.Treeview(frame)
     table["columns"] = cols
+
+    # Highlighting for better visuals
     table.tag_configure('oddrow', background='#E8E8E8')
     table.tag_configure('evenrow', background='#FFFFFF')
 
+    # Ensure the data stretches to fill the container
     table.column('#0', width=0, stretch=tkinter.NO)
     table.heading('#0', text='', anchor=tkinter.W)
 
@@ -205,6 +241,7 @@ def build_table(
         table.column(col, anchor=tkinter.W, width=150)
         table.heading(col, text=col, anchor=tkinter.W)
 
+    # Fill each row with the values retrieved from the database
     for idx, row in enumerate(query_func()):
         table.insert(
             parent='',
@@ -225,6 +262,7 @@ def main() -> int:
     entries = []
 
     def submit_changes():
+        """ Callback triggered on submitting a modified values form. """
         nonlocal selected_table
         nonlocal entries
         nonlocal lhs_frame
@@ -235,16 +273,20 @@ def main() -> int:
         headers = ANTENNAS_HEADERS if selected_table == "antenna" else PARAMS_HEADERS
         values = [e.get() for e in entries]
         set_vals = ""
+
+        # Construct the values to use as part of the update SQL command
         for header, value in list(zip(headers[1:], values[1:])):
             set_vals += f"\"{header}\" = \"{value}\""
             if header != headers[-1]:
                 set_vals += ", "
 
+        #  Insert our changes into the row selected
         conn = sqlite3.connect("db.db")
         cur = conn.cursor()
         cmd = f"UPDATE {selected_table} SET {set_vals} WHERE id = {values[0]};"
         res = cur.execute(cmd)
 
+        # Commit changes to the database
         conn.commit()
 
         # refresh table in main window
@@ -258,6 +300,7 @@ def main() -> int:
         conn.close()
 
     def modify_row() -> None:
+        """ Display a popup form for the user to modify a selected row. """
         nonlocal lhs_tbl
         nonlocal rhs_tbl
         nonlocal selected_table
@@ -268,6 +311,13 @@ def main() -> int:
 
         # Stores the index of the selected row
         selected_row = lhs_tbl.focus()
+        if not selected_row:
+            # No row has been selected
+            tkinter.messagebox.showerror("Invalid", "No row selected")
+            return
+
+        # Draw the form for the user to fill by retrieving the correct selection
+        # of headers, and building up a two-column form of headers and values
         values = lhs_tbl.item(selected_row, "values")
         headers = ANTENNAS_HEADERS
         selected_table = "antenna"
@@ -282,6 +332,8 @@ def main() -> int:
             tkinter.Label(popup, text=val[0]).grid(row=idx, column=0)
             entry = tkinter.Entry(popup)
             entry.grid(row=idx, column=1)
+            # Ensure the entry widget is populated with the current value so the 
+            # user doesn't have to retype it for small modifications
             entry.insert(0, val[1])
             entries.append(entry)
 
@@ -291,6 +343,7 @@ def main() -> int:
     win.title("Window")
     win.geometry("980x540")
 
+    # Construct two frames to draw tables in
     lhs_frame = ttk.Frame(win, borderwidth=1)
     lhs_frame.place(relx=0.05, rely=0.01, relwidth=0.4, relheight=0.75)
     lhs_tbl = build_table(lhs_frame, ANTENNAS_HEADERS, get_antennas_table)
@@ -299,6 +352,7 @@ def main() -> int:
     rhs_frame.place(relx = 0.55, rely=0.01, relwidth=0.4, relheight=0.75)
     rhs_tbl = build_table(rhs_frame, PARAMS_HEADERS, get_params_table)
 
+    # Ensure our buttons are drawn in the right place
     upload_btn = tkinter.Button(win, text="Upload File", command=upload_file)
     upload_btn.place(relx=0.2, rely=0.8)
     modify_btn = tkinter.Button(win, text="Modify", command=modify_row)
