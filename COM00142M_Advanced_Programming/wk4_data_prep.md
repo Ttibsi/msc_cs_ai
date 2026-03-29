@@ -17,7 +17,21 @@
 * Variance - Measure of how many a set of scores vary by from their mean.
     Variance is the square of of the standard deviation
 
-* Linear Correlation - How close the relationship between two variables are 
-* Linear Regression -  The straight line that best describes the linear 
+* Linear Correlation - How close the relationship between two variables are
+* Linear Regression -  The straight line that best describes the linear
     relationship between two variables.
 
+### Lesson 1 - NumPy
+NumPy is a library for cleaning and analysing very large data sets with more efficiency than
+standard python data structures. Numpy includes:
+* A high-performance multidimensional array: `ndarray`
+* Functions for generating random values
+* Data Types for to express `Scalar` and `dtype` values
+* Mathematical functions
+* Specialised mathematical techniques
+
+Numpy arrays must contain the same type, unlike lists which can hold different types
+Vectorisation is the term for performing arithmetic operations on all lines in an array
+Numpy Arrays are efficient because they store data in contiguous blocks of memory
+
+Element-wise product - multiplying two matrices together
