@@ -26,3 +26,28 @@ df = pandas.DataFrame(data, columns=cols)
 print(df.head()) # Just printing the head will show the first 5 rows
 print(df["year"]) # print the year as a Series
 print(df.T) # Rotate rows and columns
+
+# Indexing
+idx = pandas.Series(range(3), index=['a', 'b', 'c'])
+print(idx)
+print(idx.index)
+
+# Reindex to sort in a different order
+idx2 = idx.reindex(['c', 'b', 'a'])
+print(idx2)
+
+# These column headers don't exist, but you can reindex a frame too
+print(df.reindex(columns=['foo', 'bar', 'baz']))
+
+# indexing, selection, filtering
+print("---")
+print(df["pop"])
+print(df.T[0])
+print(df[["pop", "state"]])
+print("---")
+print(df["pop"][1:3])
+
+print("---")
+import numpy
+data = pandas.Series(numpy.arange(6.))
+print(data[3])
