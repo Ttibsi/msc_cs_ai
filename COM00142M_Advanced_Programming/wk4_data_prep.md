@@ -35,3 +35,11 @@ Vectorisation is the term for performing arithmetic operations on all lines in a
 Numpy Arrays are efficient because they store data in contiguous blocks of memory
 
 Element-wise product - multiplying two matrices together
+
+### Lesson 2 - Pandas
+Pandas provides specialised data structures: `Series` and `DataFrame` classes
+    - Series are for handling KV pair data
+    - DataFrames are for handling data with row and column headers
+
+numpy `ndarray` is more suited to homogenous data, pandas is better for handling
+tabulated data
