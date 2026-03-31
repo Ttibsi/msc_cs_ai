@@ -35,5 +35,19 @@ def exercise_two():
     print(f"Lowest values:\n {ret_4}")
 
 
+def exercise_three():
+    with open ("SalesData.csv") as f:
+        lines = f.readlines()
+        columns = lines[0].strip().split(",")[1:]
+        rest = [l.strip().split(",") for l in lines[1:]]
+        index = [i[0] for i in rest]
+        body = [i[1:] for i in rest]
+        body = [[int(item) for item in row] for row in body]
+
+    file = pandas.DataFrame(body, columns=columns, index=index)
+    pct = file.pct_change()
+    print(f"Max: {pct.max()}")
+    print(f"Min: {pct.min()}")
+
 if __name__ == '__main__':
-    raise SystemExit(exercise_two())
+    raise SystemExit(exercise_three())
