@@ -11,12 +11,28 @@ def exercise_one():
 
 
 def exercise_two():
-    file = pandas.read_csv("SalesData.csv")
-    print(file.iloc[[2, 5], [2, 11, 12]])
+    with open ("SalesData.csv") as f:
+        lines = f.readlines()
+        columns = lines[0].strip().split(",")[1:]
+        rest = [l.strip().split(",") for l in lines[1:]]
+        index = [i[0] for i in rest]
+        body = [i[1:] for i in rest]
+        body = [[int(item) for item in row] for row in body]
 
-    print(file.iloc[[1,0], [6,7,8]].pct_change())
-    top_three = file.iloc[[3,4]].stack().nlargest(2)
-    print(top_three)
+    file = pandas.DataFrame(body, columns=columns, index=index)
+    print(file)
+    ret_1 = file.loc[["P2", "B8"], ["Nov-18", "Feb-19", "Mar-19"]]
+    print(f"Sales (P2/B8):\n {ret_1}")
+    
+    ret_2 = file.loc[["L3", "L1"], ["Oct-18", "Nov-18", "Dec-18"]]
+    print(f"Third quarter:\n {ret_2}")
+    print(f"Percentage increase:\n {ret_2.pct_change()}")
+
+    ret_3 = file.loc[["N6", "N4"]].stack().nlargest(3)
+    print(f"top ny stores:\n {ret_3}")
+
+    ret_4 = file.min().min()
+    print(f"Lowest values:\n {ret_4}")
 
 
 if __name__ == '__main__':
