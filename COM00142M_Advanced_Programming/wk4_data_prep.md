@@ -43,3 +43,15 @@ Pandas provides specialised data structures: `Series` and `DataFrame` classes
 
 numpy `ndarray` is more suited to homogenous data, pandas is better for handling
 tabulated data
+
+### Lesson 3 - Prep for data analysis
+Serialization - the process of storing and retrieving objects to and from a binary representation.
+In python, the pickle library handles this
+
+Cleaning data
+* removing missing data
+* removing duplicate data
+* replacing values 
+* renaming axis
+* discretization and binning
+* removing outliers
