@@ -51,3 +51,26 @@ user"
 * May have led to echo chambers and fake news - noted for influencing the US 2016 election
 * note - echo chambers are usually specific to news media
 * AI algorithms can be influenced by the data they're trained on
+
+Algorithmic bias is a concern that is growing even for those that aren't regularly switched on to 
+the changes in technology or in the realm of computer science. Issues such as the wrong person being 
+identified by policing software and arrested unlawfully[1], AI hiring tools laden with unfair
+biases[2], we are finding that what might be algorithmically easy doesn't hold up in the real world
+as often as it should. This has led to a general distrust of AI tools in places where we'd expect
+a human to be making decisions. These biases are formed based on the data collectd and used for
+training. In recent months, computer hardware prices have skyrocketed[3] as companies such as OpenAI,
+Google, and Anthropic collect data at larger scales to train better Large Language Models to 
+compete, leading to shortages that are expected to last multiple years[4]. 
+
+As the tools we use every day have increasing amounts of algorithmic automation built in, and 
+digital literacy in the younger generation decreases[5], we need to be more aware that the decisions
+our devices are making are correct, and be more educated in how to detect what is and isn't right.
+This is a problem that we will need to solve as a society over the coming years through 
+education[6] and legislation as well as decisions made on an individual level.
+
+[1] R. Booth and M. Wilding, “Facial recognition error prompts police to arrest Asian man for burglary 100 miles away,” the Guardian, Feb. 25, 2026. https://www.theguardian.com/technology/2026/feb/25/facial-recognition-error-prompts-police-to-arrest-asian-man-for-burglary-100-miles-away
+[2] BBC, “Amazon Scrapped ‘Sexist AI’ Tool,” BBC News, Oct. 10, 2018. Available: https://www.bbc.co.uk/news/technology-45809919
+[3] R. Bailey, “Why Has Memory Gone Up in Price? The Real Reason RAM and Storage Costs More in 2026,” TurboGeek: We Make IT Problems Disappear - Practical Linux, Windows Server and cloud guides for IT pros., Apr. 06, 2026. https://www.turbogeek.co.uk/memory-ram-price-increase-2026/
+[4] Efosa Udinmwen, “‘We’re pretty much sold out for calendar 2026’: Western Digital CEO says storage firm is completely sold out of HDD capacity already, so does that mean more price rises to come?,” TechRadar, Feb. 17, 2026. https://www.techradar.com/pro/were-pretty-much-sold-out-for-calendar-2026-western-digital-ceo-says-storage-firm-is-completely-sold-out-of-hdd-capacity-already-so-does-that-mean-more-price-rises-to-come (accessed Apr. 08, 2026).
+[5] M. Chin, “Students who grew up with search engines might change STEM education forever,” The Verge, Sep. 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z
+[6] J. Rawnsley, “Call for parents to teach their children online privacy like they would road safety,” BBC News, Apr. 06, 2026. Available: https://www.bbc.co.uk/news/articles/c070v00xzl5o
