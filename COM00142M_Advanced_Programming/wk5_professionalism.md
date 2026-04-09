@@ -74,3 +74,44 @@ education[6] and legislation as well as decisions made on an individual level.
 [4] Efosa Udinmwen, “‘We’re pretty much sold out for calendar 2026’: Western Digital CEO says storage firm is completely sold out of HDD capacity already, so does that mean more price rises to come?,” TechRadar, Feb. 17, 2026. https://www.techradar.com/pro/were-pretty-much-sold-out-for-calendar-2026-western-digital-ceo-says-storage-firm-is-completely-sold-out-of-hdd-capacity-already-so-does-that-mean-more-price-rises-to-come (accessed Apr. 08, 2026).
 [5] M. Chin, “Students who grew up with search engines might change STEM education forever,” The Verge, Sep. 22, 2021. https://www.theverge.com/22684730/students-file-folder-directory-structure-education-gen-z
 [6] J. Rawnsley, “Call for parents to teach their children online privacy like they would road safety,” BBC News, Apr. 06, 2026. Available: https://www.bbc.co.uk/news/articles/c070v00xzl5o
+
+### Lesson 2 - Moral, Ethical, Legal
+Some rules are enshrined in law and are enforced by the legal system
+Other rules aren't laws, and form a part of a culture's ethical and moral perspectives
+Ethics are at a social level, morals are at a personal level.
+
+Some relevant UK laws:
+* Data Protection Act 
+* Humans Rights Act 1998
+* European Convention on Human Rights
+* Copyright
+* Computer Misuse Act 1990
+* Digital Economy Act
+
+Ethics and Morals
+* Ethics refers to a group of rules defining appropriate behaviour.
+* Morals refer to a set of principles which guide behaviour.
+
+Cars are the most ubiquitous form of transportation across the modern world, having first been 
+invented in the tail end of the industrial revolution, and with the advancements in modern 
+technology in the 2000s and 2010s, it was inevitable that eventually the driverless vehicles of 
+science fiction would arrive on our roads in the form of driverless cars. Despite their slow and
+headline-pushing development, the legal system has been slow to react. But as we edge towards the 
+late 2020s, catch up they have. For the United Kingdom, this takes the form of the Automated 
+Vehicles Act 2024, building on the Automated and Electric Vehicles Act 2018.
+
+These laws were driven by the UK's desire to be seen as an attractive country for the tech giants
+such as Tesla and Waymo (the latter owned by Alphabet, Google's parent company) to develop their
+full-self driving vehiches in, with the overall intent of growing the UK's economy in this 
+direction, and to support work towards decreasing carbon emissions.
+The process a new law goes through to be ratified - known as the legislative process - is 
+complicated, but any MP can propose a new law. This just involves multiple rounds of debate and 
+review in either House of Parliment, but needs to be approved by an initial committee, and then
+more widely by both Houses before it can gather Royal Ascent and become an Act [1].
+
+However, the law can come into conflict with personal and social ethics. It's worth noting that an 
+early 2025 study showed that only 17% of people would prefer a self-driving car[2], with a number 
+of factors being responsible, such as truct in technology and lack of control.
+
+[1] Cabinet Office, “Legislative process: taking a Bill through Parliament,” GOV.UK, Feb. 20, 2013. https://www.gov.uk/guidance/legislative-process-taking-a-bill-through-parliament
+[2] C. Strand, “New Study Reveals Public’s Lack of Trust in Driverless Vehicles,” Fleet Alliance, Feb. 17, 2025. https://www.fleetalliance.co.uk/autonomous-vehicles/
