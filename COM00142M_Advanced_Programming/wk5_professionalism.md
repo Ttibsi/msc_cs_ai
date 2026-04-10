@@ -115,3 +115,79 @@ of factors being responsible, such as truct in technology and lack of control.
 
 [1] Cabinet Office, “Legislative process: taking a Bill through Parliament,” GOV.UK, Feb. 20, 2013. https://www.gov.uk/guidance/legislative-process-taking-a-bill-through-parliament
 [2] C. Strand, “New Study Reveals Public’s Lack of Trust in Driverless Vehicles,” Fleet Alliance, Feb. 17, 2025. https://www.fleetalliance.co.uk/autonomous-vehicles/
+
+### Lesson 3 - Impact context
+Understanding the impact of legal, ethical and moral decisions is important as identifying when
+they are no longer feasable or causing more harm than good
+
+Social - how a society responds to innovation can be unpredicatable. 
+    ex mobile phones were never predicted to become as big as they are, they were intended to be
+    only relevant/affordable to big businesses.
+    Some technology just never catches on, such as the Segway, which was meant to replace a car
+    on short journeys
+
+Environmental
+* One technology percieved as having answers to environmental issues is energy production.
+
+Economical
+* A technology's success often is evaluated by economic impact - do they generate a healthy
+return on investment
+* Electric cars are currently expensive and not everyone can afford one, but over the years, 
+it'll be easier and they'll be more widespread.
+* Some technologies have a detrimental effect on the economy, such as through job automation and
+cuts to the workforce.
+
+Educational
+* Three distant perspectives
+    * Technology as a tool for elearning
+    * Educational soft skills, ex digital literacy in the workplace
+    * The approach taken to teach a new technology or it's relevant discipline. This can be
+    affected by educator knowledge/experience or how it would radicalise current teaching methods
+
+Driverless cars and FSD technology are radical changes to the way people approach the road, and
+their mixed adoption has been impacted by a number of factors
+
+* Social - There are a number of social impacts that will come from driverless cars being more
+common on the road, and statistics show that there's still a significant amount of the population
+that don't trust these devices for a number of reasons. I want to focus here on the overreach that
+could be achieved here. For a self-driving vehicle to work, it relies on a large number of cameras
+installed on the device. While we still have a comparatively high rate of CCTV and speed cameras
+on our roads here in the UK, attaching a camera array to every car on the road will allow for a 
+level of oversight from private companies - often not UK-based companies - that comes as a concern.
+We've recently observed in the US the antics of Elon Musk, the CEO of Tesla, the poster child for
+self-driving car technology, and we've observed thanks to Amazon Ring Doorbell devices in the case 
+of Nancy Guthrie's disappearance that these devices are recording and uploading to US corporation's
+servers, often without user permission or control over the footage. Can we trust that the car we 
+drive isn't streaming our every move to a US corporation under the guise of "training data"? Can
+we trust that this isn't one more element of digital fingerprinting that will lead to more erosion
+of privacy?
+
+* Environmental - Currently, driverless technology doesn't appear to have a signifcant impact on
+the environment compared to the electric car technology it's usually coupled with, but an automated
+driving system will make better decisions when it comes to routefinding, gear selection, and 
+vehicle usage, decreasing the number of emissions that are put out by the vehicle and in the longer
+run decreasing the amount of wear and tear on parts. We can extrapolate from here that the vehicle
+will instead need less work and less parts replaced, decreasing it's waste. 
+
+It is also possible that as this technololgy becomes more ubiquitous, we will see changes to the
+way roads are designed or maintained, and we may need less surveillance if the cars themselves are
+fitted with a number of cameras. While this begins as an environmental impact due to the quantity
+and types of materials used, this discussion can easily veer into one surrounding societal impacts.
+
+* Economical - At the current time, the mixed amount of trust in self-driving vehicles, as well as 
+the expense of a new vehicle is keeping them from being found commonly. It is my observation that
+the number of Teslas on the road - notably all having various levels of self-driving capabilities -
+are increasing, and my assumption is that this is happening for other newer self driving cars.
+However, as cars hold their value, and many people are still driving cars over 10 years old as 
+they're cheaper to purchase second hand, it will take many years for every car on the road to
+become a self-driving car. 
+
+It's worth noting that this hasn't prevented the continued development of this technology, as it's 
+one of the main selling features most car manufacturers are chasing at the moment.
+
+* Educational - The main areas that are going to be impacted here are driving instruction, which
+will likely need to adapt to teaching how this techology works, and the car repair technician 
+industry. With the car industry following the lead of companies like Tesla that are trying to 
+make a car a device, akin to a phone or computer, the repairability of these devices is going down.
+Repair technicians are now needing to upskill by learning how this new technology works, and tool
+makers are having to develop new tools to work with these devices.
