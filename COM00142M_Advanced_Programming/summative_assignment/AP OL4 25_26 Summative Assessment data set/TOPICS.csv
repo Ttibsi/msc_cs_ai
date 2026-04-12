@@ -1,0 +1,9 @@
+topic_id,topic_name,category,moderation_level,description
+T001,lifestyle,entertainment,low,"Posts about daily life, hobbies, and personal interests"
+T002,technology,education,medium,"Tech news, reviews, and discussions about digital innovations"
+T003,politics,news,high,"Political discussions, news, and current affairs"
+T004,environment,social,high,"Environmental issues, climate change, and sustainability"
+T005,sports,entertainment,low,"Sports news, events, and athletic activities"
+T006,health,education,medium,"Health tips, medical news, and wellness advice"
+T007,business,news,medium,"Business news, finance, and economic discussions"
+T008,education,education,low,Educational content and learning resources
