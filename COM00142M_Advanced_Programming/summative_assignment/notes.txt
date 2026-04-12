@@ -1,0 +1,31 @@
+###
+Prompts
+
+Build me a single python file that includes the following:
+* includes a tkinter button that will accept a file upload of a CSV file and reasonably throws an error if the file isn't a csv or utf-8 encoded
+* Has a pane with four tabs to jump between four different tables populated by sqlite tables - we will handle the database at a later point.
+* Include a button to trigger a stubbed function to cleanup the data that has been uploaded.
+* Include a button to implement filters on the data based on hour of day and topic. Note that we currently only need the frontend, we will add the logic behind this later.
+* Ensure any input from the user has error checking included, and provides the user the option
+to confirm or reject any actions.
+* Add another button to calculate basic statistics for rows selected in the table. Include the logic to read the data from the selected rows, then add a TODO to calulcate other values to be filled in at a later stage. 
+* Add another TODO somewhere to remind me to build "correlation visualisations"
+* This should all be exposed through a single "start_gui" function that will be imported and 
+used in another file later. 
+* Only use the python stdlib. 
+* Try to match the programming style of Anthony Sottile/asottile
+
+---
+
+NOTE: ATTACH FILES
+
+I've attached the example CSV files I need to store in a database. In a new python file, write some code to do the following with sqlite:
+* Check if an existing database exists (returning a bool)
+* Create another function to create a database and all the needed tables to store this data, using the 0th row as the table column names.
+* Create functions to "tidy up" the names of the headers so that they can be accepted by sqlite. Make sure there are also functions to tidy up any input header names from users.
+* Write functions to allow us to query for specific data from user-entered rows in a selected table
+* Only use the python stdlib. 
+* Try to match the programming style of Anthony Sottile/asottile
+
+---
+
