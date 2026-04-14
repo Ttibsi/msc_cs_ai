@@ -27,3 +27,13 @@ This can often reveal missing data or inconsistencies.
 * `pandas.stack`
 * `pandas.unstack`
 * `pandas.rotate`
+
+### Lesson 2 - Data Visualisation
+Once data has been cleaned and reshaped, the analysis process can begin. 
+Types of visualisation:
+* bar graph
+* pie chart
+* line graph
+* histogram
+
+Library in use - `matplotlib`
