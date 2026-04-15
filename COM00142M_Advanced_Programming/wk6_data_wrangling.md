@@ -37,3 +37,14 @@ Types of visualisation:
 * histogram
 
 Library in use - `matplotlib`
+
+### Lesson 3 - Data Analysis
+Data analysis process:
+* information need (what you want to know)
+* gather data (encoding, format, structure)
+* clean data (missing data, consistency)
+* reshape data (split, apply, combine)
+* Analyse data (counts, statistics, correlations)
+* present data (diagrams, graphs, gui)
+
+
