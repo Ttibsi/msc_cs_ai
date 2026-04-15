@@ -24,3 +24,27 @@ x = df["data1"].groupby([states, years]).mean()
 # Or you can shortcut things like this:
 df.groupby("key1")["data1"] == df["data1"].groupby(df["key1"])
 
+### time series
+import datetime
+datestrs = ["2011-07-06 12:00:00", "2011-08-06 00:00:00"]
+times = pandas.to_datetime(datestrs)
+# Also registers "NaT" (not a time)
+not_a_time = pandas.to_datetime([None])
+
+# timeseries is a series of time values
+ts = pandas.Series(numpy.random.standard_normal(2), index=datestrs)
+# print(ts)
+
+# indexing can use subscripting to get the date based on a date string
+longer_ts = pandas.Series(
+    numpy.random.standard_normal(1000),
+    index=pandas.date_range("2000-01-01", periods=1000)
+)
+# print(longer_ts["2001"])
+# print(longer_ts["2001-05"])
+# print(longer_ts.truncate(after="2011-01-09"))
+# print(longer_ts.is_unique)
+
+# pandas can generate daily timestamps on a given range
+daily = pandas.date_range(start="2012-04-01", periods=20)
+print(daily)

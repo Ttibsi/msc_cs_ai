@@ -47,4 +47,11 @@ Data analysis process:
 * Analyse data (counts, statistics, correlations)
 * present data (diagrams, graphs, gui)
 
+Pandas has built in data types to handle times that work with the python standard
+datetime libraries. This allows for slicing and other pandas-based benefits
 
+Ways to refer to time-series data
+* timestamps
+* fixes periods (ex "Jan 2020")
+* intervals of time (ex "every 5 minutes")
+* experiment/elapsed time (relative to a start point)
