@@ -29,7 +29,7 @@ coend
 x and y can be assigned to at the same time but need to both happen before the calculation
 
 ---
-task 1
+Task 1
 The maze problem shown in the video could utilise a team of 3 by "hopscotching" the three pointers
 using memoisation to store every path taken. When all 3 pointers have a non-complete end path (they
 hit a dead end), a pointer can start their search again, referring to the cache to ensure that it
@@ -130,5 +130,31 @@ t2.join()
 
 print("final counter =", counter)
 ```
+---
 
+* Starvation - Lower priority threads never getting selected to execute as there's always
+something else more important to do.
+* Multiple semaphores across multiple processes can also result in messy environments
 
+* Monitor - higher level construct that guarantees mutual exclusion and conditional critical 
+sections
+* Monitors use a lock to signal that a process is currently executing, and prevents other 
+processes from running that code
+* Two common problems - bounded buffers (producers and consumers) and readers/writers
+* Invented by Tony Hoare
+* Monitors contain functions to be run
+
+---
+Task 5
+
+When we have multiple threads trying to access the same mutex, it's possible that one reader thread
+trying to read the data will have the lock, and another reader requests access. As there's no
+modification happening, there's no issue with another reader trying to access the data --
+concurrent reads are safe.
+
+This is often handled with an "entry" section that every thread has to go through, acting almost
+like an airlock does. Any amount of threads can be stored in the entry, but only one at a time can
+read from the data to prevent a race condition. This is managed by a `readcount` integer. When
+a reader is allowed to enter and read the value, it locks it to prevent anything writing to it at 
+ the same time, then can continue by decrementing `readcount`. The value can only be written to
+ when the `readcount` is 0
