@@ -1,0 +1,17 @@
+"Automated social media moderation systems trained on historically biased reporting data inevitably perpetuate and amplify platform discrimination against certain topics and user groups."
+800 words
+
+Structure:
+Intro (100 words)
+Arguement 1 (200 words)
+Arguement 2 (200 words)
+Arguement 3 (200 words)
+Conclusion (100 words)
+
+Resources:
+https://www.ucl.ac.uk/ioe/departments-and-centres/academic-writing-centre/resources-academic-reading-and-writing/argument-voice-structure
+
+intro:
+```
+Social media usage has risen rapidly since its inception, with over 2 billion monthly active users in 2019 [1]. As with any public forum, not everything uploaded to these platforms is appropriate for public consumption, and moderation tools have been deployed to mitigate the worst of this.
+```
