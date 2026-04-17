@@ -72,3 +72,63 @@ One app that doesn't use concurrency: Until recent years, most old school text e
 and emacs would only run in a single thread. This was seen as something that wouldn't contribute
 much to the user input, although in recent years, emacs-lisp ( the scripting language that drives
 emacs) has started to gain multithreaded capabilities.
+
+### Lesson 2 - Shared Variables
+Concurrency starts to get complex when you need to share the same resources and data between 
+processes.
+
+atomic statement - something that can't be interfered with 
+    - either executes completely or not at all
+    - intermediate values cannot be viewed or interleaved
+
+Code needs to be marked mutually exclusive if it needs to be executed with no interference from
+other processes. One solution to this problem is semaphores
+
+* Semaphores are a simple flagging system designed by Dijkstra
+* Stores an integer and two primitives (`wait`, and `signal`)
+* The integer is usually initialised as 1
+* `signal` atomically increments the semaphore int
+* `wait` - if value > 0, value--, else block the tasks
+* for mutual exclusion, we wait before running a block, then signal when it's done
+
+A `mutex` is a specific type of semaphore
+
+---
+Task 3
+A mutex is a specific type of semaphore that is very similar to a base semaphore. The major
+difference appears to be around the implementation, whereas a semaphore will use an integer
+to count how often it's called and then only trigger when the integer value is 0, but a 
+mutex is simpler, only using a boolean value. Instead of the `wait` and `signal` interface on
+a semaphore, the mutex interface looks to be `lock` and `unlock` with no differenciator as to
+who is unlocking it. 
+
+The main usecase for a mutex is around a single shared resource, such as a global value. In the
+examples shown, we could wrap the variable `c` in a mutex. With the help of AI, I've recreated the 
+simple problem from the videos in python below to demonstrate how a mutex would be used here: 
+
+```py
+import threading
+
+counter = 0
+mutex = threading.Lock()
+
+def inc():
+    global counter
+    for _ in range(10):
+        # acquire lock, then release automatically
+        with mutex:
+            counter += 1
+
+# create two threads
+t1 = threading.Thread(target=inc)
+t2 = threading.Thread(target=inc)
+
+t1.start()
+t2.start()
+t1.join()
+t2.join()
+
+print("final counter =", counter)
+```
+
+
