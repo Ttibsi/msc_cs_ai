@@ -3,10 +3,35 @@
 
 Structure:
 Intro (100 words)
-Arguement 1 (200 words)
-Arguement 2 (200 words)
-Arguement 3 (200 words)
+Arguement 1 (200 words) - ethics (community beliefs)
+    * It's not OK to share certain things publicly (violence, gore, extreme pornography)
+    * age restrictions are often 13 or 16, teenagers still developing
+        - mention the age restrictions going through law right now
+Arguement 2 (200 words) - morals (personal beliefs)
+Arguement 3 (200 words) - legal
+    * platforms are responsible for what's uploaded
 Conclusion (100 words)
+
+Notes
+* pro stance 
+* counter-arguemnt every point and refute it
+* responsibilities of software engineers here
+
+Argument 1 - foreign languages/other cultures are less well represented in the training data
+    - counter arguement: Millions use social media in non-western world countries too
+        - rebuttal: Largest social media companies are US-centric, with China having it's own social media behind the great firewall
+    - examples: https://www.oversightboard.com/decision/ig-7thr3si1/
+            https://www.cambridge.org/core/journals/american-journal-of-international-law/article/bias-in-social-media-content-management-what-do-human-rights-have-to-do-with-it/BA9E847DEDECE34FFEBB42014AF8C683
+            https://worldpopulationreview.com/country-rankings/social-media-users-by-country
+            https://www.expatriatehealthcare.com/what-social-media-is-allowed-in-china/
+
+Argument 2 - context-less moderation has led to higher amounts of self-censorship online
+    Counter argument: This isn't a recent development, see leetspeak or slang.
+        rebuttal: This is more than slang, educators are affected, this is stretching into the real world
+    links:
+        https://scholarworks.iu.edu/journals/index.php/li/article/view/37371
+        https://news.illinois.edu/how-do-people-use-self-censorship-to-avoid-having-their-content-suppressed-on-sites-like-tiktok/
+        (note, 2 is an interview about 1)
 
 Resources:
 https://www.ucl.ac.uk/ioe/departments-and-centres/academic-writing-centre/resources-academic-reading-and-writing/argument-voice-structure
@@ -15,3 +40,10 @@ intro:
 ```
 Social media usage has risen rapidly since its inception, with over 2 billion monthly active users in 2019 [1]. As with any public forum, not everything uploaded to these platforms is appropriate for public consumption, and moderation tools have been deployed to mitigate the worst of this.
 ```
+
+references
+2 - https://themarkup.org/automated-censorship/2024/03/01/how-automated-content-moderation-works-even-when-it-doesnt-work
+3 - https://ai.meta.com/blog/training-ai-to-detect-hate-speech-in-the-real-world/
+4 - https://ai.meta.com/blog/how-facebook-uses-super-efficient-ai-models-to-detect-hate-speech/
+5 - https://www.sciencedirect.com/science/article/abs/pii/S0747563223003229
+6 - 
