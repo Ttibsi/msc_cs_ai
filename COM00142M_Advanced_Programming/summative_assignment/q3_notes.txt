@@ -42,8 +42,27 @@ Social media usage has risen rapidly since its inception, with over 2 billion mo
 ```
 
 references
+1- https://ourworldindata.org/rise-of-social-media
 2 - https://themarkup.org/automated-censorship/2024/03/01/how-automated-content-moderation-works-even-when-it-doesnt-work
 3 - https://ai.meta.com/blog/training-ai-to-detect-hate-speech-in-the-real-world/
 4 - https://ai.meta.com/blog/how-facebook-uses-super-efficient-ai-models-to-detect-hate-speech/
 5 - https://www.sciencedirect.com/science/article/abs/pii/S0747563223003229
-6 - 
+6 - https://globalwitness.org/en/campaigns/digital-threats/how-big-tech-platforms-are-neglecting-their-non-english-language-users/
+7 - https://www.oversightboard.com/decision/ig-7thr3si1/
+8 - https://www.oversightboard.com/our-work/
+9 - https://www.metacareers.com/locations
+10 - https://worldpopulationreview.com/country-rankings/social-media-users-by-country
+11 - https://stockanalysis.com/list/sp-500-stocks/
+12 - https://www.cl.cam.ac.uk/~rnc1/ignoring.pdf
+13 - https://www.expatriatehealthcare.com/what-social-media-is-allowed-in-china/
+14 - https://www.cfr.org/backgrounders/media-censorship-china
+15 - https://www.oversightboard.com/news/content-moderation-in-a-new-era-for-ai-and-automation/
+16 - https://news.illinois.edu/how-do-people-use-self-censorship-to-avoid-having-their-content-suppressed-on-sites-like-tiktok/
+17 - https://scholarworks.iu.edu/journals/index.php/li/article/view/37371
+18 - https://arxiv.org/html/2407.14164v1
+19 - https://en.wikipedia.org/wiki/Leet
+20 - https://books.google.co.uk/books/about/Concise_Oxford_Companion_to_the_English.html?id=QMsWFsI0YkIC&redir_esc=y
+21 - https://academic.oup.com/psq/article-abstract/138/3/361/7192889?login=false
+22 - https://holistic.news/en/self-censorship-and-rising-censorship-in-europe/
+23 - https://www.fire.org/news/surveys-reveal-rising-student-and-faculty-concern-about-censorship-self-censorship-post
+24 - https://ieeexplore.ieee.org/document/10530557
