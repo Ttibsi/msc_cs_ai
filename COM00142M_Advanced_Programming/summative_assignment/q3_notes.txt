@@ -66,3 +66,4 @@ references
 22 - https://holistic.news/en/self-censorship-and-rising-censorship-in-europe/
 23 - https://www.fire.org/news/surveys-reveal-rising-student-and-faculty-concern-about-censorship-self-censorship-post
 24 - https://ieeexplore.ieee.org/document/10530557
+25 - https://www.checkstep.com/the-evolution-of-content-moderation-rules-throughout-the-years
