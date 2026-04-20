@@ -170,3 +170,43 @@ identify different threads is also needed.
 * Both a sender and reciever can be blocking
 * Analogies - making a telephone call (both sides are blocking)
             - posting a letter - reciever is blocking
+
+---
+Message Passing Exercise One
+Sieve of Eratosthenes pseudocode
+
+ALGORITHM sieve(max)
+    values = [true * (max - 1)]
+    break_count = 1000
+    prime_count = 10
+
+    if max < break_count
+        break
+
+    for i = 2 .. (max - 2)
+        if values[i] == false
+            continue
+
+        spawnthread do
+            start = recieve()
+
+            for j in start .. (max - 2) step start
+                values[j] = false
+            end
+        end
+
+        send(i)
+
+        # a specific number of numbers have been examined (e.g. 1000)
+        if i >= break_count:
+            break
+        end
+
+        # a specific number of primes have been identified.
+        if count(true in values) == prime_count
+            break
+        end
+    endEratosthenes
+end
+
+
