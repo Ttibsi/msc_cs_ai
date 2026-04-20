@@ -158,3 +158,15 @@ read from the data to prevent a race condition. This is managed by a `readcount`
 a reader is allowed to enter and read the value, it locks it to prevent anything writing to it at 
  the same time, then can continue by decrementing `readcount`. The value can only be written to
  when the `readcount` is 0
+
+### Lesson 3 - Message Passing
+The second way to achieve concurrency is through message passing. Each process has their own data
+storage/memory and uses messages for data passing and synchronisation. THis is often used in high
+performance or distributed systems.
+
+A protocol is needed for packing up data and sending it between processes. A naming convention to
+identify different threads is also needed.
+
+* Both a sender and reciever can be blocking
+* Analogies - making a telephone call (both sides are blocking)
+            - posting a letter - reciever is blocking
