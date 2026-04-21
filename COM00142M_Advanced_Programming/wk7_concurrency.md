@@ -209,4 +209,27 @@ ALGORITHM sieve(max)
     endEratosthenes
 end
 
+### Lesson 4 - Parallel problems
+* Starvation - When a thread indefinitely waits for resource access, such as to a mutex.
+    - Can be prevented by better resource scheduling
 
+* Deadlock - Two or more processes are unable to make any further progress because of mutually
+    incompatible demand for resources
+    - The best resolution is to detect deadlocks and recover from them, including killing and
+    restarting (where appropriate) the threads involved.
+    - Another approach is to prevent them by removing pre-conditions. This might include resource
+    acquisition and variable reading.
+
+
+* Livelock
+
+* Race conditions - two threads trying to update the same variable at the same time.
+    - Any mix of the two values could end up in the variable.
+    - This can be alleviated by marking the variable as atomic, meaning it has to be updated as a 
+    whole, not in parts.
+    - ex Java - everything but long and double are atomic, Ada - any variable can be marked as 
+    atomic with a pragma statement. `pragma atomic(v)`
+    - When a variable is marked as atomic, no other threads can read or modify the object while
+    an atomic operation is in progress
+
+explaining atomics in c++: https://ryonaldteofilo.medium.com/atomics-in-c-what-is-a-std-atomic-and-what-can-be-made-atomic-part-1-a8923de1384d
