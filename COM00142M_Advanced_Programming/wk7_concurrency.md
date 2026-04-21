@@ -221,7 +221,8 @@ end
     acquisition and variable reading.
 
 
-* Livelock
+* Livelock - two processes that constantly update but never progress, as each one updates a value
+            that the other thread uses to move backwards
 
 * Race conditions - two threads trying to update the same variable at the same time.
     - Any mix of the two values could end up in the variable.
@@ -233,3 +234,46 @@ end
     an atomic operation is in progress
 
 explaining atomics in c++: https://ryonaldteofilo.medium.com/atomics-in-c-what-is-a-std-atomic-and-what-can-be-made-atomic-part-1-a8923de1384d
+
+---
+Exercise 1
+As suggested by their names, deadlock and livelock are opposites -- the former is when multiple
+threads end up locked by their conflicting dependancies on the same data, such as a variable locked
+by a mutex, whereas the latter is when two threads keep doing work but make no progress, each one 
+undoing the work of the other. An example of this can be seen in the below pseudocode
+
+```
+var = 2
+
+thread_1():
+    while (true):
+        var += 1
+        if var == 5:
+            return
+
+thread_2():
+    while (true):
+        var -= 1
+        if var < 0:
+            return
+```
+
+Both threads will change the `var` variable up and down until the system gets lucky and one of the
+return values gets triggered. This can be prevented best by adding some unpredictability, potentially
+some sleeps in the threads, so that their logic doesn't always trigger at the same time.
+
+A race condition is similar, occuring when multiple threads try to write to the same variable 
+at the same time. This can cause the value stored to be messy, such as a mix of both written
+values, or other corrupted memory. To prevent this, we can use a global tool such as a mutex, to 
+ensure that only one thread can modify the value at a time
+
+Exercise 2 - The Dining Philosophers problem
+This problem states that there are 5 philosophers at a table with 5 plates of spaghetti and 5 
+forks. A philosopher needs 2 forks to each, and has to put down both forks when they've taken a bite.
+A philosopher is either eating or thinking. 
+
+As we know, philosophers usually do more thinking than eating.
+
+In this scenario, a deadlock will occur when two neighbouring philosophers try and reach for the 
+same fork between them. Opposingly, starvation will occur when a philosopher is sandwiched between
+two that keep eating, so the one in the middle is always stuck thinking. 
