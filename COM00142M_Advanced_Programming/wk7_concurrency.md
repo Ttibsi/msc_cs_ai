@@ -277,3 +277,21 @@ As we know, philosophers usually do more thinking than eating.
 In this scenario, a deadlock will occur when two neighbouring philosophers try and reach for the 
 same fork between them. Opposingly, starvation will occur when a philosopher is sandwiched between
 two that keep eating, so the one in the middle is always stuck thinking. 
+
+### Lesson 5 - Concurrency in python
+python's thread is the simplest way to achieve a concurrent program, but it's not always the 
+most effective.
+
+GIL - Global Interpreter Lock - enforces memory safety. Prevents memory issues, has to be acquired
+by any thread that wants to run, meaning all programs end up being single threaded. Some python
+APIs can circumvent this
+
+Multiple threads can exist, but with the GIL enabled, they can't execute in parallel.
+
+daemonic threads 
+    - cant be joined
+    - automatically destroyed when the main thread terminates
+    - should be used for long-running threads
+
+Because of the GIL, python threads are better suited to IO handlin and concurrent execution of 
+code that performs blocking operations, such as waiting for IO or database results.
