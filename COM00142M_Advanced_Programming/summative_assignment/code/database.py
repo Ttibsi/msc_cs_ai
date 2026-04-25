@@ -206,12 +206,6 @@ def _quoted_identifier(identifier: str) -> str:
 def read_csv_rows(
         csv_path: str,
 ) -> tuple[list[str], list[tuple[str, ...]]]:
-    return _read_csv_rows(csv_path)
-
-
-def _read_csv_rows(
-        csv_path: str,
-) -> tuple[list[str], list[tuple[str, ...]]]:
     for encoding in ('utf-8', 'utf-8-sig', 'cp1252', 'latin-1'):
         try:
             with open(csv_path, encoding=encoding, newline='') as f:
