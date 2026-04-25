@@ -1,0 +1,13 @@
+• (introduction) What are threads, why use them
+    ◦ What I'm going to add threads to
+        ▪ A second option I could have approached instead
+
+        ▪ Why this part of the program will benefit from multithreading
+        ▪ Link this to the brief of social media
+• What is the impact of adding concurrency
+    ◦ talk about data races, talk about perf improvements
+    ◦ Talk about deadlock? But sqlite has multithreading commits built in (need to research)
+
+References
+----------
+1 - https://docs.python.org/3/library/threading.html
