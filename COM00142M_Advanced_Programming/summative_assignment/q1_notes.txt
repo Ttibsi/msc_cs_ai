@@ -16,3 +16,31 @@ References
 4 - https://www.learncpp.com/cpp-tutorial/in-and-out-parameters/
 5 - https://github.com/python/cpython/issues?q=is%3Aissue%20state%3Aclosed%20queue
 6 - https://www.py4u.org/python-standard-library/the-competitive-edge-python-standard-library-vs-custom-code/
+
+---
+
+q1b
+
+three user interactions:
+* tabs
+* Columnar view for tables
+    - recreate tabular data as it's stored.
+    - Also mirroring how the data is stored in the database
+* multiple windows 
+    - can be placed across screen for cross-referencing
+    - 
+
+layout principles
+    - my code uses both pack and grid.
+    - "advanced princi
+
+usability trade-offs
+    * tabs limit which table can be seen, but also allows the user a wider view into that table,
+    revealing more columns.
+    * tabular data - raw data displayed, not yet processed. Less easy to see trends etc.
+
+interactions streamline workflows:
+    - Allowing for quick filtering to different slices of time
+    - Tickboxes to hide bots indicate how many rows are hidden
+    - 
+
