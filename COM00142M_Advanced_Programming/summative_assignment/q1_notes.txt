@@ -11,3 +11,8 @@
 References
 ----------
 1 - https://docs.python.org/3/library/threading.html
+2 - https://sqlite.org/lang_transaction.html
+3 - https://docs.python.org/3/library/queue.html
+4 - https://www.learncpp.com/cpp-tutorial/in-and-out-parameters/
+5 - https://github.com/python/cpython/issues?q=is%3Aissue%20state%3Aclosed%20queue
+6 - https://www.py4u.org/python-standard-library/the-competitive-edge-python-standard-library-vs-custom-code/
