@@ -17,7 +17,6 @@
 #
 # Column rename utility: migrate_text_preview_to_content_preview (re-exported from database)
 # renames posts.text_preview -> posts.content_preview on existing SQLite databases.
-
 from __future__ import annotations
 
 import re
@@ -540,5 +539,3 @@ def format_report_for_dialog(report: CleanupReport, *, max_lines: int = 80) -> s
     head = lines[: max_lines - 1]
     head.append(f'… ({len(lines) - len(head)} more lines omitted)')
     return '\n'.join(head)
-
-

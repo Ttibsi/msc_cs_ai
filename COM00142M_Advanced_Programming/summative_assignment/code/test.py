@@ -9,18 +9,18 @@ from contextlib import closing
 from pathlib import Path
 from unittest import mock
 
+import numpy as np
+import pandas as pd
+from matplotlib.figure import Figure
+
 import analysis
 import audit_log
 import categorical_analysis
 import database
 import hour_topic_pivot
-import main
 import moderation_effectiveness
-import numpy as np
-import pandas as pd
 import ui
 import utilities
-from matplotlib.figure import Figure
 
 
 class _FakeVar:

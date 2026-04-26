@@ -4,7 +4,6 @@ Three-way categorical breakdown: topic category × moderation level × post cont
 Population: posts with a non-null topic and a join to topics; optional non-bot-only filter
 to align with other human-focused analyses.
 """
-
 from __future__ import annotations
 
 import sqlite3

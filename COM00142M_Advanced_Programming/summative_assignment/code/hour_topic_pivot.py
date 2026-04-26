@@ -5,7 +5,6 @@ When no topic filter is applied, posts with NULL ``topic_id`` are grouped under
 ``(no topic)``. When a specific topic is selected, only that topic is included
 (implicitly excluding NULL-only rows for that filter).
 """
-
 from __future__ import annotations
 
 import sqlite3

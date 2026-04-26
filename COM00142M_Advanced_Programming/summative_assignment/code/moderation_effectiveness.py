@@ -5,7 +5,6 @@ Definitions match the GUI copy: human post authors, non-null topic, human report
 ``interaction_type`` = report (case-insensitive); placeholder reporter U9999 excluded
 from counts with a running ignored tally.
 """
-
 from __future__ import annotations
 
 import sqlite3

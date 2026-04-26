@@ -1,5 +1,4 @@
 """Central audit / application logging: ``log.txt`` (INFO+) and stderr (ERROR+ only)."""
-
 from __future__ import annotations
 
 import logging

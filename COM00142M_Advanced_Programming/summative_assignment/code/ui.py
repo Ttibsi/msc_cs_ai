@@ -4,29 +4,29 @@ import os
 import sqlite3
 import statistics
 import tkinter as tk
-from typing import cast
 from tkinter import filedialog
 from tkinter import messagebox
 from tkinter import ttk
+from typing import cast
 
-from audit_log import LOG_FILE
 from audit_log import get_audit_logger
-from categorical_analysis import INTERPRETATION_TEXT
+from audit_log import LOG_FILE
 from categorical_analysis import build_categorical_analysis_figure
+from categorical_analysis import INTERPRETATION_TEXT
 from categorical_analysis import query_three_way_distribution
 from database import database_exists
 from database import ensure_relational_schema
-from hour_topic_pivot import build_hour_topic_pivot_figure
-from hour_topic_pivot import build_pivot_matrix
-from hour_topic_pivot import query_hour_topic_counts
 from database import read_csv_rows
 from database import replace_table_data_from_csv
 from database import sql_exclude_bot_users
 from database import table_name_for_csv
-from moderation_effectiveness import DEFINITIONS_TEXT
-from moderation_effectiveness import PLACEHOLDER_REPORTER_USER_ID
+from hour_topic_pivot import build_hour_topic_pivot_figure
+from hour_topic_pivot import build_pivot_matrix
+from hour_topic_pivot import query_hour_topic_counts
 from moderation_effectiveness import build_moderation_correlation_figure
 from moderation_effectiveness import build_moderation_effectiveness_figure
+from moderation_effectiveness import DEFINITIONS_TEXT
+from moderation_effectiveness import PLACEHOLDER_REPORTER_USER_ID
 from moderation_effectiveness import run_moderation_effectiveness_analysis
 from utilities import cleanup_entire_table
 from utilities import format_report_for_dialog

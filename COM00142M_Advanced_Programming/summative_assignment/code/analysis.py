@@ -1,5 +1,4 @@
 """Exploratory aggregations and matplotlib figures for the relational demo database."""
-
 from __future__ import annotations
 
 import sqlite3
