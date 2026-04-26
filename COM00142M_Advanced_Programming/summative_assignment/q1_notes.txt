@@ -16,6 +16,8 @@ References
 4 - https://www.learncpp.com/cpp-tutorial/in-and-out-parameters/
 5 - https://github.com/python/cpython/issues?q=is%3Aissue%20state%3Aclosed%20queue
 6 - https://www.py4u.org/python-standard-library/the-competitive-edge-python-standard-library-vs-custom-code/
+7 - https://tk-tutorial.readthedocs.io/en/latest/tree/tree.html
+8 - https://docs.python.org/3/library/tkinter.ttk.html#tkinter.ttk.Notebook
 
 ---
 
@@ -32,7 +34,6 @@ three user interactions:
 
 layout principles
     - my code uses both pack and grid.
-    - "advanced princi
 
 usability trade-offs
     * tabs limit which table can be seen, but also allows the user a wider view into that table,
