@@ -1,0 +1,21 @@
+q2a - design decisions supported by code
+
+* choice of data format: SQL
+    - mirroring input (CSV:SQL)
+    - Common in industry
+    - easy to store compactly (sqlite database file is a binary file)
+    - Can allow for using a purpose built querying language where data analysis libraries fall short
+* why it suits network data analysis
+    - easily transferrable and storable format
+    - Allows for custom querying 
+        - disadvantage: requires different knowledge to query over just python
+    - advantage: isn't coupled to the software, can be shared with others easily
+    - advantage: relationships are built into database software
+* constrained
+    - has to follow the given format when uploaded to fit in SQL tables
+
+---
+q2b - Analyse and demonstrate how your code produces required analysis
+* Statistics
+* Graphs
+* Categorical Analysis
