@@ -15,6 +15,14 @@ q2a - design decisions supported by code
     - has to follow the given format when uploaded to fit in SQL tables
 
 ---
+references
+1 - https://docs.python.org/3/library/sqlite3.html
+2 - https://sqlite.org/whentouse.html
+3 - https://sqlite.org/docs.html
+4 - https://sqlite.org/appfileformat.html
+5 - https://sqlite.org/quirks.html
+6 - https://sqlite.org/amalgamation.html
+---
 q2b - Analyse and demonstrate how your code produces required analysis
 * Statistics
 * Graphs
