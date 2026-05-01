@@ -23,7 +23,40 @@ references
 5 - https://sqlite.org/quirks.html
 6 - https://sqlite.org/amalgamation.html
 ---
+
 q2b - Analyse and demonstrate how your code produces required analysis
+
 * Statistics
 * Graphs
 * Categorical Analysis
+
+- summary under "moderation effectiveness"
+    - pro, calculated at point of requirement
+    - con: not visible at all times/at a glance.
+- separate "calculate stats" button for mean/median/mode
+    - requires rows selected, for filtering - but auto-ignores bot accounts
+    - for future development: if no rows selected, use them all
+
+tool selection
+- Embedded matplotlib graphs into a tkinter window (ask AI how)
+    - wider recognition in industry over seaborn
+    - allows for more granularity in generation of table
+    https://pythoneo.com/matplotlib-vs-seaborn/
+- used pandas and numpy as the industry standard for data parsing and analysis
+    - used for higher performance calculations and data processing
+
+- code snippets
+- output analysis
+    - What does it show WRT social media moderation, how can we best use what the charts show us
+    - trends over time, etc
+    - what is actionable here?
+
+- screenshots and references
+
+--- 
+references
+7 - https://github.com/numpy/numpy
+8 - cython.org
+9 - https://github.com/pandas-dev/pandas
+10 - https://matplotlib.org/stable/gallery/user_interfaces/embedding_in_tk_sgskip.html
+11 - https://github.com/mwaskom/seaborn
