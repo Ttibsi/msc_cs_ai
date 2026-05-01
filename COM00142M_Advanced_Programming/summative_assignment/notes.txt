@@ -29,3 +29,10 @@ I've attached the example CSV files I need to store in a database. In a new pyth
 
 ---
 
+Assessment Overview
+Design and develop a Social Media Moderation Analytics Prototype that demonstrates how to format, reshape, and analyse social media data while balancing automation with ethical considerations.
+Your prototype can be a single program or a set of related programs. It must meet the functional, non-functional, and technical requirements detailed below.
+
+Moderation Analytics Tool Prototyping: Concurrency, Design Review, and Ethics.
+
+https://www.mybib.com/#/projects/YDMKbp/citations
