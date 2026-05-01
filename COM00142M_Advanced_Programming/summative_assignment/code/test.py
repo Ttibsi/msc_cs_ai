@@ -635,11 +635,22 @@ class TestDatabase(unittest.TestCase):
             database._create_empty_relational_tables(conn)
             conn.execute("INSERT INTO users VALUES ('u1', 'alice', NULL, NULL, NULL, NULL, NULL)")
             conn.execute("INSERT INTO topics VALUES ('t1', 'Topic 1', NULL, NULL, NULL)")
-            with self.assertRaisesRegex(ValueError, 'foreign keys failed validation'):
+            
+            # Missing key should return warning, not raise
+            warn = database._validate_relational_import_fk(
+                conn,
+                'posts',
+                [('p1', 'missing', None, None, None, None, 't1', None)],
+            )
+            self.assertIsInstance(warn, str)
+            self.assertIn('foreign keys failed validation', warn)
+
+            # Empty user_id should still raise ValueError
+            with self.assertRaisesRegex(ValueError, 'empty user_id'):
                 database._validate_relational_import_fk(
                     conn,
                     'posts',
-                    [('p1', 'missing', None, None, None, None, 't1', None)],
+                    [('p1', '', None, None, None, None, 't1', None)],
                 )
 
     def test__insert_relational_rows(self) -> None:
@@ -714,10 +725,11 @@ class TestDatabase(unittest.TestCase):
 
     def test_replace_table_data_from_csv(self) -> None:
         path = self._write_csv('notes.csv', [['ID', 'Body'], ['1', 'hello']])
-        table_name, headers, rows = database.replace_table_data_from_csv(str(self.db_path), csv_path=str(path))
+        table_name, headers, rows, warning = database.replace_table_data_from_csv(str(self.db_path), csv_path=str(path))
         self.assertEqual(table_name, 'notes')
         self.assertEqual(headers, ['id', 'body'])
         self.assertEqual(rows, [('1', 'hello')])
+        self.assertIsNone(warning)
 
     def test_get_table_columns(self) -> None:
         database.replace_table_data(

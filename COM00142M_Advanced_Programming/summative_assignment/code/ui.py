@@ -235,12 +235,15 @@ def _upload_csv(
         return
 
     try:
-        imported_table_name, headers, data_rows = replace_table_data_from_csv(
+        imported_table_name, headers, data_rows, warning = replace_table_data_from_csv(
             DB_PATH,
             csv_path=filename,
             table_name=table_name,
             preloaded=(headers, data_rows),
         )
+        if warning:
+            get_audit_logger().warning('Upload finished with warnings: %s', warning)
+            messagebox.showwarning('Upload warning', warning)
     except ValueError as e:
         get_audit_logger().warning('Upload failed during DB replace (ValueError): %s', e)
         messagebox.showerror('Upload error', str(e))

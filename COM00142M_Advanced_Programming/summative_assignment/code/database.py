@@ -412,8 +412,8 @@ def _validate_relational_import_fk(
         db: sqlite3.Connection,
         table_name: str,
         typed_rows: list[tuple],
-) -> None:
-    """Raise ValueError with missing keys before SQLite FK error obscures the cause."""
+) -> str | None:
+    """Return warning message if keys are missing, or raise ValueError if data is invalid."""
     if table_name == 'posts':
         cols = _RELATIONAL_INSERT_COLUMNS['posts']
         i_uid = cols.index('user_id')
@@ -448,10 +448,11 @@ def _validate_relational_import_fk(
                     f'topic_id(s) not in topics table: {", ".join(sorted(bad_t)[:40])}'
                     + ('…' if len(bad_t) > 40 else ''),
                 )
-            raise ValueError(
+            return (
                 'posts CSV foreign keys failed validation: '
                 + '; '.join(parts)
-                + '. Load topics and users CSVs first (in that order), or add the missing keys.',
+                + '. Rows were inserted, but some reference missing users/topics. '
+                'Load topics and users CSVs first (in that order) for full consistency.'
             )
     if table_name == 'interactions':
         cols = _RELATIONAL_INSERT_COLUMNS['interactions']
@@ -490,11 +491,13 @@ def _validate_relational_import_fk(
                     f'user_id(s) not in users: {", ".join(sorted(bad_u)[:40])}'
                     + ('…' if len(bad_u) > 40 else ''),
                 )
-            raise ValueError(
+            return (
                 'interactions CSV foreign keys failed validation: '
                 + '; '.join(parts)
-                + '. Load posts and users before interactions.',
+                + '. Rows were inserted, but some reference missing posts/users. '
+                'Load posts and users before interactions for full consistency.'
             )
+    return None
 
 
 def _insert_relational_rows(
@@ -503,7 +506,7 @@ def _insert_relational_rows(
         table_name: str,
         headers: list[str],
         rows: Iterable[tuple[str, ...]],
-) -> None:
+) -> str | None:
     columns = _RELATIONAL_INSERT_COLUMNS[table_name]
     placeholders = ', '.join('?' for _ in columns)
     columns_sql = ', '.join(_quoted_identifier(c) for c in columns)
@@ -511,15 +514,23 @@ def _insert_relational_rows(
         _relational_insert_tuple(table_name, headers, row)
         for row in rows
     ]
+    warning = None
     if table_name in ('posts', 'interactions'):
-        _validate_relational_import_fk(db, table_name, typed_rows)
+        warning = _validate_relational_import_fk(db, table_name, typed_rows)
+
     sql = (
         f'INSERT INTO {_quoted_identifier(table_name)} ({columns_sql}) '
         f'VALUES ({placeholders})'
     )
     try:
+        if warning:
+            db.execute('PRAGMA foreign_keys = OFF')
         db.executemany(sql, typed_rows)
+        if warning:
+            db.execute('PRAGMA foreign_keys = ON')
     except sqlite3.IntegrityError as exc:
+        if warning:
+            db.execute('PRAGMA foreign_keys = ON')
         hint = (
             f'Foreign key violation while inserting into {table_name!r}: {exc}. '
             'Load CSVs in dependency order: topics → users → posts → interactions. '
@@ -533,6 +544,7 @@ def _insert_relational_rows(
 
         get_audit_logger().error('%s', hint, exc_info=True)
         raise ValueError(hint) from exc
+    return warning
 
 
 def _replace_relational_table(
@@ -541,13 +553,13 @@ def _replace_relational_table(
         table_name: str,
         headers: list[str],
         rows: Iterable[tuple[str, ...]],
-) -> None:
+) -> str | None:
     _validate_relational_headers(table_name, headers)
     db.execute('PRAGMA foreign_keys = OFF')
     db.execute(f'DROP TABLE IF EXISTS {_quoted_identifier(table_name)}')
     db.executescript(_RELATIONAL_DDL[table_name])
     db.execute('PRAGMA foreign_keys = ON')
-    _insert_relational_rows(db, table_name=table_name, headers=headers, rows=rows)
+    return _insert_relational_rows(db, table_name=table_name, headers=headers, rows=rows)
 
 
 def _sort_csv_paths_for_fk(csv_paths: Iterable[str]) -> list[str]:
@@ -596,20 +608,19 @@ def replace_table_data(
         table_name: str,
         headers: Iterable[str],
         rows: Iterable[Iterable[str]],
-) -> None:
+) -> str | None:
     normalized_table_name = tidy_header_name(table_name)
     normalized_headers = prepare_csv_headers_for_import(normalized_table_name, headers)
     normalized_rows = [tuple(row) for row in rows]
 
     with _connect(db_path) as db:
         if _is_relational_table(normalized_table_name):
-            _replace_relational_table(
+            return _replace_relational_table(
                 db,
                 table_name=normalized_table_name,
                 headers=normalized_headers,
                 rows=normalized_rows,
             )
-            return
 
         db.execute(
             f'DROP TABLE IF EXISTS {_quoted_identifier(normalized_table_name)}',
@@ -625,6 +636,7 @@ def replace_table_data(
             headers=normalized_headers,
             rows=normalized_rows,
         )
+        return None
 
 
 def replace_table_data_from_csv(
@@ -633,7 +645,7 @@ def replace_table_data_from_csv(
         csv_path: str,
         table_name: str | None = None,
         preloaded: tuple[list[str], list[tuple[str, ...]]] | None = None,
-) -> tuple[str, list[str], list[tuple[str, ...]]]:
+) -> tuple[str, list[str], list[tuple[str, ...]], str | None]:
     resolved_table_name = (
         table_name_for_csv(csv_path)
         if table_name is None
@@ -643,7 +655,7 @@ def replace_table_data_from_csv(
         headers, rows = preloaded
     else:
         headers, rows = _read_csv_rows(csv_path)
-    replace_table_data(
+    warning = replace_table_data(
         db_path,
         table_name=resolved_table_name,
         headers=headers,
@@ -657,7 +669,7 @@ def replace_table_data_from_csv(
         resolved_table_name,
         len(rows),
     )
-    return resolved_table_name, final_headers, rows
+    return resolved_table_name, final_headers, rows, warning
 
 
 def get_table_columns(
