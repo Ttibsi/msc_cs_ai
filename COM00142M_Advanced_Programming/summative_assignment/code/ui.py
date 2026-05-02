@@ -268,7 +268,10 @@ def _upload_csv(
         sync()
 
     try:
+        import time
+        start = time.time()
         cleanup_report = cleanup_entire_table(conn, imported_table_name, apply=True)
+        print(f"Cleanup time: {(time.time() - start):.6f} secs")
     except Exception as e:
         _log_error('Upload CSV / cleanup after import', e)
         messagebox.showerror(
