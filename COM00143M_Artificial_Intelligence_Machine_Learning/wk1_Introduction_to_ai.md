@@ -44,4 +44,11 @@ dangers of AI:
 * safety-critical applications - and the fatal injuries that may come with it 
 * cybersecurity
 
-
+Competitions in AI
+* SAT Competition
+    - Multiple tracks
+    - Goal is to solve the boolean satisfiability problem fastewr than others
+* robocup
+    - robots learning to play football against each other
+    - been running since 1997, over 40 teams take part
+    - different leagues for different shaped robots, including humanoid and roomba-like
