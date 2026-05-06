@@ -29,3 +29,19 @@ AI capabilities needed for the turing test
 Interaction with the real world will also require:
 * computer vision
 * robotics
+
+### Lesson 2 - State of the Art in AI
+1956 - Logic Theorist wrote a proof for a theorem shorter than the one in the a known paper
+    - a paper on this subject was rejected
+General Problem Solver - the first program to use the "thinking humanly" approach
+1958 - lisp language created, dominant AI programming language for the late 1900s
+
+dangers of AI:
+* Lethal autonomous weapons
+* surveillance and persuasion
+* biased decision making
+* impact on employment
+* safety-critical applications - and the fatal injuries that may come with it 
+* cybersecurity
+
+
