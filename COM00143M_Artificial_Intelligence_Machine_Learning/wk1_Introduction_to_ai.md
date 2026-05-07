@@ -52,3 +52,22 @@ Competitions in AI
     - robots learning to play football against each other
     - been running since 1997, over 40 teams take part
     - different leagues for different shaped robots, including humanoid and roomba-like
+
+### Lesson 3 - Intro to AI Search
+AI search is a powerful technique for solving problems when we need a sequence of actions to
+achieve a goal. Key concepts include: states, actions, goals.
+
+Search problem examples:
+* rubiks cube
+* robot that delivers packages
+
+Given a current state, the valid actions to take are a finite set (mathematical set)
+ex `ACTIONS(Liverpool) = {ToManchester, ToBirmingham, ToCardff}`
+in the problem of getting from london to liverpool
+
+In short, this is some form of search problem, such as Breath-First search
+
+Agent - anything that cn be viewed as percieving its environment through sensors and acting
+upon that environment through actuators
+Percept - any content the agent's sensors are perceiving
+
