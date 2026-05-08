@@ -71,3 +71,22 @@ Agent - anything that cn be viewed as percieving its environment through sensors
 upon that environment through actuators
 Percept - any content the agent's sensors are perceiving
 
+### Lesson 4 - Introduction to Logic
+Logic in AI:
+- used to find errors
+- used for scheduling
+- used for designing scientific experiments
+
+AI can derive new knowledge from an existing body of knowledge using inferrence algorithms
+These AI agents rely on their Knowledge Base (KB)
+    - a set of sentences that contains everything they know)
+    - expressed in a "knowledge representation language"
+
+TELL - an instruction to add a new sentence to the knowledge base
+ASK - an instruction to query what is known
+
+A knowledge base agent goes through three steps
+    - TELL the kb what it percieves
+    - ASK what action should be performed
+    - the agent TELLs which action was chosen
+This is the whole agent algorithm
