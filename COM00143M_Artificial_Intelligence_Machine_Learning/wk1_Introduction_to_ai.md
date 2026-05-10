@@ -90,3 +90,23 @@ A knowledge base agent goes through three steps
     - ASK what action should be performed
     - the agent TELLs which action was chosen
 This is the whole agent algorithm
+
+### Lesson 5 - Introduction to Machine Learning
+Machine learning is one of the most important areas within AI
+- Unsupervised learning - AI is given examples, has to learn patterns (ex clustering)
+- supervised learning - given examples along with the desired output
+- reinforcement learning - AI takes action and learns from the results
+
+An agent is learning if it improves it's performance after making observations of the real world
+
+When an output is a finite set of values (ex sunny/cloudy/rainy), it's a classification problem
+If the output is a number, it's called regression
+
+Underfitting - when a hypothesis fails to find a pattern in the data. This usually means there 
+isn't enough data to train the model on
+
+Overfitting - when a model pays too much attention to the particular data it was trained on and 
+can't handle unseen data correctly
+
+### Lesson 6 - Contemporary AI
+
