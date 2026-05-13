@@ -68,3 +68,69 @@ Evaluate an algorithm in 4 ways
 - cost optimality
 - time complexity
 - space complexity
+
+### Lesson 3 - Uninformed Search Strategies
+Uninformed search algorithms are given the formulation of the problem ( the search space ) and
+nothing else. They can't estimate how close they are to the goal.
+These are sometimes called blind search.
+
+informed search algorithms use functions called heuristics to calculate how good their selections
+have been
+
+Breadth-first search
+    - Uses a queue
+
+BFS pseudocode from "Artificial Intelligence: A Modern Approach" section 3.4 (fig 3.9)
+```
+function BREADTH-FIRST-SEARCH(problem) return a solution node or failure
+    node <- NODE(problem.INITIAL)
+    if problem.IS-GOAL(node.STATE) then return node
+
+    frontier <- FIFO queue with node as an element
+    reached <- problem.INITIAL
+
+    while not IS-EMPTY(frontier) do
+        node <- POP(frontier)
+
+        for each child in EXPAND(problem, node) do
+            s <- child.STATE
+            if problem.IS-GOAL(s) then return child
+            if s is not in reached then
+                add s to reached
+                add child to frontier
+    return failure
+```
+Time and space complexity are both O(n^2) as every node remains in memory
+
+Depth first Search
+    - uses a stack / LIFO
+    - two types of algorithm - one for trees, one for graphs
+
+Depth-limited search is a limited form of DFS that will only search until it hits a specific
+depth, considering any nodes below that depth as non-existant. This prevents an infinite loop
+when traversing a graph as the algorithm will give up and try a different route instead.
+
+Iterative Deepening search builds on this, this is an algorithm that checks every element in a
+given depth before moving on to the next depth layer until a solution is found.
+
+```
+function ITERATIVE-DEEPENING-SEARCH(problem) returns a solution node or failure
+    for depth = 0 to INF do
+        result <- DEPTH-LIMITED-SEARCH(problem, depth)
+        if result != cutoff then return result
+
+function DEPTH-LIMITED-SEARCH(problem, l) returns a node or failure or cutoff
+    frontier <- stack with NODE(problem.INITIAL) as an element
+    result <- failure
+
+    while not IS-EMPTY(frontier) do
+        node <- POP(frontier)
+        if problem.IS-GOAL(node.STATE) then return node
+
+        if DEPTH(node) > l then
+            result <- cutoff
+        else if not IS-CYCLE(node) do
+            for each child in EXPAND(problem, node) do
+                add child to frontier
+    return result
+```
