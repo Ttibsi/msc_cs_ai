@@ -20,3 +20,22 @@ GBFS - expands first the node with the lowest heuristic value (appears to be clo
 * Can be complete in finite search spaces but not infinite ones.
 * worst case time/space is both O(V), but can be reduced to O(BM) in the best case
 
+GBFS Algorithm pseudocode from wikipedia:
+```
+procedure GBS(start, target) is:
+    mark start as visited
+    add start to queue
+
+    while queue is not empty do:
+        current node <- vertex of queue with min distance to target
+        remove current_node from queue
+
+        for each neighbor n of current_node do:
+            if n not in visited then:
+                if n is target:
+                    return n
+                else:
+                    mark n as visited
+                    add n to queue
+    return failure
+```
