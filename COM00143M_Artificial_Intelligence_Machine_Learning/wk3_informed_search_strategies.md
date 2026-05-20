@@ -39,3 +39,26 @@ procedure GBS(start, target) is:
                     add n to queue
     return failure
 ```
+
+If the heuristic has simple properties, then A* is guaranteed to find an optimal solution
+A* takes cost into consideration as well as the heuristic. It is not required that the 
+heuristic finds a goal state
+
+`f(n) = g(n) + h(n)`
+- g(n) is the path cost from the initial state to node n
+- h(n) is the estimated cost of the shortest path from n to the goal
+
+admissible heuristic - one that never overestimates the cost to reach a goal
+    - an admissible heuristic is optimistic
+
+A* properties
+- It will always find a viable solution if one exists
+- it will always find the optimal solution first
+- It is optimally efficient
+
+Contour - a boundary in the state space that encloses all states with a cost less or equal
+to a set value
+
+GBFS vs Iterative Deepening
+    - GBFS does not regenerate nodes, Iterative Deepening does
+    - the heuristic help GBFS select nodes close to the goal
