@@ -62,3 +62,17 @@ to a set value
 GBFS vs Iterative Deepening
     - GBFS does not regenerate nodes, Iterative Deepening does
     - the heuristic help GBFS select nodes close to the goal
+
+### Lesson 2 - Design of Heuristics
+- A bad heuristic can break an algorithm - GBFS is more susceptible to this issue than A*
+
+- Effective Branching Factor - a measure that quantifies the average number of children that 
+can be found in an iteration?
+
+- Effective Depth - a heuristic reduces the effective depth by aq constant K compared to the 
+true depth (of the search space? not clear)
+
+- Domination - when one heuristic tends to perform better than another one. This is a mark of 
+efficiency
+
+- Relaxation - relaxing the rules of the problem to get simpler solutions
