@@ -22,7 +22,7 @@ GBFS - expands first the node with the lowest heuristic value (appears to be clo
 
 GBFS Algorithm pseudocode from wikipedia:
 ```
-procedure GBS(start, target) is:
+procedure GBFS(start, target) is:
     mark start as visited
     add start to queue
 
