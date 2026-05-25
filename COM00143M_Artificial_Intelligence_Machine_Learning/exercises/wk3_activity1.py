@@ -46,16 +46,6 @@ def steps(start: str, end: str) -> int:
     return 1000
 
 
-def get_minimum(nodes: list[str]) -> str:
-    min_val = 1000
-    min_node = 'Z'
-    for node in nodes:
-        if heuristics[node] < min_val:
-            min_node = node
-
-    return min_node
-
-
 def greedy_best_first_search() -> None:
     visited = ["A"]
     q = ["A"]
@@ -78,7 +68,30 @@ def greedy_best_first_search() -> None:
 
 
 def astar() -> None:
-    ...
+    visited = ["A"]
+    q = ["A"]
+
+    while "H" not in visited:
+        neighbors = connections[visited[-1]]
+
+        values = {n: 0 for n in neighbors}
+        for n in neighbors:
+            if n in visited:
+                values.pop(n)
+                continue
+
+            value = heuristics[n] + steps(visited[-1], n)
+            if value > 1000:
+                value = heuristics[n] + steps(n, visited[-1])
+                if value > 1000:
+                    raise AssertionError(f"ERROR: {visited[-1]} | {n}")
+
+            values[n] = value
+
+        visited.append(min(values, key=values.get))
+
+    print(f"A-star: {visited}")
+
 
 def main() -> int:
     greedy_best_first_search()
