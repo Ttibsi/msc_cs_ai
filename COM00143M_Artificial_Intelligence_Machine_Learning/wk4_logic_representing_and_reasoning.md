@@ -78,3 +78,19 @@ Backward chaining instead works back from the query. If the given proposition is
 in the KB, no works is needed. Otherwise, the required implications are calculated recursively 
 until we can add the query and it's prerequisites, or can work backward no more. This also 
 runs in linear time.
+
+### Lesson 3 - Brief Introduction to First Order Logic
+Propositional logic can be very verbose, so first-order logic (FO logic) was created to be more 
+expressive and compact.
+
+FO Logic assumes the world is full of objects that are related in various ways instead of just
+dealing with isolated facts like Propositional logic.
+
+An upside down A is a "for all" symbol. I'll write this as a standard A in these notes
+`Ax.Person(x)` - `Person(x)` means that every x is an object of type Person.
+
+The symbol of a reversed E means "there exists". I'll write this as a standard E in these notes
+`Ex.Person(x)` means that there exists an object that is a person
+
+`Ax.Person(x) => Ep.Parent(p,x)`
+This means "Every person has a parent"
