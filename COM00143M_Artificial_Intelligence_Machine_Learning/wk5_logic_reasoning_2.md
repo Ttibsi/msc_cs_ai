@@ -38,3 +38,17 @@ Soduku example:
 * Write rules to denote that a square only has a single number in it
     ( No two numbers can be in the same letter using `¬` and `v` )
 
+### Lesson 2 - A Complete Backtracking Algorithm for SAW
+DPLL algorithm - Named after the four people who invented it
+    - Dates back to the 1960s, but has been expanded on and "current versions are almost 
+    unrecognisable"
+    - "complete" = guarunteed to find a solution given enough time
+        - note that this could be longer than the length of the universe
+    - DPLL runs in exponential time
+    - Based on DFS
+
+* A partial model assigns some of the proposition symbols to true and false, and leaves others
+unassigned
+* DPLL starts with an empty partial model and attempts to find a way to extend it step-by-step
+until the formula is satisfied
+* DPLL is a binary-tree
