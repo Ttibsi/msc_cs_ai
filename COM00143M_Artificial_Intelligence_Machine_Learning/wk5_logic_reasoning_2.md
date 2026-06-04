@@ -51,4 +51,49 @@ DPLL algorithm - Named after the four people who invented it
 unassigned
 * DPLL starts with an empty partial model and attempts to find a way to extend it step-by-step
 until the formula is satisfied
-* DPLL is a binary-tree
+* DPLL is a binary-tree (every node has exactly 2 children) traversed in a depth-first search order
+
+Time complexity: `O(2^n)` where `n` is the number of proposition symbols
+Can be efficient, but not guaranteed to be
+
+DPLL requires a formula to be in CNF
+Usually implemented recursively
+Frontier set usually not stored in memory at all
+
+* DPLL features early termination, meaning if a part of the statement is true, then the whole
+statement is true, and the algorithm can break out of it's calculations
+* Pure symbol - a symbol that appears with the same sign in every clause (either `¬` for 
+negation or not)
+* Unit clause - a clause with just a single true/false literal
+
+```
+function DPLL_SATISFIABLE(s) returns true or false
+    inputs: s, a sentence in propositional logic
+
+    clauses <- a set of clauses in the CNF representation of s
+    symbols <- a list of propositional symbols in s
+    return DPLL(clauses, symbols, {})
+
+function DPLL(clauses, symbols, model) return true or false
+    if every clause in clauses is true in model
+        return true
+
+    if any clause in clauses is false in model 
+        return false
+
+    P, value <- FIND_PURE_SYMBOL(symbols, clauses, model)
+    if P is non null
+        model.add({P=value})
+        return DPLL(clauses, symbols - P, model)
+
+    P, value <- FIND_UNIT_SYMBOL(symbols, clauses, model)
+    if P is non null
+        model.add({P=value})
+        return DPLL(clauses, symbols - P, model)
+
+    P <- FIRST(symbols)
+    rest <- REST(symbols)
+    model.add({P=true}) or model.add({P=false})
+    return DPLL(clauses, rest, model)
+```
+
