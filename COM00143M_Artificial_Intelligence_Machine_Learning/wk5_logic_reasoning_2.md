@@ -97,3 +97,40 @@ function DPLL(clauses, symbols, model) return true or false
     return DPLL(clauses, rest, model)
 ```
 
+### Lesson 3 - Incomplete, Randomised Algorithm for SAT
+WalkSAT is an example of a local search method that searches in the space of models.
+In contract to DPLL which searches partial models
+
+* Starts by selecting a random model, make a small change. Iterative algorithm
+* Can only prove if a formula is satisfiable
+* Complimentary to DPLL as WalkSAT can solve some formulae faster than DPLL
+* WalkSAT does not remember previous models it's seen.
+* Each iteration chooses one symbol to flip
+* WalkSAT is greedy, it will push the search toward solutions that are more likely
+    * I think it does this by not flipping symbols that it knows are correct
+* WalkSAT works on CNF formulae
+
+```
+function WalkSAT(clauses, p, max_flips) returns a model or failure
+    inputs: clauses, a set of clauses in propositional logic
+            p, the probability of choosing to do a "random walk", typically 0.5
+            max_flips, number of value flips allowed before giving up
+
+    model <- a random assignment of true/false to the symbols in clauses
+
+    for each i = 1 to max_flips do
+        if model satifies clauses then return model
+
+        clause <- a randomly selected clause from clauses that is false
+        if random(0, 1) <= p then
+            flip value in model of a randomly selected symbol in clause
+        else 
+            flip whichever symbol in clause maximised the number of satisfied clauses
+
+    return failure
+```
+
+WalkSAT is most useful when we expect a solution to exist. We cannot detect if it doesn't from
+this algorithm
+
+SAT is NP-complete.
