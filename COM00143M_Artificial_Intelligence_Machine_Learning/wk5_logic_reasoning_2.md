@@ -134,3 +134,24 @@ WalkSAT is most useful when we expect a solution to exist. We cannot detect if i
 this algorithm
 
 SAT is NP-complete.
+
+### Lesson 4 - Scalability of SAT
+SAT formulae are used in security protocol verification and hardware verification.
+
+In 2016, a paper was released detailing how a large-scale version of WalkSAT called 
+cube-and-conquer was used to solve a complex unsolved mathematical theorem, part of the 
+Ramsey Theory. This is the "Boolean Pythagorean Triples problem" that states that:
+
+```
+Theorem 1. The set {1, . . . , 7824} can be partitioned into two parts, such that
+no part contains a Pythagorean triple, while this is impossible for {1, . . . , 7825}.
+```
+
+which over the years has had a prize of $100 for proving the theorem.
+
+The calculations required to solve this took over 35,000 processing hours to resolve and 
+another 16,000 hours to verify, whih was reduced due to teh algorithm's capability of 
+"massive parallelization"
+
+Paper title: Solving and Verifying the Boolean Pythagorean Triples Problem via 
+Cube-and-Conquer
