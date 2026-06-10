@@ -48,3 +48,18 @@ Finding a good value for K
 I think what's going on here is that the whole algorithm is being run for k=1 to 5 and you just 
 compare the final total distances to all the centers to see which value of K brings the nodes
 closest.
+
+### Lesson 3 - Principles and Pitfalls of Supervised Learning
+hypothesis - a potential solution drawn from the "hypothesis space", such as the set of javascript
+            functions or the set of 3-SAT boolean logic formula
+            - represented as the function `h()` which is an approximation of the true function `f()`
+
+Test Set - the input data that is used to test if the model will return the expected output value
+Underfitting - the hypothesis can't find a pattern in the data
+Variance - the amount of change in the hypothesis due to fluctuations in the training data.
+         - Bigger/more variance is worse
+Overfitting - The model pays too much attention to the data it was trained on and can't evaluate
+                unseen data during testing
+
+Hypothesis space - the space of hypotheses that a supervised learning method selects from. It could
+                    be the polynomial functions in one variable
