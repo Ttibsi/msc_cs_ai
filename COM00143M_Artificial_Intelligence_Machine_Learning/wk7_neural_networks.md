@@ -17,3 +17,11 @@ to each input parameter A,B,C
 * On the first iteration, you estimate a weight using the `least squares linear regression` method.
     * Another option is `Least Absolute Deviation`
 * weights are chosen to minimise the sum of the square of the errors
+
+Logistic regression is very closely related to linear regression, but instead of predicting a
+number, it predicts a probability of 0-1.
+This works by taking the result of a linear function and passing it through a logistic function
+
+Often, test data will go through the calculations and the value closest to the result will be 
+selected. (EX if you get the result 0.7, the binary result of 1 will be selected). This is 
+called "Multiresponse linear regression"
