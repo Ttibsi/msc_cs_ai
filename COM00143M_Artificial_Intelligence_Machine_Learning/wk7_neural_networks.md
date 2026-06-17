@@ -75,3 +75,12 @@ of replacing it wholesale.
     * If this perturbation is small, the next layer is very similar to the previous
 * This are often used with CNNs in vision applications, but are a general-purpose tool
 * Not uncommon to see hundreds of layers in a residual CNN.
+
+* Training consists of tuning parameters (weights) to minimise the loss on the training set
+    * Usually done through some variant of Stochastic Gradient Descent (SGD)
+* Real world NNs will be very large, so during SGD, it's common to use small minibatches to 
+aid in escaping local minima and reduce the computational cost.
+* Minibatches can be calculated independantly, so are often sized to the take advantage of 
+GPU and TPU parallelism
+* Batch Normalisation - technique used to improve the rate of convergence during SGD
+    * rescales values in internal layers of the network from examples within each minibatch
