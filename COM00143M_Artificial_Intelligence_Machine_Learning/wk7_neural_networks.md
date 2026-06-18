@@ -47,9 +47,12 @@ of the calculation
 
 activation functions:
 `sigmoid(x) = 1 / (1 + e^-x)`
+    * also called logistic function
 `relu(x) = max(0, x)`
+    * Also called the Rectifier
 `softplus(x) = log(1 + e^x)`
 `tanh(x) = (e^2x - 1) / (e^2x + 1)`
+`hard_threshold(x) = x >= 0 ? 1 : 0`
 
 Gradient Descent learning - calculate the gradient of the loss function with respect to the weights
                             and adjust the weights along the gradient to reduce the loss
@@ -84,3 +87,51 @@ aid in escaping local minima and reduce the computational cost.
 GPU and TPU parallelism
 * Batch Normalisation - technique used to improve the rate of convergence during SGD
     * rescales values in internal layers of the network from examples within each minibatch
+
+---
+A neuron is a linear function of it's inputs.
+A neuron with n inputs has n+1 weights
+The linear function is followed by the activation function, which is deliberately not a linear 
+function
+
+logistic regression uses gradient ascent, starting with an arbitrary assignment for weights
+and iteratively improving them.
+
+The logistic regression function is equivalent to a neuron as the logistic function as its
+activation function.
+
+Convolutions
+* Some neurons act as a filter. Ex you may have a 3x3x1 filter, meaning that for each 3x3 space
+in the input layer, 1 output node is populated. 
+* The purpose of this is to reduce the amount of weights needed to calculate.
+* Every copy in the output layer uses the same weights
+
+Calculating output volume sizes:
+* If Input volume is AxBxC, and filters have size PxQxC
+* (A-P+1) x (B-Q+1) x n
+* n is the number of filters in the layer
+
+When calculating, the numbers in the multiplier (ex 10x10x1) are the number of neurons, not the 
+number of weights. THERE IS ALWAYS ONE MORE WEIGHT FOR THE NEURON ITSELF, AS WELL AS A WEIGHT FOR
+EVERY INPUT. In a 10x10x1 layer, we'd have 11 weights for every node on the second layer
+
+Example:
+Input layer: 15x15x1
+First convolutional layer: 5 filters of 3x3x1
+How many _weights_ are there?
+
+3x3x1 size = 9 inputs = 10 weights per filter. 10 * 5 filters = 50 weights total
+Layer size (output volume) = 13x13x5
+    This is calculated as (15 - 3 + 1) x (15 - 3 + 1) * 5 filters
+    See line 111 above
+
+Second convolutional layer: 5 filters of 2x2x5
+
+Each filter has 2x2x5 inputs = 20 inputs = 21 weights per filter. 21 * 5 filters = 105 weights
+Layer size is calculated to be 12x12x5 using the same pattern as above
+
+Output layer - fully connected layer with 10 neurons
+
+Each neuron has 12x12x5 inputs, 12*12*5 = 721 * 10 neurons = 7210 weights
+
+Total weights in the network = 50 + 105 + 7210 = 7365
