@@ -135,3 +135,12 @@ Output layer - fully connected layer with 10 neurons
 Each neuron has 12x12x5 inputs, 12*12*5 = 721 * 10 neurons = 7210 weights
 
 Total weights in the network = 50 + 105 + 7210 = 7365
+
+### Lesson 3 - Perils of Machine Learning in the Real World
+* Used widely in machine autonomy - most commonly NNs in places such as autonomous vehicles
+* use of RL to learn how to drive or react in specific scenarios
+* Biggest problem is "interpretability". We dont know how NNs identify specific things 
+(weights and values)
+* NNs running into new things they can't identify - not included in the training data
+* Overfitting might not recognise things such as traffic lights that are in different designs
+or use different bulbs, for example
