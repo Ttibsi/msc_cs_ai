@@ -38,6 +38,8 @@ propositional symbols are used to represent different logic statements that can 
 Conjunctive Normal Form (CNF) - a standard way of organising logical sentences so that inferrence 
 algorithms can be applied effectively.
 
+`|-` symbol is inferrence according to Sample Paper 1, and entailment according to wikipedia so...
+
 Two algorithms: Forward chaining and backward chaining
 
 A formula in CNF only uses conjunctions (`^`) and disjunctions (`v`). 
