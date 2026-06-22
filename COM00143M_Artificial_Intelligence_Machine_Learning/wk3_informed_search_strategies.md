@@ -76,3 +76,45 @@ true depth (of the search space? not clear)
 efficiency
 
 - Relaxation - relaxing the rules of the problem to get simpler solutions
+
+---
+Stack-based algorithms
+* DFS
+* Depth-first, depth-limited search
+* iterative deepening
+
+A* algorithm
+https://medium.com/@nicholas.w.swift/easy-a-star-pathfinding-7e6689c7f7b2
+
+```
+let the openList equal an empty list of nodes
+let the closedList equal an empty list of nodes
+
+put the starting node in the openList
+
+while the openList is not empty
+    let the currentNode equal the node with the least f value
+    remove the currentNode from the openList
+    add the currentNode to the closedList
+
+    if currentNode is the goal
+        return
+
+    let the children of the currentNode equal the adjacentNodes
+
+    for each child in adjacentNodes
+        if child is in the closedList
+            continue to next iteration
+
+        child.g = currentNode.g + distance between child and current
+        child.h = distance from child to end
+        child.f = child.g + child.h
+
+        if child.position is in the openList's nodes positions
+            if child.g is higher than the openList node's g
+                continue
+
+        add the child to the openList
+```
+
+
