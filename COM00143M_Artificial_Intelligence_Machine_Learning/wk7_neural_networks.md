@@ -136,6 +136,17 @@ Each neuron has 12x12x5 inputs, 12*12*5 = 721 * 10 neurons = 7210 weights
 
 Total weights in the network = 50 + 105 + 7210 = 7365
 
+---
+Amount of neurons in current layer
+* Follow formula on line 111
+* AxB is prev layer
+* PxQ is current layer
+* Ignore filters
+
+Amount of weights in current layer:
+* Multiply out the layer size and filters
+* See line 123
+
 ### Lesson 3 - Perils of Machine Learning in the Real World
 * Used widely in machine autonomy - most commonly NNs in places such as autonomous vehicles
 * use of RL to learn how to drive or react in specific scenarios
