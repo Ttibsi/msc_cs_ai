@@ -66,5 +66,23 @@ Data privacy
     - Tracking and surveillance
     - Phishing
 * GDPR is the EU protection laws
-* 
+*
 
+### Lesson 3
+Data comes in a wide variety of forms, each having its own characteristics, advantages
+and challenges.
+
+* Concept - The class or category we're interested in
+* Concept description - A thing that is to be learned
+* Instance - An example of a concept, a single datum
+* Attribute - instances are characterised by their values on a predefined set of attibutes/features.
+    - Attributes can depend on other attributes, ex spouse name depends on isMarried
+
+Nominal attributes - discrete strings with no explicit relation
+    - ex weather = sunny, overcast, rainy
+Ordinal attributes - orderable, but with no notion of distance
+    - ex hot, mild, cool
+Interval attributes - values measured in fixed, equal units
+    ex temperature in celcius
+Ratio attributes - a value with a defined zero point
+    - ex distance from a location
