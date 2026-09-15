@@ -53,3 +53,53 @@ DIKW pyramid (top to bottom)
 * Information - linked elements
 * Data - abstracted elements
 * World
+
+ARFF files
+----------
+* Attribute-Relation File Format
+* Used in WEKA
+* Data cleaning will usually take a lot longer than data preparation
+* Company-wide database integration = data warehousing
+* XRFF - A version of ARFF that wraps it in XML
+* `%` denotes a comment
+* Attributes can be defined using the `@attribute` tag
+* Strings can be escaped in the standard way `\"`
+
+```arff
+@relation weather
+
+@attribute bag_ID {1, 2, 3, 4, 5, 6, 7}
+@attribute bag relational
+    @attribute outlook {sunny, overcast, rainy}
+    @attribute temperature numeric
+    @attribute humidity numeric
+    @attribute windy {true, false}
+@end bag
+@attribute play? {yes, no}
+
+@data
+1, "sunny, 85, 85, false\nsunny, 80, 90, true", no
+2, "overcast, 83, 86, false\nrainy, 70, 96, false", yes
+```
+Example from Fig 2.3 on page 88 of "Data Mining" by Ian H Witten et al
+
+If there are values that default to zero, you can leave those out and just index
+the fields you are populating. Ex:
+`{1 X, 6, Y, 10 "class A"}
+
+* Indexes start at 0 in ARFF
+* Some values are missing because that's what the user is looking for
+    * EX a doctor might do a test to see which value is missing to come up with a diagnosis
+* Some data has rogue attributes/values, meaning the data wasn't collected originally
+    * May have been considered unimportant at the time
+    * Data may just change over time as well.
+
+* Useful tools include histograms and distribution charts to visually see how the data looks
+
+Examples:
+* Missing values - Survey responses may refuse to answer specific questions such as age or income
+* Inaccurate Values - People might make slight intentional errors to identify which data ends up
+    being sold to advertisers, such as spelling in their address or extentions to their email
+    address
+* Unbalanced Values - Weather data for a location where it's predominantly one weather type, such
+    as always raining in ireland.
