@@ -137,3 +137,23 @@ Undetected issues
 codebook = description of the data, a form of metadata
     * list value encodings for radiobutton style questions
     * what type of data (ex hierarchical, graph etc)
+
+### Task 1
+Look at the provided `gcse.arff` file and identify issues with the data
+Write a bunch of rules to follow to clean up the data
+
+* If <firstname is not uppercase> then <convert to uppercase>
+* If <firstname contains whitespace> then <strip whitespace>
+* if <len(firstname> le 3> then <remove row>
+* if <lastname contains whitespace> then <strip whitespace>
+* if <len(lastname) le 3>  then <remove row>
+* if <gender[0].lower == 'm'> then <replace with "Male">
+* if <gender[0].lower == 'f'> then <replace with "Female">
+* If <dob out of range of 16-18 year olds taking their GCSE> then <remove row>
+* If <subject is not wrapped in quotes> then <add quotes>
+* If <grade is a number> then <replace with correct enumerated letter grade starting with A* = 1>
+* If <grade letter out of range of predefined enumeration> then <replace with 'U' for lowest grade>
+* If <grade is not supplied> then <set grade to U>
+* If <subject is not present but grade is> then <remove row>
+* If <subject and grade are both empty> then <do nothing>
+
