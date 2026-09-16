@@ -103,3 +103,37 @@ Examples:
     address
 * Unbalanced Values - Weather data for a location where it's predominantly one weather type, such
     as always raining in ireland.
+
+### Lesson 2 - Cleaning Data
+Five principles of dataa cleaning:
+* You can't fix problems until you seee them
+* Don't fix problems by making things worse
+* Justify your fixes
+* Sometimes you shouldn't fix
+* At the end, acknowledge residual uncertainty (There is always residual uncertainty)
+
+Undetected issues
+- Suspiciously repeated values may be placeholders
+- Some data might be filled in with averages instead of single data points
+
+* Data Cleansing
+    * Errors from data entry
+    * Physically impossible values
+    * missing values
+    * outliers
+    * spaces, typos
+    * Errors against codebook(?)
+* data transformation
+    * aggregating data
+    * Extrapolating data
+    * derived measures
+    * creating dummies
+    * reducing number of variables
+* combining data
+    * merging/joining datasets
+    * set operators
+    * creating views
+
+codebook = description of the data, a form of metadata
+    * list value encodings for radiobutton style questions
+    * what type of data (ex hierarchical, graph etc)
