@@ -157,3 +157,21 @@ Write a bunch of rules to follow to clean up the data
 * If <subject is not present but grade is> then <remove row>
 * If <subject and grade are both empty> then <do nothing>
 
+### Lesson 3 -  Feature extraction and creation from tabular data
+* Adding extra variables to a decision tree algorithm decreases accuracy
+    * When running, this algorithm should select the most likely variable to switch on
+    (which edge to follow to the next similar datum)
+* Nearest Neighbor is highly susceptible to irrelevant attributes
+    * One possibility is to use a decision tree first and strip out the attributes not used
+    before passing into a nearest neighbor algorithm
+
+Benefits of using subsets of data
+* resulting models are easier to understand
+* takes less computation
+
+scheme dependant subsetting - applying planned learning algorithm to multiple potential subsets of
+data and using the subset that has the best accuracy
+
+Filter method - information gain ranking
+    - filter methods use statistical properties like information gain or correlation evaluated
+    independently of the model
