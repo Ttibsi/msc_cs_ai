@@ -175,3 +175,22 @@ data and using the subset that has the best accuracy
 Filter method - information gain ranking
     - filter methods use statistical properties like information gain or correlation evaluated
     independently of the model
+
+### Lesson 4 - Data Integration
+Merging multiple data sets isn't easy and takes up a lot of time
+
+Integrating stages:
+* extracting
+* cleaning
+* standardising
+    - EX shoe sizes - using different numbeing systems around the world
+* transforming
+    - EX changing a raw age value into an age range because a difference by
+    1 year (ex 42 YO vs 43 YO) rarely makes a difference
+    - This is called binning
+* integrating
+    - Creating the analytics base table
+
+Analytics Base Table - A table of data with redundant values removed
+    - Used as input into ML algorithms
+Analytics Record - An n x m matrix of n entities with m attributes
