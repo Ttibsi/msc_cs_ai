@@ -46,3 +46,25 @@ There are standardised transformations that should be kept to
 Contingency tables are tables that have headings along both the top and LHS
 They often show the relationship/association between two different categories
 (google it)
+
+### Lesson 2 - Key concepts in machine learning
+* ML algorithms take us from descriptive to pedictive, allowing us to predict or classify future work
+* explicit definition:
+    - ML - The study of algorithms that learn from data to make predictions or decisions without
+            being explicitly programmed
+        - Automated techniques for finding patterns in data
+* Validation set - a third set of data after training and test data that helps tune and adjust
+                a model
+* Overfitting - A model becomes too good at remembering the training data, including specific
+quirks
+* Underfitting - the model is too simple to capture the important patterns in the data.
+* Data mining is what we do, machine learning is the techniques we use to get there
+
+ML classes of task:
+* Clustering/segmentation
+* Anomaly/outlier detection
+* prediction/classification/regression
+* association rule mining
+    - This is a form of unsupervised learning that tries to find groups of items that
+    often occur together, such as buying hotdogs, buns, and ketchup together
+    - This is often used in the cross-sell technique by sales people
