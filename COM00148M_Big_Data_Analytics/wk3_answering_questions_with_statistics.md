@@ -68,3 +68,13 @@ ML classes of task:
     - This is a form of unsupervised learning that tries to find groups of items that
     often occur together, such as buying hotdogs, buns, and ketchup together
     - This is often used in the cross-sell technique by sales people
+
+### Lesson 3 - Linear Regression
+Linear regression produces a function that accepts the properties of a phenomena and 
+get the correct value of another.
+    - This is just how any function works, no? The input and output
+    - I guess it's treated like a black box
+
+It appears that `y = mx + b` is a linear regression formula to draw the graph
+To work in the other way (to fill out m and b), we can use the minimum square error algorithm
+
