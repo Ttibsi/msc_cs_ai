@@ -70,7 +70,7 @@ ML classes of task:
     - This is often used in the cross-sell technique by sales people
 
 ### Lesson 3 - Linear Regression
-Linear regression produces a function that accepts the properties of a phenomena and 
+Linear regression produces a function that accepts the properties of a phenomena and
 get the correct value of another.
     - This is just how any function works, no? The input and output
     - I guess it's treated like a black box
@@ -78,3 +78,19 @@ get the correct value of another.
 It appears that `y = mx + b` is a linear regression formula to draw the graph
 To work in the other way (to fill out m and b), we can use the minimum square error algorithm
 
+### Lesson 4 - Decision Trees
+A technique for making predictions based on input features.
+DTs split data intop increasingly specific groups based on rules.
+Used in fraud detection, medicatl diagnosis, software fault prediction
+
+Very similar to linear regression, except for categorisation instead of numeric output.
+
+Rules are an alternative to a decision tree.
+    - From the explanation, my understanding is that the difference is in the
+    actual data structure in memory?
+Rules can be added to the list of things to check easier than reshaping a whole decision tree
+Rules usually look like `if variable then value = some_value`.
+    - You can also use boolean expressions as the variable (AND, OR etc)
+    - or use other standard programming comparators for numeric values
+
+Decision tree learning algorithms all stem from the `ID3` algorithm from 1986
