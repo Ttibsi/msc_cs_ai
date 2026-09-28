@@ -94,3 +94,32 @@ Rules usually look like `if variable then value = some_value`.
     - or use other standard programming comparators for numeric values
 
 Decision tree learning algorithms all stem from the `ID3` algorithm from 1986
+
+### Lesson 5 - Evaluating Learned Models
+Just how good is a specific method, how can we compare different methods
+
+Error rates - the proportion of errors made over the whole training set
+    - This is best for things like classification algorithms
+    - Not always the best way to measure success as this uses the training data specifically
+
+Resubstitution error - the error rate when using the test data instead
+    - Not always reliable, still useful to know
+
+Boernoulli process - A succession of independent events that either succeed or fail
+    - Ex coin flipping
+
+For numeric values, we can use the Mean Squared Error (MSE) formula.
+    - Used in linear regression
+    - Alternative: mean absolute error (MAE), but does not take outliers into
+    consideration
+
+Confusion matrices and accuracy scores
+--------------------------------------
+Confusion matrix = a table with one side being the predicted values and the other dimension
+    is the actual value. A boolean table would be 2x2
+
+Accuracy, Precision, Recall, F1-score can all be calculated from a confusion matrix
+Cost sensetive learning - modifying how the data is used when training
+    - rebalancing
+    - re-sampling
+    - adjusting weighting of individual values
