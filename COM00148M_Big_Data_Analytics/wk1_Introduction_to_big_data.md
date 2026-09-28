@@ -86,3 +86,10 @@ Interval attributes - values measured in fixed, equal units
     ex temperature in celcius
 Ratio attributes - a value with a defined zero point
     - ex distance from a location
+
+- prediction - deriving unknown properties of an entity from it's known properties
+- Data scientists value CS skills for two reasons:
+    - understanding and developing machine learning algorithms
+    - Using high-performance computing
+- Moneyball - which players are the best performers
+
