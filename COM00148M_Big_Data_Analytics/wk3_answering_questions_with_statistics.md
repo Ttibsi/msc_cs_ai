@@ -123,3 +123,10 @@ Cost sensetive learning - modifying how the data is used when training
     - rebalancing
     - re-sampling
     - adjusting weighting of individual values
+
+Evaluating a model = assessing how well it performs on a given task
+    - comparing prediions to known outcomes
+    - This includes using test and training data, or using cross-validation
+
+Error score - how wrong your model is
+    - A common metric is the MSE
