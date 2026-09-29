@@ -130,3 +130,7 @@ Evaluating a model = assessing how well it performs on a given task
 
 Error score - how wrong your model is
     - A common metric is the MSE
+
+Primary criterion used to split nodes of a decision tree: information gain
+Gini impurity of 0 = the node only has 1 class, "perfectly pure"
+
