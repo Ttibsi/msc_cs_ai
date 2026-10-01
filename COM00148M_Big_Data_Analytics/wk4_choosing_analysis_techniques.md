@@ -16,13 +16,14 @@ MLR - In multiple linear regression, we have multiple dependant values
     - We also add in an intercept, usually W0
     - For each data point, we use MSE to calculate the error. We want to find the set of weights
     that minimises the total squared error.
+    - Primary objective is to predict a numeric value using multiple independant variables
 
 Evaluating model performance - often uses Residual Sum of Squares (RSS) calculation
     -total squared difference between actual values and model predictions
     - Alternative is Rsquared, varince in dependant variable in range 0-1
 
 Support Vector machine
-    - Finds the maxinmim margin hyperplane
+    - Finds the maximum margin hyperplane
         - hyperplane = liner model
     - SVMs are often used in classification problems, they find the optimal space between data
         points of opposite classes
