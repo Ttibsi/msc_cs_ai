@@ -46,4 +46,32 @@ Kernel ridge regression
     - Ridge Regression will shrink the coefficients down and reduce the OLS value
         - Different coefficients will be reduced by different amounts, not uniformly
 
+### Lesson 2 - Alternatives for Classification
+Naive Bayes Modelling
+    - Used for classification (spam/not spam)
+    - "class-conditional independence assumption"
+    - conditional probabilities of features given each class
+    - prior probabilities for each class
 
+Bayesian Statistics
+    - rooted in Bayes theorem, a fundamental property of probability theory
+    - Allows us toe continuously update our beliefs based on fresh evidence
+
+`P(A|B) = (P(B|A) * P(A)) / P(B)` where `P` is the probability of A or B
+
+Reminder that in set theory, doing `P(A|B)` means that it's the possibility of A in the
+dataset of B.
+    - Good explanation of this formula is in the youtube video `Naive Bayes, Clearly Explained`
+    by `Statquest with josh starmer`
+
+Why naive - the assumption that all features are independant once you know the category
+    - ex in spam detection, each word in the email doesn't affect other words
+    - ex in a factory producing bottles, one defective bottle doesn't affect the others
+
+Which classifiers to use
+    - gaussian naive bayes - assumes the data follows a normal distribution and is best for
+                            continuous data
+    - multinomial naive bayes - great for text classification, words are counted to assign
+                                documents to categories
+    - Bernoulli naive bayes - works well on binary data, meaning features only have two possible
+                            values.
