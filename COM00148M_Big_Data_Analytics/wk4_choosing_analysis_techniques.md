@@ -75,3 +75,20 @@ Which classifiers to use
                                 documents to categories
     - Bernoulli naive bayes - works well on binary data, meaning features only have two possible
                             values.
+
+### Lesson 3 - Choosing a learning technique
+3 step approach
+    1 - Identify the techniques that are appropriate (classification, regression, clustering)
+    2 - Quantitative performance - which are likely to perform best in terms of accuracy,
+                                    error rate etc.
+    3 - Empirical testing - If you still have multiple techniques in mind, use them all and see
+                            which gets you the best results. This can be done with smaller
+                            subsets of the data for faster iteration to start
+
+* When thinking about performance, you also need to think about technical limitations
+    - What kind of models can be trained fast enough with the hardware you have, for example
+* How will you handle outliers?
+
+* Feature engineering
+* Algorithm selection
+* parameter tuning
