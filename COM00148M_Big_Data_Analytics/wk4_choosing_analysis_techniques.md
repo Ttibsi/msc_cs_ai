@@ -92,3 +92,10 @@ Which classifiers to use
 * Feature engineering
 * Algorithm selection
 * parameter tuning
+
+---
+* Residual - difference between observed and predicted values
+* Naive bayes independance assumption does not need to hold exactly
+    - well suited to social media post sentiment analysis, spam filtering in emails, document classification
+* SVC and decision trees
+* SVR and KRR
