@@ -12,3 +12,22 @@ problem setting
 DBMS - Database management system
 Database model/schema - Description of the data at different levels of detail.
 
+Conceptual data model - high level description of dta items and characteristics
+    - represented with an Enhanced Entity Relationship model (EER)
+Logical Data Model - translates the conceptual data model into a specific
+    implementation. 
+
+Three layer architecture
+- conceptual/logical layer
+- external layer - any external data model, including UI views
+- internal layer - specifies how data is stored or organised physically.
+
+User types
+- information architect
+- business user
+- database administrator
+- application developer
+
+Data definition language - used by a DBA to represent these models
+Data manipulation language - used for CRUD operations
+
