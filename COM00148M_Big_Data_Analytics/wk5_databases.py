@@ -75,3 +75,34 @@ Enhanced ERD features:
     - Generalisation
     - specialisation
     - aggregation
+
+### Lesson 3 - Database Normalisation
+Normalisation - organising data efficiently and effectively.
+    - Deduplication of data
+    - Data integrity via thorough links and organisation
+    - flexible data scalability
+
+* Each table focusses on a single theme
+
+Anomalies
+* Insertion anomaly - unable to add new data
+* Deletion anomay - When deleting one piece of data accidentally removed other important data
+* Update anomaly - Updating a value in one place does not update a copy of it elsewhere
+
+First Normal Form
+    * Ensuring the structure is tidy - one value per cell, no repeating groups
+    * Attributes should be atomic, their values can't be broken down any further
+        - This just means any non-atomic value should be split into it's own table
+
+Second Normal Form
+    * Every non-key field is fully functionally dependant on the key
+        - not just a portion of the key
+    * Example: `student-course` table, with composite key studentID & courseID
+        * field `student name` will only apply to the studentID, not the courseID so should
+        be stored elsewhere
+
+Third Normal Form
+    * Remove transitive dependancies, don't have fields that rely on other non-ID fields
+    * example table with fields studentID (pkey), studentName, deptID, deptName
+        - The deptID should instead be a foreign key, and the deptName (dependant on deptID)
+            should be stored elsewhere
