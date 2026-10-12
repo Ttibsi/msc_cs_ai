@@ -63,7 +63,8 @@ Limitations
 - ERDs don't include domain constraints
     - eg "course credits must be an integer between 10 and 20"
 
-Domain - a set of values that may be assigned to an attribute for each individual entry.
+Domain - a set of values that may be assigned to an attribute for each individual
+    entry.
     - ex an enum of possible values
 
 Relatonships are shown as rhombuses on an ERD
@@ -106,3 +107,12 @@ Third Normal Form
     * example table with fields studentID (pkey), studentName, deptID, deptName
         - The deptID should instead be a foreign key, and the deptName (dependant on deptID)
             should be stored elsewhere
+
+Candidate key - minimal set of attributes that can uniquely identify an entity instance
+Relational constraints
+    - functional dependancies
+    - referencial integrity constraints
+    - domain constraints
+
+Superkey - multiple attributes that uniquely identifies tuples
+    - may contain extraneous attributes
