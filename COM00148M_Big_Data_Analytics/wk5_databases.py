@@ -40,7 +40,9 @@ Attributes are pieces of information to store on each entity
     - ex `id`, `name` etc
     - Drawn as an oval pointing to an entity
 Composite attributes - attributes made of multiple others
+    - These are represented as one ellipsis with other ellipsis pointing at it
 Multivalue attributes - arrays
+    - represented with a double oval
 Derived values - that can be calculated based off other data
     - ex age can be calculated off of stored DOB
 key attributes - unique identifiers, eg ID field
@@ -60,3 +62,16 @@ Limitations
 - ERDs cannot represent complex business rules, eg prerequisite classes for a course
 - ERDs don't include domain constraints
     - eg "course credits must be an integer between 10 and 20"
+
+Domain - a set of values that may be assigned to an attribute for each individual entry.
+    - ex an enum of possible values
+
+Relatonships are shown as rhombuses on an ERD
+    - Can be thought of as two triangles pointing between two entities
+    - You can have "degrees of relationships", such as binary, unary recursive, or ternary
+    - ternary relationships are shown as diamonds
+
+Enhanced ERD features:
+    - Generalisation
+    - specialisation
+    - aggregation
