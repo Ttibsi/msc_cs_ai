@@ -107,3 +107,36 @@ JOIN SUBJECT on e.subjectId = SUBJECT.subjectId
 WHERE SUBJECT.subjectName = "Maths"
 AND e.grade = "U"
 ```
+
+### Lesson 2 - Next Generation of databases
+These are databases that don't use the realtional model, such as nosql databases.
+They rely on graphs and other database architectures
+
+nosql = "not only sql".
+
+ACID consistency model
+    - Atomic - all operations in a database transaction should be atomic
+    - Consistent - All users see the same updated data
+    - Isolated - transactions do not contend with each other to modify data.
+        - Trying to modify the same data at the same time is moderated by the database,
+        queuing the transactions to prevent issues
+    - Durable - The results of a transaction are permanent, even with failures
+
+BASE consistency model
+    - Basic availability
+    - Soft state - when the database is updated, it may be inconsistent for some time
+    - Eventual consistency - when the database is in a known, consistent state
+
+BASE is primarily used by key-value and document stores
+(Redis, maybe?)
+
+Key-Value stores - a type of database, everything is treated as a blob of data associated with a key.
+Document database - document stores, Similar to KV stores, they instead store all data inside
+    large JSON or XML documents in their memory
+Graph databases - ex graphQL, Modelled on a graph, nodes are data values and edges are relationships.
+
+XQuery - a language designed to query XML documents, often used in XML-based databases
+eXist - XML database open source example
+
+xml-based databases are often used in content management systems.
+json-based databases are often used in web-based workloads.
