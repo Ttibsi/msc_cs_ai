@@ -140,3 +140,31 @@ eXist - XML database open source example
 
 xml-based databases are often used in content management systems.
 json-based databases are often used in web-based workloads.
+
+### Lesson 3 - Big Data, Hadoop
+
+5 Vs of big data: Volume, Velocity, Variety, Veracity, Value
+Big data - datasets too large to process or capture with traditional tools
+
+Apache Hadoop - open source framework created to store and analyse big data
+NoSQL arose in the same year Hadoop did, 2005
+Apache Spark superceded Hadoop in 2014, but both are still used
+
+Benefits include
+- better insights
+- easier/more informed decision making
+- personalised customer experiences
+- improved operational efficiency
+
+Hadoop
+------
+- Inspired by google's internal filesystem and MapReduce
+- Storage and processing can be split between different machines for distributed deployments
+- Distributed file system is responsible for storing data across multiple nodes
+    - high availability through rplication
+- MapReduce computational engine breaks data into chunks and aggregates the results of a query
+- YARN - Yet Another Resource Negotiator - coordinates all resources, decided what job
+runs where, and load balancing.
+
+- Files stored are split into blocks, each block is stored in multiple locations for redundancy
+- Block-based becase of parallel processing of queries
