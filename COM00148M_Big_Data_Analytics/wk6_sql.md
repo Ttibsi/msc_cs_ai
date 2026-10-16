@@ -168,3 +168,17 @@ runs where, and load balancing.
 
 - Files stored are split into blocks, each block is stored in multiple locations for redundancy
 - Block-based becase of parallel processing of queries
+
+### Task 2 - Describing Big Data
+
+My chosen big data source is social media, collecting user's interactions with posts such as likes
+and shares. The most obvious use for this data is marketting and advertising, allowing a marketting
+team to see how well various posts do for the popularity and reputation of a product or service
+they're trying to promote. Storing this data is relatively simple, as there's very little to it,
+so the main challenge is in it's quantity. Similarly for processing, any data processing algorithm
+will need to make strong use of techniques such as chunking, threading, and multi-process software
+to perform analysis in a reasonable time frame, leading to the conclusion that a tool such as Hadoop's
+MapReduce would be the right processing tool here. It would be worth investigating if specific
+dashboards and queries could be built to analyse data as it comes into the system as well.
+
+
