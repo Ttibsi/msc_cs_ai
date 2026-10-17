@@ -1,0 +1,119 @@
+collision_index,
+collision_year,
+collision_ref_no,
+vehicle_reference,
+casualty_reference,
+casualty_class,
+sex_of_casualty,
+age_of_casualty,
+age_band_of_casualty,
+casualty_severity,
+pedestrian_location,
+pedestrian_movement,
+car_passenger,
+bus_or_coach_passenger,
+pedestrian_road_maintenance_worker,
+casualty_type,
+casualty_imd_decile,
+lsoa_of_casualty,
+enhanced_casualty_severity,
+casualty_injury_based,
+casualty_adjusted_severity_serious,
+casualty_adjusted_severity_slight,
+casualty_distance_banding
+
+-----
+3NF Database 
+
+Collision 
+-collision_index (PK)
+-collision_year,
+-collision_ref_no
+
+Vehicle
+-collision_index (PK)
+-vehicle_reference, (PK)
+-vehicle_type (FK) (listed in excel)
+
+Vehicle_Type
+-vehicle_type (PK)
+-vehicle_type_name
+
+Casualty
+-collision_index (PK)
+-casualty_reference (PK)
+-casualty_class,
+-sex_of_casualty,
+-age_of_casualty, (FK - Age_Band_to_Age)
+-enhanced_casualty_severity,
+-pedestrian_location (FK - Pedestrian_Location)
+-pedestrian_movement (FK - Pedestrian_Movement)
+-car_passenger (FK - Passenger_location)
+-bus_or_coach_passenger (FK - Bus_Coach_location)
+-pedestrian_road_maintenance_worker (FK - Maintenance_Worker)
+-casualty_type (FK - Casualty_Type)
+-casualty_imd_decile (FK - Decile_type)
+-lsoa_of_casualty
+-casualty_injury_based,
+-casualty_adjusted_severity_serious,
+-casualty_adjusted_severity_slight,
+-distance_band_id (FK - Distance_Banding)
+-casualty_severity (FK - Casualty_Severity)
+- vehicle_reference (composite FK with collision_index to Vehicle table)
+
+Age_Band_to_Age
+- Age (PK)
+- Age_band (FK)
+
+Age Bands
+- age_band_id (PK)
+- age_band
+
+Pedestrian_Location
+- pedestrian_location (PK)
+- description
+
+Pedestrian_Movement
+- pedestrian_movement (PK)
+- description
+
+Passenger_location
+- car_passenger (PK)
+- description
+
+Bus_Coach_location
+- bus_or_coach_passenger (PK)
+- description
+
+Maintenance_Worker
+- pedestrian_road_maintenance_worker (PK)
+- description
+
+Casualty_Type
+-casualty_type_id (PK)
+-description
+
+Casualty_Severity
+-casualty_severity_id (PK)
+-description
+
+Casualty_Class
+-casualty_class (PK)
+-description
+
+Decile_type
+-casualty_imd_decile (PK)
+-description
+
+Distance_Banding
+-distance_band_id
+-description
+
+LSOA
+-lsoa_of_casualty (PK)
+-casualty_imd_decile (FK - Decile_type)
+
+
+---
+collision_index can be calculated as year + collision_ref_no
+
