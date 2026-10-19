@@ -1,0 +1,48 @@
+# Week 7 - Ethics
+
+* Explain what privacy is and why privacy is important. [MLO 5]
+* State a range of ways in which privacy can be violated. [MLO 5]
+* Explain ethics in relation to Data Privacy. [MLO 5]
+* Identify, address and document residual threats to validity for a given analysis. [MLO 5]
+
+### Lesson 1 - Privacy and Data Validity
+Data may only be collected for "a specific, explicity, and legitimate purpose" as per GDPR.
+If the data already exists, we can't use it for a different purpose. That is illegal.
+Quite often companies are vague about their purposes to get around this.
+
+"Data privacy means empowering the data subjects to make their own decisions about who
+can process their data and for what purposes." - GDPR
+Data privacy is about control.
+
+Concerns
+- Discrimination over the information provided in use data
+- ex religious/political beliefs and membership of a trade union
+- medical history is also sensetive information.
+- minor criminal offenses considered spent.
+
+Data can be sold on, which is a concern.
+Data can be used to build a profile of an individual that could be used
+to discriminate.
+Data may not be fully anonymised, or include so many unique elements in a data profile
+that it's easy to identify someone even if information such as a person's name isn't
+included.
+
+Ethical concerns on Data Mining: (Witten book - 1.7)
+* Reidentification
+    * 85% of americans can be reidentified from only their ZIP code, birthdate, and sex.
+    * over half can be identified by just city, birthdate, sex
+    * moral is that if you remove _all_ PII, you won't be left with anything useful
+
+* Using Personal Information
+    * People should be informed in simple language how their data is going to be used
+    * Ethically, how far can that usage be stretched?
+
+* Wider Issues
+    * Logical and Scientific standards must also be adhered to
+    * caveats need to be applied to conclusions unless they can be backed up
+    * How do you decide to use the data you're given
+        * Ex in a supermarket, if you know two items usually sell well together,
+            should you shelve them together or further apart, to encourage more
+            purchases at the same time?
+        * Should the more expensive items of those types be shelved together instead
+        of cheaper alternatives to encourage higher profits?
