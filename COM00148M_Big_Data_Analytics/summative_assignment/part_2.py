@@ -56,12 +56,24 @@ def main() -> None:
             cur.execute(cmd)
 
     # Step 2: insert data from csv file
+    with DatabaseConnection("db.db") as cur:
+        with open("dft-road-casualty-statistics-casualty-2024.csv") as f:
+            reader = csv.reader(f)
+            for row in reader:
+                ...
 
-    # Step 3: extract all casualties who
-    # - suffered serious or fatal injuries
-    # - were involved in pedestrian-related incidents
-    # - occured under a specific condition
-        # NOTE: I think the last one is up to us to decide
+    # Step 3: extract all casualties who:
+        # - suffered serious or fatal injuries
+        # - were involved in pedestrian-related incidents
+        # - occured under a specific condition
+            # NOTE: I think the last one is up to us to decide
+    query_cmds: Final[list[str]] = [
+    ]
+
+    with DatabaseConnection("db.db") as cur:
+        for cmd in query_cmds:
+            res = cur.execute(cmd)
+            res.fetchone()
 
     # Step 4: Perform descriptive analysis of casualty severity by casualty type
     # (aggregation query)
