@@ -1,3 +1,4 @@
+CSV headings:
 collision_index,
 collision_year,
 collision_ref_no,
