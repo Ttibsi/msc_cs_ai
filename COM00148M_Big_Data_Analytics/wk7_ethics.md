@@ -46,3 +46,26 @@ Ethical concerns on Data Mining: (Witten book - 1.7)
             purchases at the same time?
         * Should the more expensive items of those types be shelved together instead
         of cheaper alternatives to encourage higher profits?
+
+GDPR
+----
+* General Data Protection Regulation
+* Came into effect 2018
+* Six guiding principles
+    - Data is processd fairly, lawfully, and transparently
+    - Collected and processed for specific reasons and stored for specific periods of time,
+    and is not used beyond it's original collection purpose
+    - Only the data neccesary for the purpose is collected and not more
+    - Collected data is accurate and reasonable steps are taken to ensure it remains accurate
+    - is kept in a form that allows individuals to be identified only as long as it is
+    neccesary
+    - it is kept securely and protected from unlawful access, accidental loss, or damage.
+* GDPR also defines rights that individuals have to access and control their data
+    - right to be informed
+    - right of access
+    - right to rectification
+    - right to erasure/ right to be forgotten
+    - right to restrict processing
+    - right to data portability
+    - right to object
+    - rights in relation to automated decision making and profiling
