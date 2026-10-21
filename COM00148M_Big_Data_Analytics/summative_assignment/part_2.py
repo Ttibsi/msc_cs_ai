@@ -56,18 +56,29 @@ def main() -> None:
         # - occured under a specific condition
             # NOTE: I think the last one is up to us to decide
     query_cmds: Final[dict[str, str]] = {
-        "Serious or fatal injuries": "SELECT collision_index, casualty_reference FROM Casualty WHERE casualty_severity IN (1, 2);",
-        "Pedestrian-related incidents": "SELECT collision_index, casualty_reference FROM Casualty WHERE pedestrian_location != 0;",
-        "Collisions are over the age of 30": "SELECT collision_index, casualty_reference FROM Casualty WHERE age_of_casualty >= 30;"
+        "Serious or fatal injuries:": "SELECT collision_index, casualty_reference FROM Casualty WHERE casualty_severity IN (1, 2);",
+        "Pedestrian-related incidents:": "SELECT collision_index, casualty_reference FROM Casualty WHERE pedestrian_location != 0;",
+        "Collisions are over the age of 30:": "SELECT collision_index, casualty_reference FROM Casualty WHERE age_of_casualty >= 30;"
     }
     with DatabaseConnection("db.db") as cur:
         for desc, cmd in query_cmds.items():
             result = cur.execute(cmd).fetchall()
             print(desc)
-            print(result)
+
+            if not len(result):
+                print()
+            else:
+                for r in result:
+                    print(f"\t{r}")
 
     # Step 4: Perform descriptive analysis of casualty severity by casualty type
     # (aggregation query)
+    aggregate = "SELECT description, COUNT(collision_index) FROM Casualty JOIN Casualty_Severity WHERE casualty_severity = casualty_severity_id GROUP BY casualty_severity;"
+    print("Number of casulties by severity:")
+    with DatabaseConnection("db.db") as cur:
+        result = cur.execute(aggregate).fetchall()
+        for r in result:
+            print(f"\t{r}")
 
 
 if __name__ == "__main__":
