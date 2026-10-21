@@ -1,5 +1,6 @@
-from pprint import pprint
+import os
 import sqlite3
+from pprint import pprint
 from typing import Final
 from typing import Optional
 
@@ -39,6 +40,10 @@ def exec_script(script: str):
 
 
 def main() -> None:
+    # Step 0: cleanup previous execution
+    if os.path.exists("db.db"):
+        os.remove("db.db")
+
     # Step 1: create the database and tables
     exec_script("create.sql")
 
@@ -50,9 +55,15 @@ def main() -> None:
         # - were involved in pedestrian-related incidents
         # - occured under a specific condition
             # NOTE: I think the last one is up to us to decide
+    query_cmds: Final[dict[str, str]] = {
+        "Serious or fatal injuries": "SELECT collision_index, casualty_reference FROM Casualty WHERE casualty_severity IN (1, 2);",
+        "Pedestrian-related incidents": "",
+    }
     with DatabaseConnection("db.db") as cur:
-        for cmd in query_cmds:
-            pprint(cur.execute(cmd).fetchall())
+        for desc, cmd in query_cmds.items():
+            result = cur.execute(cmd).fetchall()
+            print(desc)
+            print(result)
 
     # Step 4: Perform descriptive analysis of casualty severity by casualty type
     # (aggregation query)
