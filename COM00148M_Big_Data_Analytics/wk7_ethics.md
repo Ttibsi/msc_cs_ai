@@ -69,3 +69,21 @@ GDPR
     - right to data portability
     - right to object
     - rights in relation to automated decision making and profiling
+
+### Lesson 2 - What Went Wrong?
+Privacy by Design
+    * Proactive not reactive, preventative not remedial
+    * Privacy as the default setting
+    * PRivacy embedded into design
+    * Full functionality - positive-sum, not zero-sum
+    * End-to-end securyt - full lifetime protection
+    * Visibility and transparency - keep it open
+    * Respect for user provacy - keep it user-centric
+
+These are ISO standardised. Similar legislation in other countries, enforced as part of GDPR.
+Generally considered positive _but_
+
+Criticism:
+* points are considered vague and leaving any open questions when designing software architecture
+* No enforcement, these are voluntary (although this is now superceded by what is part of
+GDPR law)
