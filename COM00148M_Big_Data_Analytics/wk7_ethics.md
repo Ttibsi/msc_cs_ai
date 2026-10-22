@@ -87,3 +87,18 @@ Criticism:
 * points are considered vague and leaving any open questions when designing software architecture
 * No enforcement, these are voluntary (although this is now superceded by what is part of
 GDPR law)
+
+ML Test Score
+* Research paper from google
+* outlining 28 different assertions to apply to a ML algorithm.
+* Primarily based around testing the data, not the code
+* Should be used alongside standard software testing practices, not a replacement
+
+GDPR Privacy rights
+* Right to be informed
+* Right of access
+* Right to rectification
+* Right to erasure
+* Right to restrict processing
+* Right to data portability
+* Right to object
