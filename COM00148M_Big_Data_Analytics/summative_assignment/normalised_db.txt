@@ -132,6 +132,7 @@ casualty_reference (FK)
 vehicle_reference (FK)
 
 Casualty
+casualty_reference (PK)
 casualty_class
 sex_of_casualty, (FK)
 age_of_casualty (FK)

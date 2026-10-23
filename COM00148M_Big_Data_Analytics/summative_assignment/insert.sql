@@ -13,6 +13,7 @@ INSERT INTO Maintenance_Worker VALUES (-1, 'Data missing or out of range');
 INSERT INTO Pedestrian_Location VALUES (1, 'Crossing on pedestrian crossing facility');
 INSERT INTO Pedestrian_Movement VALUES (3, 'Crossing from driver''s offside');
 INSERT INTO Casualty_Type VALUES (0, 'Pedestrian');
+INSERT INTO Casualty_Class VALUES (3, 'Pedestrian');
 
 INSERT INTO Pedestrian VALUES (
     1,
