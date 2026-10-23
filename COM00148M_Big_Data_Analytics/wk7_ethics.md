@@ -102,3 +102,35 @@ GDPR Privacy rights
 * Right to restrict processing
 * Right to data portability
 * Right to object
+
+### Lesson 3 - Identify the remaining threats to validity
+Why is validity an ethical issue?
+    - Because incorrect or invalud data can lead to assumptions that can harm people
+    - EX loan applications, spam detection, clinical trials
+    - Could lead to systemic bias
+
+Internal validity - do your results flow from your data
+External validity - Do your results generalise beyond your current data
+Construct validity - Do the concepts that you use to describe your investigation ("life satisfaction")
+                    map well to the data you're using.
+
+### Task 1 - Threat Mitigation
+
+In the paper "An Empirical Study of Bugs in Machine Learning Systems", the researchers study how
+internal validity is mitigated across three large-scale open source softwares by investigating
+a random selection of closed bugs in their issue trackers. Their investigation showed the number of
+bugs across all three projects in different categories, but did not explain how the maintainers
+of each project attempted mitigation. Here, the suggestion would be to ensure the projects lean
+on software development standard testing approaches, such as rigorous unit and integration testing,
+as well as "dogfooding", the process of using your own software, so as to experience buggy
+behaviour themselves.
+
+In the study claiming phones are harmful, we see a textbook example of Construct Validity, the
+validity threat that has the researcher asking if the data they've collected accurately reflects
+the hypothesis they're trying to research. The current researchers mitigated this issue by
+relying on software-related phone usage tracking instead of user-submitted data, which is often
+inaccurate due to human nature. However, they could have taken this further by relying on custom
+software that takes more accurate and granular readings, which would provide the researchers with
+more data to work with, such as the age and sex of the user, as well as the time of day that
+subjects are using their phones and how the purpose of phone usage changes throughout the day.
+
