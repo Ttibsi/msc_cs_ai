@@ -118,3 +118,80 @@ LSOA
 ---
 collision_index can be calculated as year + collision_ref_no
 
+
+-----
+V2
+Collision
+collision_year, (PK)
+collision_ref_no, (PK)
+casualties_in_collision_id (FK)
+
+Casualties_In_Collision
+casualties_in_collision_id (PK)
+casualty_reference (FK)
+vehicle_reference (FK)
+
+Casualty
+casualty_class
+sex_of_casualty, (FK)
+age_of_casualty (FK)
+casualty_severity (FK)
+pedestrian_id (FK)
+car_passenger (FK)
+bus_or_coach_passenger (FK)  
+casualty_type (FK)
+LSOA_id (FK)
+enhanced_casualty_severity (FK)
+casualty_distance_banding (FK)
+
+LSOA
+LSOA_id (PK)
+casualty_imd_decile
+lsoa_of_casualty
+
+Pedestrian
+pedestrian_id (PK)
+pedestrian_location (FK)
+pedestrian_movement (FK)
+pedestrian_road_maintenance_worker_id (FK)
+
+Maintenance_Worker
+- pedestrian_road_maintenance_worker (PK)
+- description
+
+Pedestrian_Movement
+- pedestrian_movement (PK)
+- description
+
+Passenger_location
+- car_passenger (PK)
+- description
+
+Age_Band_to_Age
+- age (PK)
+- age_band_id (FK)
+
+Age_Band
+- age_band_id (PK)
+- min_age
+- max_age
+
+Casualty_Sex
+- sex_of_casualty (PK)
+- description
+
+Casualty_Severity
+-casualty_severity_id (PK)
+-description
+
+Enhanced_Casualty_Severity
+-enhanced_casualty_severity (PK)
+-description
+
+Bus_Coach_location
+- bus_or_coach_passenger (PK)
+- description
+
+Distance_Banding
+-distance_band_id (PK)
+-description
