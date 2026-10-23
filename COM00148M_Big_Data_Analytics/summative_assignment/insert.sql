@@ -32,7 +32,6 @@ INSERT INTO Casualty VALUES (
     -1,             -- pedestrian_road_maintenance_worker
     0,              -- casualty_type
     -1,             -- casualty_imd_decile
-    -1,             -- lsoa_of_casualty
     1,              -- casualty_injury_based
     0,              -- casualty_adjusted_severity_serious
     1,              -- casualty_adjusted_severity_slight
