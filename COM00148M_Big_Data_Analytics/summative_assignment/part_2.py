@@ -57,26 +57,21 @@ def main() -> None:
             # NOTE: I think the last one is up to us to decide
     query_cmds: Final[dict[str, str]] = {
         "Serious or fatal injuries:": (
-            "SELECT c.collision_year, c.collision_ref_no, ca.casualty_reference "
-            "FROM Casualty ca "
-            "JOIN Casualties_In_Collision cic ON cic.casualty_reference = ca.casualty_reference "
-            "JOIN Collision c ON c.casualties_in_collision_id = cic.casualties_in_collision_id "
-            "WHERE ca.casualty_severity IN (1, 2);"
+            "SELECT casualty_reference "
+            "FROM Casualty "
+            "WHERE casualty_severity IN (1, 2);"
         ),
         "Pedestrian-related incidents:": (
-            "SELECT c.collision_year, c.collision_ref_no, ca.casualty_reference "
+            "SELECT ca.casualty_reference "
             "FROM Casualty ca "
             "JOIN Pedestrian p ON p.pedestrian_id = ca.pedestrian_id "
             "JOIN Casualties_In_Collision cic ON cic.casualty_reference = ca.casualty_reference "
-            "JOIN Collision c ON c.casualties_in_collision_id = cic.casualties_in_collision_id "
             "WHERE p.pedestrian_location != 0;"
         ),
-        "Collisions are over the age of 30:": (
-            "SELECT c.collision_year, c.collision_ref_no, ca.casualty_reference "
+        "Casualties are over the age of 30:": (
+            "SELECT ca.casualty_reference "
             "FROM Casualty ca "
-            "JOIN Casualties_In_Collision cic ON cic.casualty_reference = ca.casualty_reference "
-            "JOIN Collision c ON c.casualties_in_collision_id = cic.casualties_in_collision_id "
-            "WHERE ca.age_of_casualty >= 30;"
+            "WHERE age_of_casualty >= 30;"
         ),
     }
     with DatabaseConnection("db.db") as cur:
