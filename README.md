@@ -7,3 +7,4 @@ Notes from my masters degree
 * COM00142M_Advanced_Programming/
 * COMO0143_Artificial_Intelligence_Machine_Learning/
 * COM00148M_Big_Data_Analytics/
+* COM00145M_Computer_Architecture_Operating_Systems/
