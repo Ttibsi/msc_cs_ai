@@ -8,12 +8,31 @@ def clean_data(data: pandas.DataFrame) -> pandas.DataFrame:
     data = data[data['age_of_casualty'] != -1].reset_index(drop=True)
     data = data[data['enhanced_casualty_severity'] != -1].reset_index(drop=True)
 
+    data = data.iloc[:, 3:].copy()
+
     return data
 
 
 def main():
-    data: pandas.DataFrame = pandas.read_csv("dft-road-casualty-statistics-casualty-2024.csv")
+    FILE: Final[str] = "dft-road-casualty-statistics-casualty-2024.csv"
+    data: pandas.DataFrame = pandas.read_csv(FILE)
     data = clean_data(data)
+
+    with open(FILE) as f:
+        headers = [ l.strip().rstrip() for l in f.readlines()[0].split(",") ][3:]
+
+    dependant = data[headers[9]]
+    headers.pop(9)
+
+    results: dict[str, float] = {}
+
+    for independant in headers:
+        print(independant)
+        model = sklearn.linear_model.LinearRegression()
+        independant_val = data[[independant]]
+        model.fit(independant_val, dependant)
+
+        results[independant] = model.score(independant_val, dependant)
 
 
 if __name__ == "__main__":
