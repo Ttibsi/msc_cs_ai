@@ -41,6 +41,7 @@ Key elements of software
 Von Neumann Model - CPU, Memory, IO devices
 * Also listed as Control Unit, Arithmetic Logic Unit (ALU), and memory
 * Modules are connected via a "system bus"
+    - Also called main bus or host bus
 
 Busses allow many devices to share one communication route for information.
 Only one device can control the bus at a time, called a bus master
@@ -56,6 +57,11 @@ Harvard architecture - tries to alleviate the bottleneck by introducing two buss
 program memory and the other for data memory and IO
 
 clocks - used to synchronise operations by generating a regular sequence of electrical pulses
+* rising edge as it turns on, falling edge as it turns off
+* This looks like a square wave
+* One iteration of off-on-off is called a cycle or period
+    * One cycle is a single on/off of a signal
+* frequency = 1 / period
 
 ---
 History of computers
@@ -85,3 +91,52 @@ Further changes are less defined as generations, but advances include:
 * semiconductor memory
 * microprocessor CPUs - all the components of a CPU on a single chip
     - developed with Intel's 4004 in 1971
+
+Binary - base 2
+Hex - base 16
+
+Adder circuit - digital circuit that adds two numbers together
+* used in the ALU
+* Usually operates on binary numbers
+* tivial to modify into an adder-subtractor
+* half adder has two outputs - the sum and the carry, used in te case of overflow
+    in multidigit addition
+* full adder accounts for values carried in as well as out
+* The simplest half-adder incorporates the an XOR gate for the sum and
+    an AND gate for the carry.
+* An OR gate can be used to combine two half-adders into a full adder
+* alternatively, a full-adder can be implemented with 9 NAND or NOR gates
+
+half-adder truth table
+----------------------
+(a input, b input) = (carry, sum)
+(0, 0) = (0, 0)
+(0 ,1) = (0, 1)
+(1, 0) = (0, 1)
+(1, 1) = (1, 0)
+
+The third input in a full-adder is the carried over bit from the previous execution
+
+full-adder truth table
+----------------------
+(a in, b in, c in) = (carry, sum)
+(0, 0, 0) = (0, 0)
+(0, 0, 1) = (0, 1)
+(0, 1, 0) = (0, 1)
+(0, 1, 1) = (1, 0)
+(1, 0, 0) = (0, 1)
+(1, 0, 1) = (1, 0)
+(1, 1, 0) = (1, 0)
+(1, 1 ,1) = (1, 1)
+
+RS flipflop - circuit or latch that retains it's state, either on or off.
+RS stands for "reset set".
+
+Alternatively is the D flipflop, short for data flipflop.
+These capture the input at a given time in a clock signal, such as the rising edge, which
+becomes it's output
+
+A counter is a circuit that does as it states, usually a finite state machine.
+Diagrams suggest this works in binary, storing a number of on/off states to represent each bit
+in the number being stored and knowing how to increment. These can be implemented using
+D flip-flops in one case, or other types of flip-flops
