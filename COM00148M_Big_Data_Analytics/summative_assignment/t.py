@@ -1,8 +1,10 @@
 import csv
 import heapq
+
+import matplotlib.pyplot as plt
 import pandas
-from sklearn.model_selection import train_test_split
 import sklearn
+from sklearn.model_selection import train_test_split
 
 def clean_data(data: pandas.DataFrame) -> pandas.DataFrame:
     # if the given column's value is -1, we remove it
@@ -15,10 +17,7 @@ def clean_data(data: pandas.DataFrame) -> pandas.DataFrame:
 
     return data
 
-
-def main():
-    FILE: Final[str] = "dft-road-casualty-statistics-casualty-2024.csv"
-    data: pandas.DataFrame = pandas.read_csv(FILE)
+def most_likely_candidates(data: pandas.DataFrame):
     data = clean_data(data)
 
     with open(FILE) as f:
@@ -38,8 +37,25 @@ def main():
         results[independant] = model.score(independant_val, dependant)
 
     top_three = heapq.nlargest(3, results.items(), key=lambda y: (y[1], y[0]))
+    print("Top 3 variables: ")
     for k, v in top_three:
         print(f"{k}: {v}")
+
+
+def investigate_relationships(data: pandas.DataFrame):
+    data = data[["casualty_severity", "age_of_casualty", "casualty_type"]].copy()
+
+    model = sklearn.linear_model.LinearRegression()
+    independant = data.iloc[: 1,:]
+    model.fit(independant, data["casualty_severity"])
+
+
+def main():
+    FILE: Final[str] = "dft-road-casualty-statistics-casualty-2024.csv"
+    data: pandas.DataFrame = pandas.read_csv(FILE)
+
+    # most_likely_candidates(data)
+    investigate_relationships(data)
 
 
 if __name__ == "__main__":
