@@ -1,5 +1,6 @@
 import csv
 import heapq
+import itertools
 
 import matplotlib.pyplot as plt
 import pandas
@@ -43,17 +44,16 @@ def most_likely_candidates(data: pandas.DataFrame):
 
 
 def investigate_relationships(data: pandas.DataFrame):
-    data = data[["casualty_severity", "age_of_casualty", "casualty_type"]].copy()
+    fields = ["casualty_severity", "age_of_casualty", "casualty_type"]
+    data = data[fields].copy()
+    results: dict[tuple[str, str], float] = {}
 
-    independant = data.iloc[:, 1:]
-    dependant = data["casualty_severity"]
-    x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(
-        independant, dependant, random_state=0, test_size=0.4
-    )
+    for f1, f2 in itertools.permutations(fields, 2):
+        results[(f1, f2)] = data[f1].corr(data[f2])
 
-    model = sklearn.linear_model.LinearRegression()
-    model.fit(x_train, y_train)
-    print(model.score(x_test, y_test))
+    print("Correlation data:")
+    for k, v in results.items():
+        print(f"{k}: {v}")
 
 
 def main():
