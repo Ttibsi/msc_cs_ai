@@ -45,9 +45,15 @@ def most_likely_candidates(data: pandas.DataFrame):
 def investigate_relationships(data: pandas.DataFrame):
     data = data[["casualty_severity", "age_of_casualty", "casualty_type"]].copy()
 
+    independant = data.iloc[:, 1:]
+    dependant = data["casualty_severity"]
+    x_train, x_test, y_train, y_test = sklearn.model_selection.train_test_split(
+        independant, dependant, random_state=0, test_size=0.4
+    )
+
     model = sklearn.linear_model.LinearRegression()
-    independant = data.iloc[: 1,:]
-    model.fit(independant, data["casualty_severity"])
+    model.fit(x_train, y_train)
+    print(model.score(x_test, y_test))
 
 
 def main():
