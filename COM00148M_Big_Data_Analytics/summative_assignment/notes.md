@@ -59,3 +59,12 @@ Useful links
 * https://www.gov.uk/government/publications/policy-on-protecting-personal-and-other-sensitive-information-in-fire-and-rescue-incident-and-casualty-data
 * https://ico.org.uk/for-organisations/uk-gdpr-guidance-and-resources/individual-rights/individual-rights/
 * https://ones.com/blog/navigating-ethical-minefield-risks-predictive-analytics/
+
+---
+
+Part 1C:
+
+demographic fields:
+    - just age and sex
+
+Identifying other attributes = correlation or causation

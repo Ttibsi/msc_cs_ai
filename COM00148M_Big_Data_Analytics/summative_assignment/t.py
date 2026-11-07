@@ -1,7 +1,9 @@
 import csv
 import heapq
 import itertools
+from typing import Final
 
+import numpy
 import matplotlib.pyplot as plt
 import pandas
 import sklearn
@@ -56,12 +58,37 @@ def investigate_relationships(data: pandas.DataFrame):
         print(f"{k}: {v}")
 
 
+    # sklearn.linear_model.LogisticRegression()
+# Multiple Linear Regression
+def demographics(data: pandas.DataFrame):
+    fields = ["casualty_severity", "age_of_casualty", "sex_of_casualty"]
+    data = data[fields].copy()
+
+    dependant = pandas.concat(
+        [data["age_of_casualty"], pandas.get_dummies(data["sex_of_casualty"])],
+        axis=1
+    )
+    dependant.columns = dependant.columns.astype(str)
+    independant = data[["casualty_severity"]]
+
+    x_train, x_test, y_train, y_test = train_test_split(
+        dependant, independant, random_state=0, test_size=0.3
+    )
+
+    model = sklearn.linear_model.LinearRegression()
+    model.fit(x_train, y_train)
+    
+    result = model.score(x_test, y_test)
+    print(result)
+
+
 def main():
     FILE: Final[str] = "dft-road-casualty-statistics-casualty-2024.csv"
     data: pandas.DataFrame = pandas.read_csv(FILE)
 
     # most_likely_candidates(data)
-    investigate_relationships(data)
+    # investigate_relationships(data)
+    demographics(data)
 
 
 if __name__ == "__main__":
