@@ -8,20 +8,19 @@ import matplotlib.pyplot as plt
 import pandas
 import sklearn
 from sklearn.model_selection import train_test_split
+from sklearn.tree import DecisionTreeClassifier
 
 def clean_data(data: pandas.DataFrame) -> pandas.DataFrame:
     # if the given column's value is -1, we remove it
     data = data[data['age_of_casualty'] != -1].reset_index(drop=True)
     data = data[data['enhanced_casualty_severity'] != -1].reset_index(drop=True)
 
-    # Remove unrequired columns
-    data = data.iloc[:, 3:].copy()
-    data = data.drop("lsoa_of_casualty", axis=1)
-
     return data
 
 def most_likely_candidates(data: pandas.DataFrame):
     data = clean_data(data)
+    data = data.iloc[:, 3:].copy()
+    data = data.drop("lsoa_of_casualty", axis=1)
 
     with open(FILE) as f:
         headers = [ l.strip().rstrip() for l in f.readlines()[0].split(",") ][3:]
@@ -48,6 +47,8 @@ def most_likely_candidates(data: pandas.DataFrame):
 def investigate_relationships(data: pandas.DataFrame):
     fields = ["casualty_severity", "age_of_casualty", "casualty_type"]
     data = data[fields].copy()
+    data = clean_data(data)
+
     results: dict[tuple[str, str], float] = {}
 
     for f1, f2 in itertools.permutations(fields, 2):
@@ -63,6 +64,7 @@ def investigate_relationships(data: pandas.DataFrame):
 def demographics(data: pandas.DataFrame):
     fields = ["casualty_severity", "age_of_casualty", "sex_of_casualty"]
     data = data[fields].copy()
+    data = clean_data(data)
 
     dependant = pandas.concat(
         [data["age_of_casualty"], pandas.get_dummies(data["sex_of_casualty"])],
@@ -82,13 +84,35 @@ def demographics(data: pandas.DataFrame):
     print(result)
 
 
+def other_attributes(data: pandas.DataFrame):
+    # step 1 - collect only the rows with the right severity
+    data = data[data["casualty_severity"] != 1].reset_index(drop=True)
+    data = data[data['casualty_severity'] != -1].reset_index(drop=True)
+    data = clean_data(data)
+    
+    y = data["casualty_severity"]
+    cols_to_drop = [
+        'collision_index',
+        'collision_year',
+        'collision_ref_no', 
+        'vehicle_reference',
+        'casualty_reference',
+        'lsoa_of_casualty'
+    ]
+    X = df.drop(columns=cols_to_drop + ['casualty_severity'])
+
+    tree = DecisionTreeClassifier()
+    tree.fit(X, y)
+
+
 def main():
     FILE: Final[str] = "dft-road-casualty-statistics-casualty-2024.csv"
     data: pandas.DataFrame = pandas.read_csv(FILE)
 
     # most_likely_candidates(data)
     # investigate_relationships(data)
-    demographics(data)
+    # demographics(data)
+    other_attributes(data)
 
 
 if __name__ == "__main__":
