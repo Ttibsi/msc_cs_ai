@@ -92,18 +92,25 @@ def other_attributes(data: pandas.DataFrame):
     
     y = data["casualty_severity"]
     cols_to_drop = [
-        'collision_index',
-        'collision_year',
-        'collision_ref_no', 
-        'vehicle_reference',
-        'casualty_reference',
-        'lsoa_of_casualty'
+        "collision_index",
+        "collision_year",
+        "collision_ref_no", 
+        "vehicle_reference",
+        "casualty_reference",
+        "lsoa_of_casualty",
+        "casualty_adjusted_severity_serious",
+        "casualty_adjusted_severity_slight",
+        "enhanced_casualty_severity"
     ]
-    X = df.drop(columns=cols_to_drop + ['casualty_severity'])
+    data = data.drop(columns=cols_to_drop + ['casualty_severity'])
+
+    data = pandas.get_dummies(data, columns=['sex_of_casualty', 'pedestrian_location'])
 
     tree = DecisionTreeClassifier()
-    tree.fit(X, y)
+    tree.fit(data, y)
 
+    importances = pandas.Series(tree.feature_importances_, index=data.columns)
+    print("Top 3 Indicators:\n", importances.sort_values(ascending=False).head(3))
 
 def main():
     FILE: Final[str] = "dft-road-casualty-statistics-casualty-2024.csv"
