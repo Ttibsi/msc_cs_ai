@@ -140,3 +140,41 @@ A counter is a circuit that does as it states, usually a finite state machine.
 Diagrams suggest this works in binary, storing a number of on/off states to represent each bit
 in the number being stored and knowing how to increment. These can be implemented using
 D flip-flops in one case, or other types of flip-flops
+
+### Lesson 2 - Processors
+CPU - a digital electronic circuit, usually built from millions of transistors.
+It can hold a small amount of temporary data and perform mathematical operations upon
+them.
+
+Fetch-execute cycle
+- The CPU fetches the next instruction from memory, then executes it.
+
+MIPS = Million Instructions Per Second
+peak mips - maximum possible mips a processor can achieve under the best conditions.
+GOPS - giga-operations per second
+GFLOPS - giga floating-point operations per second
+
+Main concern is power. Clock speed can be scaled down for pwer saving purposes,
+ex CPU Throttling, putting the CPU in a sleep state.
+
+Dynamic power - consumed each operation, the more operations performed per second,
+the more power used.  On this basis, setting the clock rate to zero ought to reduce
+power consumption to zero too.
+
+Static power - consumed continuously even if the CPU does nothing.
+
+Clock frequency - how many cycles per second (measured in hertz)
+pipelining - overlapping instruction execution
+    - could also include SIMD? Not clear
+
+branch prediction - static or dynamic
+- static is hardwired into the circuitry
+- dynamic uses a "branch history table" to store previously reached branches
+    and then uses the up-to-date info in that table to decide if a branch should
+    be taken or not
+- Allows for the CPU to fetch the next instruction immediately for overlapping
+execution.
+
+Branch mis-prediction - needing to step-back and re-run a branch because the wrong
+branch was taken.
+As 1 in 6 instructions are often a branch, this is a risk worth taking.
