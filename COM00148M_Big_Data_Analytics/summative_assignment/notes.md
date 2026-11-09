@@ -68,3 +68,15 @@ demographic fields:
     - just age and sex
 
 Identifying other attributes = correlation or causation
+
+--- 
+Part 1 writeup
+
+* Treat it as it's own essay, not as part of a larger one.
+* ~400 words for each writeup, plus an introduction and conclusion of ~150 words
+
+impact of weather:
+https://www.sciencedirect.com/science/article/abs/pii/S0022437598000516
+
+hidden patterns:
+https://www.researchgate.net/publication/320384102_Extracting_Hidden_Patterns_Within_Road_Accident_Data_Using_Machine_Learning_Techniques

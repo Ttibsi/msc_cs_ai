@@ -1,6 +1,8 @@
 import csv
 import heapq
 import itertools
+import time
+import timeit
 from typing import Final
 
 import numpy
@@ -28,9 +30,10 @@ def most_likely_candidates(data: pandas.DataFrame):
         "casualty_reference",
         "lsoa_of_casualty",
         "age_band_of_casualty",
+        "casualty_severity",
     ]
 
-    data = clean_data(data)
+    # data = clean_data(data)
     data = data.drop(columns=cols_to_drop)
 
     with open(FILE) as f:
@@ -49,9 +52,13 @@ def most_likely_candidates(data: pandas.DataFrame):
 
         results[independant] = model.score(independant_val, dependant)
 
-    top_three = heapq.nlargest(3, results.items(), key=lambda y: (y[1], y[0]))
-    print("Top 3 variables: ")
-    for k, v in top_three:
+    # top_three = heapq.nlargest(3, results.items(), key=lambda y: (y[1], y[0]))
+    # print("Top 3 variables: ")
+    # for k, v in top_three:
+    #     print(f"{k}: {v:.4f}")
+
+    sorted_results = {k:v for k, v in reversed(sorted(results.items(), key=lambda item: item[1]))}
+    for k, v in sorted_results.items():
         print(f"{k}: {v:.4f}")
 
     print()
@@ -134,11 +141,25 @@ def other_attributes(data: pandas.DataFrame):
 def main():
     data: pandas.DataFrame = pandas.read_csv(FILE)
 
+    start = time.time()
     most_likely_candidates(data)
+    first = time.time()
+    print(f"Time: {first - start}")
+
     investigate_relationships(data)
+    second = time.time()
+    print(f"Time: {second - first}")
+
     demographics(data)
     other_attributes(data)
+    third = time.time()
+    print(f"Time: {third - second}")
 
+
+def main2():
+    data: pandas.DataFrame = pandas.read_csv(FILE)
+    print(f"Age is -1: {(data['age_of_casualty'] == -1).sum()}")
+    print(f"enhanced_casualty_severity is -1: {(data['enhanced_casualty_severity'] == -1).sum()}")
 
 if __name__ == "__main__":
     raise SystemExit(main())
