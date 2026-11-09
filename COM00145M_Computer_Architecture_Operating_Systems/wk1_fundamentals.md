@@ -178,3 +178,53 @@ execution.
 Branch mis-prediction - needing to step-back and re-run a branch because the wrong
 branch was taken.
 As 1 in 6 instructions are often a branch, this is a risk worth taking.
+
+microarchitecture - internal organisation of the CPU
+    - ALU - does the actual computation
+    - registers - binary storage elements that can hold numbers of a given size
+    - PC register - program counter, keeps track of where the next instruction in memory
+        is going  to come from.
+
+An address is the name of a given register. When it's needed, it's pulled from the
+address register and the CPU performs a read or a write
+
+pipelining - the CPU can simultaneously work on multiple instructions by overlapping
+them.
+speculative execution - A CPU will use branch prediction and dataflow analysis to
+speculatively execute instructions ahead of their actual appearnce in the program tom
+maximise the amount of processing done in any one second
+
+Microsequencing
+- running an instruction through a sequence in a microprocessor.
+- This is the Fetch-execute cycle for `ADD R2,R3 R6`
+
+* Fetch (ADD)
+* decode th instruction. We know it should have 3 operands
+* Read R2
+* Read R3
+* Execute add (add r2 and r3's values)
+* Write R6
+
+6 clock cycles are required. This is a CPI (clocks per instruction) of 6.
+
+During pipelining, if values are being read before they should be (ex one instruction
+updating a register and the next instruction reading from it), then we can insert
+"delay slots" or "pipeline bubbles", which are no-op instructions, to the latter opcode.
+This is done by the CPU itself, not the developer.
+
+Another approach is to run other instructions that use different registers instead of the
+ones you're waiting for to be written to. This is usually done by a compiler, and is called
+static instruction scheduling
+
+CPU comparison on userbenchmark.com
+* highest performing processor
+    - Single core: Intel Core Ultra 7 270K (Plus) - £307
+    - Multi core: Intel Core Ultra 7 265KF - £295
+* Expensive yet high perf:
+    - Single core: Intel Core i9-13900KS - £698
+    - Multi core: Intel Core i9-13900KS - £698
+
+A program trace steps through each instruction and writes out the values at that point.
+Loops are written out by hand, values are seen
+
+
