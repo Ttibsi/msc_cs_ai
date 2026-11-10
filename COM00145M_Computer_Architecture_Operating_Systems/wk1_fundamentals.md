@@ -227,4 +227,32 @@ CPU comparison on userbenchmark.com
 A program trace steps through each instruction and writes out the values at that point.
 Loops are written out by hand, values are seen
 
+### Lesson 3 - Computers everywhere
+SOC - System on a Chip. These are usually mobile chips that contains the RAM and other
+features alongside the CPU in one package.
 
+Embedded system - computers embedded in other hardware for a single purpose.
+Examples include a microwave, printer, car heating control, electric toothbrush
+
+Some embedded systems include fault tolerance to reset to a known good state to prevent
+error
+
+Just as there are a variety of computers and purposes for those computers, there are
+also a variety of different types of CPUs/processors. There are specialised chips
+for AI (Tensor processing units) and graphics (Graphical processing units) that
+can be separate units to plug into a machine.
+
+Embedded Systems
+* ARM architecture - a reduced instruction set developed by a single company and licensed
+out to others
+* Embedded systems - electronics and software within a product, as opposed to a
+general-purpose computer
+* Often tightly coupled to their environment, giving rise to read-time constraints that come
+from the need to interact with that environment.
+* ARM chips are known for their small die size and low power requirements.
+* ARM designs the processor and multi-core architecture and sells those to other companies
+* Used in PDAs and consumer products
+* Arm chips are designed to meet the needs of three product categories:
+    - Embedded real-time systems
+    - Application platforms running standard desktop/mobile operating systems
+    - secure applications
