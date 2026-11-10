@@ -33,7 +33,7 @@ def most_likely_candidates(data: pandas.DataFrame):
         "casualty_severity",
     ]
 
-    # data = clean_data(data)
+    data = clean_data(data)
     data = data.drop(columns=cols_to_drop)
 
     with open(FILE) as f:
@@ -52,33 +52,34 @@ def most_likely_candidates(data: pandas.DataFrame):
 
         results[independant] = model.score(independant_val, dependant)
 
-    # top_three = heapq.nlargest(3, results.items(), key=lambda y: (y[1], y[0]))
-    # print("Top 3 variables: ")
-    # for k, v in top_three:
-    #     print(f"{k}: {v:.4f}")
+    top_three = heapq.nlargest(3, results.items(), key=lambda y: (y[1], y[0]))
+    print("Top 3 variables: ")
+    for k, v in top_three:
+        print(f"{k}: {v:.4f}")
 
+    print("\nAll results:")
     sorted_results = {k:v for k, v in reversed(sorted(results.items(), key=lambda item: item[1]))}
     for k, v in sorted_results.items():
         print(f"{k}: {v:.4f}")
 
-    print()
-
 
 def investigate_relationships(data: pandas.DataFrame):
     fields = ["casualty_severity", "age_of_casualty", "casualty_type"]
-    data = clean_data(data)
+    # data = clean_data(data)
     data = data[fields].copy()
 
     results: dict[tuple[str, str], float] = {}
+    print("Correlation:")
+    print(data[fields].corr()["age_of_casualty"])
 
-    for f1, f2 in itertools.permutations(fields, 2):
-        results[(f1, f2)] = data[f1].corr(data[f2])
-
-    print("Correlation data:")
-    for k, v in results.items():
-        print(f"{k}: {v:.4f}")
-
-    print()
+    # for f1, f2 in itertools.permutations(fields, 2):
+    #     if (f2, f1) in results.keys():
+    #         continue
+    #     results[(f1, f2)] = data[f1].corr(data[f2])
+    #
+    # print("Correlation data:")
+    # for k, v in results.items():
+    #     print(f"{k}: {v:.4f}")
 
 
 # Multiple Linear Regression
@@ -144,11 +145,11 @@ def main():
     start = time.time()
     most_likely_candidates(data)
     first = time.time()
-    print(f"Time: {first - start}")
+    print(f"Time: {first - start}\n")
 
     investigate_relationships(data)
     second = time.time()
-    print(f"Time: {second - first}")
+    print(f"Time: {second - first}\n")
 
     demographics(data)
     other_attributes(data)
