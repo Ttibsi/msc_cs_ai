@@ -256,3 +256,25 @@ from the need to interact with that environment.
     - Embedded real-time systems
     - Application platforms running standard desktop/mobile operating systems
     - secure applications
+
+Amdahl's law
+* The maximum speedup possible in a system
+* Where some proportion of it's activity P is optimised
+    - P is usually a range 0-1
+* Max speedup = 1 / (1-P)
+if P is 0, maximum speedup is 1.0
+if P is 0.5, maximum speedup is 2.0
+if P is 1.0, maximum speedup is infinity
+    - this is obviously not a realistic value.
+
+We can adjust the formula to: 1 / ((1-P) + (P/n))
+    - N is the speedup factor or number of processors to spread the work across
+
+The result is in a multiplier. Ex if we have a result of 1.11, we've gained
+11% in performance
+
+
+Hidden computer - prforms dedicated functions wthin a larger system without
+direct user interaction
+Machine with many facets - a multifunctional computing device that serves
+many roles/purposes. A smartphone is a good example of this
