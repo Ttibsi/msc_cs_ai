@@ -70,7 +70,7 @@ def investigate_relationships(data: pandas.DataFrame):
 
     results: dict[tuple[str, str], float] = {}
     print("Correlation:")
-    print(data[fields].corr()["age_of_casualty"])
+    print(data[fields].corr()["casualty_type"])
 
     # for f1, f2 in itertools.permutations(fields, 2):
     #     if (f2, f1) in results.keys():
