@@ -128,9 +128,12 @@ def other_attributes(data: pandas.DataFrame):
     data = data.drop(columns=cols_to_drop + ['casualty_severity'])
 
     data = pandas.get_dummies(data, columns=['sex_of_casualty', 'pedestrian_location'])
+    x_train, x_test, y_train, y_test = train_test_split(
+        data, y, random_state=0, test_size=0.4
+    )
 
     tree = DecisionTreeClassifier()
-    tree.fit(data, y)
+    tree.fit(x_train, y_train)
 
     importances = pandas.Series(tree.feature_importances_, index=data.columns)
     top_three = importances.sort_values(ascending=False).head(3)
@@ -138,6 +141,8 @@ def other_attributes(data: pandas.DataFrame):
     print("Top 3 Indicators:")
     for idx, val in top_three.items():
         print(f"{idx}: {val:.4f}")
+
+    print(f"Decision tree accuracy: {tree.score(x_test, y_test)}")
 
 
 def main():
