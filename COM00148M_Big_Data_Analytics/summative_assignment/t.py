@@ -85,7 +85,8 @@ def investigate_relationships(data: pandas.DataFrame):
 # Multiple Linear Regression
 def demographics(data: pandas.DataFrame):
     fields = ["casualty_severity", "age_of_casualty", "sex_of_casualty"]
-    data = clean_data(data)
+    data = data[data['sex_of_casualty'] != -1].reset_index(drop=True)
+    data = data[data['age_of_casualty'] != -1].reset_index(drop=True)
     data = data[fields].copy()
 
     dependant = pandas.concat(
@@ -96,7 +97,7 @@ def demographics(data: pandas.DataFrame):
     independant = data[["casualty_severity"]]
 
     x_train, x_test, y_train, y_test = train_test_split(
-        dependant, independant, random_state=0, test_size=0.3
+        dependant, independant, random_state=0, test_size=0.4
     )
 
     model = sklearn.linear_model.LinearRegression()
