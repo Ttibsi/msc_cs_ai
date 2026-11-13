@@ -1,7 +1,7 @@
 INSERT INTO Age_Band VALUES (7, 36, 45);
 INSERT INTO Age_Band_to_Age VALUES (39, 7);
 INSERT INTO Casualty_Sex VALUES (2, 'Female');
-INSERT INTO Casualty_Severity VALUES (3, 'Slight');
+INSERT INTO Casualty_Severity VALUES (3, 'Slight'), (2, 'Severe'), (1, 'Fatal');
 
 INSERT INTO Passenger_location VALUES (0, 'Not car passenger');
 INSERT INTO Bus_Coach_location VALUES (0, 'Not a bus or coach passenger');
@@ -19,7 +19,7 @@ INSERT INTO Casualty VALUES (
     3,
     2,
     39,
-    3,
+    2,
     1,
     0,
     0,
