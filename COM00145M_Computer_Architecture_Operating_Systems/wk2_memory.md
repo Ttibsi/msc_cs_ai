@@ -41,3 +41,19 @@ for addressing, which is another performance improvement
 
 Cycle time - the total time a memory module takes to complete a full read/write operation
     - this includes both access and reccovery time
+
+* Different storage technologies have different price and performance trade-offs
+* Price and performance properties of different technologies are changing at different rates
+* DRAM and disk perf lags behind CPU perf
+
+Programs with good Locality run faster than those without.
+Locality - the concept of keeping data that's commonly accessed together nearby in memory
+    to reduce the retrieval time.
+Programs that repeatedly reference the same variables enjoy good temporal locality.
+    - A C-style for loop is a good example of this, referencing the iteration variable
+        regularly in a short period.
+
+RAM comparison on userbenchmark.com
+- highest performing device: G.Skill TZ/RJ/FX DDRa5 6000 C30 (£2809)
+- highest cost device: G.Skill TZ/RJ/FX DDRa5 6000 C30 (£2809)
+
