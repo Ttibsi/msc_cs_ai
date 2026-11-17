@@ -80,4 +80,21 @@ of being returned to the main memory
     - First In First Out
     - Random Replacement
 
+instruction-only cache is called an `i-cache`
+    - often read-only, making them simpler
+data-only cache is called a `d-cache`
+unified cache = both
+
+Separate caches allow for reading both instructions and data at the same time
+
+On an intel i7 chip, each of the four cores have their own private L1 i-cache
+and d-cache and L2 unified cache. There's also an on-chip L3 unified cache.
+
+Writing code with good locality
+- make the common case go fast
+    - focus on optimising the main loops of the application
+- minimise the number of cache misses in each inner loop
+
+reads per sec = (clock rate / average read time)
+Data transfer rate = reads per sec * bits per read
 
