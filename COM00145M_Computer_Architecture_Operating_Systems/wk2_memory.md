@@ -98,3 +98,18 @@ Writing code with good locality
 reads per sec = (clock rate / average read time)
 Data transfer rate = reads per sec * bits per read
 
+### Lesson 3 - Errors, Mapping, Coherency
+ECC RAM - Error Correcting Code RAM
+    - utilises various algorithms, including parity check or Hammering code
+
+Power On Self Test - POSTing, a check the computer does when it boots.
+    - write test data patterns to every memory location and check the response
+
+IO mapping - a part of memory that IO devices read and write to, ex when you press
+a key on a keyboard, or stoing the caps lock toggle.
+These are usually known as IO-addressable registers
+
+Some OS's highlight parts of the memory to be non-cachable, such as IO registers,
+to prevent different cores reading cached inputs
+
+DDR = Double Data Rate.
