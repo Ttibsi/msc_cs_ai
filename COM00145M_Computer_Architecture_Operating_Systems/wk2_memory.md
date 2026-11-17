@@ -57,3 +57,27 @@ RAM comparison on userbenchmark.com
 - highest performing device: G.Skill TZ/RJ/FX DDRa5 6000 C30 (£2809)
 - highest cost device: G.Skill TZ/RJ/FX DDRa5 6000 C30 (£2809)
 
+### Lesson 2 - Performance Challenge
+Cache memory - a small but fast type of memoryued to reduce access time to
+frequently used data
+
+10% of program code is accessed 90% of the time. These often have spacial
+or temporal locality - in adjacent locations or used multiple times
+within a short time period
+
+Working set - 10% of memoyry we wish to access frequently
+Cache - small amount of fast SRAM alongside a large amount of slow DRAM
+    - There may be a cache set built into the CPU, and it may be split in two
+        for data and instructions
+
+There can be multiple caches in a system, which can alleviate the Von Neumann
+Bottleneck.
+
+Cache replacement policies - what values should be stored in the cache instead
+of being returned to the main memory
+    - Least Recently Used (LRU)
+    - Least Frequently Used (LFU)
+    - First In First Out
+    - Random Replacement
+
+
