@@ -144,3 +144,15 @@ The parity is calculated using XOR against the "Hamming code"
 
 One downside of this is that it will only correct a single error. If there are
 multiple, it may not detect them.
+
+### Task 1 - Memory Map Independant Practice
+A system with 1 MByte of memory, 128K ROM, 512K RAM, and three IO devices with 8 registers each, mapped to the top area of memory.
+
+memory total range - 0x00000-0xFFFFF
+
+IO device 1 - 0x00000 - 0x00007
+IO device 2 - 0x00008 - 0x0000F
+IO device 3 - 0x00010 - 0x00017
+ROM - 128k - 0x00018 - 0x20017
+RAM - 512k - 0x20018 - 0x90017
+Unused - 0x90017 - 0xFFFFF
