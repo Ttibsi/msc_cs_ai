@@ -100,7 +100,8 @@ Data transfer rate = reads per sec * bits per read
 
 ### Lesson 3 - Errors, Mapping, Coherency
 ECC RAM - Error Correcting Code RAM
-    - utilises various algorithms, including parity check or Hammering code
+    - utilises various algorithms, including parity check or Hamming code
+    - Hamming code invented by "Richard Hamming" at Bell Labs
 
 Power On Self Test - POSTing, a check the computer does when it boots.
     - write test data patterns to every memory location and check the response
@@ -113,3 +114,33 @@ Some OS's highlight parts of the memory to be non-cachable, such as IO registers
 to prevent different cores reading cached inputs
 
 DDR = Double Data Rate.
+
+Memory map - mapping out how much memory each part of cache takes up.
+example:
+
+ROM - 4k - addresses 0000 to 0FFF
+DRAM - 32k - addresses 1000 to 8FFF
+[ big empty space here ]
+IO device 1 - F000 to F007
+IO device 2 - F1000 to F107
+
+Cache coherency
+* In a realtime system such as a gas sensor with an alarm, the input level
+likely shouldn't be read to the cache as the gas level may not be accurate
+
+Memory errors
+* hardware failures and software failures
+* hardware failures usually mean there's a tansistor either stuck or switching
+    between 0 and 1 eratically.
+
+* An error correcting code is a value written with any value written to memory.
+* When a value is read, it's ECC is read too to verify that it's not corrupted
+* If the ECC is wrong, the value gets sent to a "corrector" on the die
+
+Hamming code:
+* 4-bit words are written as the ECC code. Half the bytes are the value you're
+writing, the other half is parity bits. Each word has an even number of bits.
+The parity is calculated using XOR against the "Hamming code"
+
+One downside of this is that it will only correct a single error. If there are
+multiple, it may not detect them.
