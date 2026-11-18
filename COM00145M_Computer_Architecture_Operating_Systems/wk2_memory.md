@@ -65,7 +65,7 @@ frequently used data
 or temporal locality - in adjacent locations or used multiple times
 within a short time period
 
-Working set - 10% of memoyry we wish to access frequently
+Working set - 10% of memory we wish to access frequently
 Cache - small amount of fast SRAM alongside a large amount of slow DRAM
     - There may be a cache set built into the CPU, and it may be split in two
         for data and instructions
@@ -156,3 +156,19 @@ IO device 3 - 0x00010 - 0x00017
 ROM - 128k - 0x00018 - 0x20017
 RAM - 512k - 0x20018 - 0x90017
 Unused - 0x90017 - 0xFFFFF
+
+---
+Address line - the copper wire on a motherboard that connects a CPU to memory
+    - 16 address lines is 16 copper runs.
+    - this may also refer to a connection to the cache etc inside the CPU itself
+
+One address line can only address 2 addresses (1 or 0).
+    - 16 address lines is 2^16  (64K)
+
+number of blocks = cache size / block size
+
+A memory module is designed with 4 chips, each of size 8K x 8. How many total address lines are required to address the entire memory space?
+* 8k*8 bytes = 8k (as each location stores 8 bits already)
+* total memory = 8k * 4 chips = 32k * 1024 = 32768 memory locations
+* log2(32768) = 15 = number of address lines needed
+
