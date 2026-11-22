@@ -28,7 +28,7 @@ in the CPU
 
 PCI bus standard
 - 33MHz bus freq
-- 32 bit data width
+- 32 bit data width (4 bytes)
 - 32 bit Address range
 - Bus arbitration takes 5 clock cycles
 - Bus turnaround takes 1 cycle
@@ -38,6 +38,22 @@ This means the 32 address lines are the same lines as the 32 data lines, but at 
 
 bus freq (33 million) * data width (32 bits/4 bytes) = 132 million bytes/sec
     - 126 Mb/s transfer rate
+
+Calculating transfer rate:
+bus width = 32 bits = 4 bytes
+cycle per transaction = 5 arbitration + 1 turnarions = 6 cycles
+byte per cycle = 4 bytes / 6 cycles = 0.66
+clock rate = 33Mhz = 33_000_000 bits
+data rate = 0.66 * 33 * 10^6 cycles * 10^6 bytes/s
+data rate = 219.7
+
+Calculating block transfer efficiency:
+amount to transfer = 16 bytes
+transfers = 16 bytes / 4 bytes
+total cycles  6 overhead + 4 data = 10 cycles
+bytes per cycle = 16 / 10 = 1.6
+Ideal (no overhead) = 4 bytes per cycle
+efficiency = 1.6 / 4 = 0.4 = 40%
 
 Universal Serial bus (USB)
 --------------------------
