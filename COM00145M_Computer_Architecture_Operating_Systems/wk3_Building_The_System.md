@@ -95,3 +95,26 @@ voltages
     and transfer data to a destination without CPU involvement.
     - More efficient as it uses larger block transfers
     - One example: Used for smoother audio streaming
+
+Host-bus interface - used to connect storage devices.
+    - Two most popular interfaces are SATA and SCSI (Scuzzy)
+
+When an IO device wants to become the bus master, it has to REQUEST control from the CPU
+The CPU responds with an ACKLNOWLEDGE to agree
+The IO device queries the row in memory
+The IO device queries the column in memory
+The IO device read's from the memory location
+The IO device sends a RELEASE to the CPU to tell it that the IO device is finished.
+
+The is considered 1 payload read and 5 overhead instructions.
+Efficiency = 1 / 6
+    1 payload cycle, 6 total cycles
+    Payload cycle count can vary
+
+Bus concurrency
+* The system bus will have a certain amount of bandwidth per second
+* multiple devices can make use of some of that bandwidth to transfer different data
+    within the same second, but there's still only X amount of bandwidth
+* IO devices could instead have a "bus bridge" between them and the system bus
+    * This bus can connect to higher performance busses such as PCI for
+    faster disk access
