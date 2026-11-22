@@ -168,3 +168,58 @@ overlap consideration = max(100ns memory time access, 64ns transfer time) = 100n
 total transfer time = 100ns * 32 blocks = 3200ns
 bandwisth = 1024 bytes / (3200 * 10^-9) = 320MB/s
 
+### Lesson 2 - Storage Technologies
+Magnetic tape - uses a magnetic recording head to write to the tape
+    - Data is serialised, written in serial to the tape, and it's location is not stored
+    - Read time is broken into seek time and data transfer time
+    - These can still be used today for long-form data storage
+
+Hard Disc Drive (HDD) - uses multiple disks in a column, called a plate
+    - smallest block that can be written is based on the sector size
+        - sector size may be ex 512bytes
+    - A file smaller than a sector will still "reserve" the whole sector, meaning
+    average wasted space is 0.5sectors.
+    - rotational speed of the disk (revolutions per minute) is how fast
+    requested bits are read/written.
+
+Data rate
+---------
+num of sectors = 100
+size of sectors = 1kb
+RPM = 7200
+rotational latency = 60sec/7200RPM = 8.3ms
+
+100 sectors can be read in 8.3ms
+1 sector can be read in 83ms
+1 byte can be read in 81ns (83ms * 10^-6 / 1024)
+
+Data rate = 1 / 81*10^-9 = 12.3million bytes/s = 11.8Mb/s
+
+Zoned bit recording = number of sectors in outer tracks is higher than on
+inner tracks
+
+File access time
+----------------
+rotational speed = 5400RPM = 90 times a second
+one rotation = 11.1ms
+data read rate = 100Mb/s
+sector size = 2KB
+
+3Kb file spans 2 sectors
+Needs to read 4Kb (total size of two sectors)
+
+worst case: seek time 2ms + 1 full rotation 11.1ms
+total access time = 13.1ms
+read time 40us
+total read time: 13.14ms
+implies peak data transfer rate of 0.3mb/s
+
+Fragmentation = File data stored in multiple non-concecutive sectors,
+    often in the wrong order.
+Contiguous file = file stored in sequential sectors
+
+Fragmentated file access time
+    num_of_segments * (2ms + 11.1ms + 0.02ms)
+
+Defrag utilities rewrites the whole disk to make all files continuous to increase
+performance
