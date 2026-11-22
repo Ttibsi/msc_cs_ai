@@ -118,3 +118,53 @@ Bus concurrency
 * IO devices could instead have a "bus bridge" between them and the system bus
     * This bus can connect to higher performance busses such as PCI for
     faster disk access
+
+### Task 1 - Advanced Bus Exercises
+bandwidth = frequency * multiplier * bus width
+
+1 - calculate bandwidth performance
+data bus = 32 bits = 4 bytes
+freq = 50MHz
+clock cycle = 20 nanoseconds
+send data takes 1 clock cycle each
+memory access time = 125ns
+
+* Get address (20ns)
+* read memory (125ns)
+* send data (20ns)
+
+total time = 20ns + 125 ns + 20ns = 165ns
+bandwidth = 4 bytes / (165 * 10^-9) = 242424.24 bytes/s / 10^6 = 24.24Mb/s
+
+2 - Asynchronous
+data bus = 32 bits = 4 bytes
+handshake = 40ns
+memory access time 125ns
+both busses can transfer 4 bytes of data
+
+* request read (40ns)
+* request address (40ns)
+* send data (40ns)
+* send ack (40ns)
+
+total time =  40 * 4 = 160 + 125 memory read = 285ns
+bandwisth = 4 / (285 * 10^-9) = 14035087.719298244 bytes/s * 10^6 = 14.03 MB/s
+
+3 - How much bandwidth is needed to transmit 1024 butes of data
+data bus/transfer speed = 64 bits = 8 bytes
+freq = 250MHz
+clock cycle = 4ns
+1 data transfer = 1 clock cycle
+2 cycles between bus operations
+memory access time = 100ns per block
+bus transfer overlaps with reading the next data
+block size = 32 bytes
+
+amount to transfer = 1024 bytes / 32 = 32 blocks
+transfers per block = 32 blocks / 8 bytes per transfer = 4
+time per transfer = 4 clock cycles (1 address, 1 data, 2 idle) * 4ns = 16ns
+total bus time per block = 4 transfers * 16ns = 64 ns
+overlap consideration = max(100ns memory time access, 64ns transfer time) = 100ns
+total transfer time = 100ns * 32 blocks = 3200ns
+bandwisth = 1024 bytes / (3200 * 10^-9) = 320MB/s
+
