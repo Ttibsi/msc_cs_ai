@@ -223,3 +223,28 @@ Fragmentated file access time
 
 Defrag utilities rewrites the whole disk to make all files continuous to increase
 performance
+
+SSD - Solid State Drive
+    - Uses flash memory, similar to how RAM works
+    - Faster and more expensive than HDDs, but have become standard to use
+
+wear-levelling - writing to different parts across the SSD to not overuse a single
+cell, wearing out everything at the same speed to decrease the likelihood of
+a drive failure
+    - This only affects write cycles, not read cycles
+
+Possible faults:
+* mechanical failure - a HDD just stops working, making it's data unreadable
+* File corruption - Could happen for a number of reasons and is generally unpredictable
+
+Reundant storage arrays can be used to reduce data loss when drive failure occurs
+RAID = Redundant Array of Independant Disks
+RAID 0 - Just combining the disks into a big pool of storage (Data striping)
+RAID 1 - Disk mirroring, 50% storage for data stored in two places in the pool
+
+Remote storage - cloud storage - cloud computing
+
+worst-case time for a sector to rotate into position:
+7200RPM in seconds = 120RPS
+1 full revolution / 120 RPS = 8.3ms
+
