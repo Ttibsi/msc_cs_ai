@@ -248,3 +248,43 @@ worst-case time for a sector to rotate into position:
 7200RPM in seconds = 120RPS
 1 full revolution / 120 RPS = 8.3ms
 
+SSDs and RAID
+-------------
+* Flash memory built using semiconductors
+* NOR memory and NAND memory.
+* NOR - basic unit is a single bit
+    - provides high-speed random access
+    - used for phone OS's or BIOS chips
+* NAND - basic unit is 16 or 32 bits
+    - Uses small blocks
+    - used in flash drives/memory cards/SSDs
+    - has greater write speeds than NOR
+    - has no external random access bus
+* SSDs have higher input-output operations per second (IOPS)
+* less susceptible to physical shock
+* Runs quieter and cooler
+* lower access times and latency rates
+* SSDs have their own controller chips
+
+RAID
+* Invented at UC Berkeley
+* 7 different levels
+    * RAID 0 - nonredundant
+    * RAID 1 - Mirrored
+    * RAID 2 - Redundancy through Hamming code
+    * RAID 3 - Bit-interleaved parity
+    * RAID 4 - Block-level parity
+    * RAID 5 - Block level distributed parity
+    * RAID 6 - Dual redundancy
+
+RAID 1 redundancy is achieved through data duplication, whereas other
+RAID levels achieve redundancy through parity
+
+RAID 2 and 3 - data striping is used, often only the size of a single
+word or byte
+
+RAID 3 has high data transfer rates, due to smaller stripes than other
+levels.
+
+RAID 6 is nweer, uses two different parity calculations stored on other
+drives. A RAID 6 array of N drives requres N+2 drives
