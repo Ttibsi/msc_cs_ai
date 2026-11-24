@@ -299,10 +299,38 @@ Best SSD based on performance: WD Black SN8100 M.2 1TB (2025)
 
 Most expensive 1TB drive: WD Black SN8100 M.2 1TB (2025) - 290GBP
 
-As identified, hard drive costs are a lot cheaper than Solid State drives. 
-This is currently at least partially driven by the ongoing data-center driven component crisis, 
-and the timing of this task around Black Friday, as we can observe that the WD Black drive 
-in question is currently listed on Amazon for 280, but has fluctuated massively 
+As identified, hard drive costs are a lot cheaper than Solid State drives.
+This is currently at least partially driven by the ongoing data-center driven component crisis,
+and the timing of this task around Black Friday, as we can observe that the WD Black drive
+in question is currently listed on Amazon for 280, but has fluctuated massively
 in the last month, and an almost 100GBP increase at the end of last month.
 
 Source: https://keepa.com/product/2-B0F3BMBQ75
+
+### Lesson 3 - Peripherals and Interfaces
+Peripherals - devices that plug into the main computer
+
+Audio generation is often left to a Digital Signal Processor
+    - Audio can have one channel (monophonic) or multiple channels.
+    - CD-quality audio has a data rate of 84KB/s
+
+Haptics - vibrators in a device to simulate feedback, such as in a
+trackpad or "datagloves" video game devices
+
+WiFi is just a trademark name, not an acronym/initialism
+
+ATM (Asynchronous Transfer Mode) - less popular but still useful wired network connection
+
+Ethernet basically works as its own bus system, with its own transfer protocol handled
+by an Ethernet controller, usually another chip on the motherboard
+
+Carrier Sense Multiple Access / Collision Detection (CSMA/CD)
+    - Ethernet technigue to work without a central control
+    - devices can begin to transmit over ethernet at any time
+
+- Is the bus already in use?
+    -  If not, then any number of devices can attempt to transmit
+- During transmission, the controller watches if this is still accurate
+- If a collision is detected, all devices transmitting stop and wait
+before attempting to transmit again.
+    - "Back off and retry"
