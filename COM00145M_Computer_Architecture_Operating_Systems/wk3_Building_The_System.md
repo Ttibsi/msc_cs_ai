@@ -288,3 +288,21 @@ levels.
 
 RAID 6 is nweer, uses two different parity calculations stored on other
 drives. A RAID 6 array of N drives requres N+2 drives
+
+Dual actuator HDDs - twice the data throughput, more power efficient.
+Likely means multiple playheads on the disks inside the HDD
+- They don't improve latency though
+
+### Task 1 - Storage price investigation
+Best HDD based on performance: WD Velociraptor 1TB (2012)
+Best SSD based on performance: WD Black SN8100 M.2 1TB (2025)
+
+Most expensive 1TB drive: WD Black SN8100 M.2 1TB (2025) - 290GBP
+
+As identified, hard drive costs are a lot cheaper than Solid State drives. 
+This is currently at least partially driven by the ongoing data-center driven component crisis, 
+and the timing of this task around Black Friday, as we can observe that the WD Black drive 
+in question is currently listed on Amazon for 280, but has fluctuated massively 
+in the last month, and an almost 100GBP increase at the end of last month.
+
+Source: https://keepa.com/product/2-B0F3BMBQ75
