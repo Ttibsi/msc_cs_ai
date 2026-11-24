@@ -293,7 +293,7 @@ Dual actuator HDDs - twice the data throughput, more power efficient.
 Likely means multiple playheads on the disks inside the HDD
 - They don't improve latency though
 
-### Task 1 - Storage price investigation
+### Task 2 - Storage price investigation
 Best HDD based on performance: WD Velociraptor 1TB (2012)
 Best SSD based on performance: WD Black SN8100 M.2 1TB (2025)
 
@@ -334,3 +334,28 @@ Carrier Sense Multiple Access / Collision Detection (CSMA/CD)
 - If a collision is detected, all devices transmitting stop and wait
 before attempting to transmit again.
     - "Back off and retry"
+
+Using CSMA/CD - the more nodes ont he network, the more likely collisions are
+to happen - this is logarithmic, not linear.
+
+wireless ethernet - ethernet via radio channels instead of wires, shares much
+of the frequency
+
+Data transfer efficiency = payloadsize / packetsize
+    where packetsize = payloadsize + headersize
+
+### Task 3 - Peripherals and Interfaces
+Program counter = CPU
+RAM = memory
+Program = memory
+Mouse = peripherals (input)
+Instruction register stores the current instruction
+
+Sustained Data transfer rate
+----------------------------
+* Calculate bytes per track
+    bytes per sector * num of sectors
+* Rotational speed in seconds (tracks per second)
+* Data per second
+    bytes per track * tracks per second
+* Convert to Mb
