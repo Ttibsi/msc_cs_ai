@@ -79,3 +79,79 @@ in kernal mode instead and allow for privileged instructions to run and
 access a stack in the kernal
 
 Aborts never apply to user code, only apply when DRAM or SRAM bits are corrupted
+
+### Lesson 2 - Workload Management
+Processes - programs that run unde control of the OS, the primary way a task is
+run. It has it's own private memory buffer and instructions are run at regular
+intervals of CPU time.
+
+Thread - Within a process there can be many threads. These each perform a
+specific task and execute concurrently within the process. Threads all use
+the same OS memory resources allocated to their parent process
+
+PID - Process Identifier
+Process Control Block (PCB) contains:
+    -  process state
+    - Information about it's parent process
+    - Task priority and privileges
+    - IO attribute information
+    - General info such as CPU state data
+
+User-level threads - scheduled by the process code itself
+    - the Kernal does not see this as separate entities
+Kernal-level threads - requires processes to request that the kernal handles
+the thread.
+    - User software does not need to implement it's own scheduler
+
+Scheduling algorithms
+Simple Sched
+    - has a list of currently running tasks
+    - every time a new task starts, it's added to the lis
+    - ierate through each task and run it for a small period of time
+        - ex 1ms
+    - When the next task is run, the previous one is suspended
+    - A task may have to wait for IO from a disk, which may take longer than it's
+    allotted time.
+
+pre-emptive scheduler is the above concept but using a FIFO queue instead of
+a list
+
+repetitive-interupt timer is what manages the timing of a scheduler
+
+voluntary yielding - if a thread is idle, it yields back control to the scheduler
+to start the next task instead. However, this means we don't know how long the
+average thread will run from, just the worst case
+
+timeslice calculation
+Each task requires 25ms
+    5ms of switching time
+100 task = 2500ms for all tasks to run once
+A task recieving 20ms of CPU time each time recieves 20/2500 = 0.008 (0.8%)
+    of the CPU time
+
+Each inactive task yields after 5ms of switching time
+(50*25) + (50*5) = 1500ms average total time
+    (assuming 50% of the 100 tasks are inactive)
+
+One way around wasting time is to use multiple queues.
+    - One option: Ready queue and IO Wait queue
+    - tasks waiting for IO are moved to the latter, which may have a larger
+    run time for each thread
+
+Interrupts - signals used to indicate that events have occured, driven by timers
+or IO devices.
+
+Priority
+    - some tasks are more important than others, need to be executed more often
+    or have more CPU time
+    - In simple schedulers, tasks have no priority
+    - Linux priority swings from -20 to +20, with 0 being the default
+
+    - one approach is to stagger the amount of time allocated to different tasks
+        - In practice, this is difficult to achieve
+    - Another approach is to keep the time-slices the same but skip over tasks that
+    don't need as much time.
+        - This is achieved with a priority queue
+        - Earliest Deadline First (EDF) priority - used in RTOS systems
+    - Another approach is to have multiple queues
+
