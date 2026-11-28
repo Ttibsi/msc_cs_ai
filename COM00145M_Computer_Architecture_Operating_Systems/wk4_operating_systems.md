@@ -155,3 +155,12 @@ Priority
         - Earliest Deadline First (EDF) priority - used in RTOS systems
     - Another approach is to have multiple queues
 
+For running just a single program, you don't need an OS, you can use the single program
+as the software for the instructions. This is how dedicated hardware works.
+
+Job scheduling - given there being multiple programs to run, there is either an operator
+or algorithm organising how to share resources between the programs.
+    - usually running one at a time in small chunks.
+
+One downside is that all running programs need to occupy memory, and when executing small
+parts at a time, we need to move around where in memory we're reading from.
