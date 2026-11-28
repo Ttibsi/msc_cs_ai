@@ -164,3 +164,32 @@ or algorithm organising how to share resources between the programs.
 
 One downside is that all running programs need to occupy memory, and when executing small
 parts at a time, we need to move around where in memory we're reading from.
+
+### Lesson 3 - Further Workload Management
+Modern processors exhibit a number of specialised capabilities thanks to the
+advances in technology in the intervening years.
+
+Superscalar instructions - start multiple instructions simultaneously.
+superscalar execution - executing multiple instructions simultaneously.
+However, these tricks are rarely able to be used to their max - a thread is unlikely to
+be able to execute 4 instructions in parallel for every clock cycle.
+
+Thread Level Parallelism (TLP) - Newer advances instead add more cores to run threads
+in parallel instead of instruction-level parallelism
+Each core can have it's own scheduler.
+
+HYperthreading/SMT - a technique that attempts to offset the cost of task switching by
+duplicating the state of related circuits in the core, so that there are multiple threads
+in hardware at once
+    - SMT = Simultaneous multithreading.
+    - Intel-proprietary technique
+    - This means that if a thread stalls, other threads can use its resources
+
+Process Parallelism
+- This is "true parallelism" and has to be implemented at the hardware level
+- Multiprocessor systems can allocate process to separate CPU cores.
+
+Decreasing the amount of time between each context switch would increase the relative
+amount of context switching overhead
+
+
